@@ -107,10 +107,12 @@ export function PracticaCard({ practica }: PracticaCardProps) {
 
         {/* Meta Info */}
         <div className="space-y-2 text-sm mb-4">
-          {practica.lugarAplicacion && (
+          {(practica.municipio || practica.provincia || practica.ccaa) && (
             <div className="flex items-center gap-2 text-gray-600">
               <MapPin className="h-4 w-4 text-[#FF6900] flex-shrink-0" />
-              <span className="line-clamp-1">{practica.lugarAplicacion}</span>
+              <span className="line-clamp-1">
+                {[practica.municipio, practica.provincia, practica.ccaa].filter(Boolean).join(', ')}
+              </span>
             </div>
           )}
           {practica.entidadResponsable && (
