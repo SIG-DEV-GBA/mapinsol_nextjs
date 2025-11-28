@@ -70,10 +70,10 @@ function RelatedCard({ practica }: { practica: BuenaPractica }) {
           </p>
         )}
 
-        {practica.lugarAplicacion && (
+        {(practica.municipio || practica.provincia || practica.ccaa) && (
           <p className="flex items-center gap-1.5 text-xs text-gray-500 truncate">
             <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-            <span className="truncate">{practica.lugarAplicacion}</span>
+            <span className="truncate">{[practica.municipio, practica.provincia, practica.ccaa].filter(Boolean).join(', ')}</span>
           </p>
         )}
 

@@ -43,10 +43,10 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
           </div>
         )}
 
-        {practica.lugarAplicacion && (
+        {(practica.municipio || practica.provincia || practica.ccaa) && (
           <div className="flex items-center gap-2 text-gray-600">
             <MapPin className="w-5 h-5 text-[#FF6900]" />
-            <span>{practica.lugarAplicacion}</span>
+            <span>{[practica.municipio, practica.provincia, practica.ccaa].filter(Boolean).join(', ')}</span>
           </div>
         )}
 
