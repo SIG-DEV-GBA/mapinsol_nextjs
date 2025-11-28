@@ -15,6 +15,17 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /**
+   * OUTPUT STANDALONE
+   * -----------------
+   * Genera un build optimizado para servidores Node.js independientes.
+   * Incluye solo los archivos necesarios para producción.
+   * Requerido para despliegue en VPS con Dokploy.
+   *
+   * El build genera: .next/standalone/
+   */
+  output: 'standalone',
+
+  /**
    * BASE PATH
    * ---------
    * Prefijo para todas las rutas de la aplicación.
