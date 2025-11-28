@@ -169,7 +169,7 @@ export function Footer() {
                   className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-sm"
                 >
                   <Mail className="w-4 h-4 flex-shrink-0 text-[#FF6900]" />
-                  <span className="break-all">consultas@fundacionpadrinosdelavejez.es</span>
+                  <span className="whitespace-nowrap">consultas@fundacionpadrinosdelavejez.es</span>
                 </a>
               </li>
             </ul>
