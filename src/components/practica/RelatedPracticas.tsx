@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Star, Building2, MapPin } from 'lucide-react';
+import { ArrowRight, Star, Building2 } from 'lucide-react';
+import { LocationLinks } from './LocationLinks';
 import type { BuenaPractica } from '@/types';
 
 interface RelatedPracticasProps {
@@ -71,10 +72,12 @@ function RelatedCard({ practica }: { practica: BuenaPractica }) {
         )}
 
         {(practica.municipio || practica.provincia || practica.ccaa) && (
-          <p className="flex items-center gap-1.5 text-xs text-gray-500 truncate">
-            <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-            <span className="truncate">{[practica.municipio, practica.provincia, practica.ccaa].filter(Boolean).join(', ')}</span>
-          </p>
+          <LocationLinks
+            municipio={practica.municipio}
+            provincia={practica.provincia}
+            ccaa={practica.ccaa}
+            size="sm"
+          />
         )}
 
         <span className="mt-auto pt-3 flex items-center gap-1.5 text-sm font-semibold text-[#FF6900]">

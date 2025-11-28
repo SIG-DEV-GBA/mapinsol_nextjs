@@ -17,9 +17,10 @@
  */
 
 import Link from 'next/link';
-import { Calendar, Building2, MapPin, ArrowRight } from 'lucide-react';
+import { Calendar, Building2, ArrowRight } from 'lucide-react';
 import type { BuenaPractica } from '@/types';
 import { StatusBadge, PdfBadge, HighlightBadge } from '@/components/ui';
+import { LocationLinks } from '@/components/practica';
 import { expandAcronyms } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
@@ -108,12 +109,12 @@ export function PracticaCard({ practica }: PracticaCardProps) {
         {/* Meta Info */}
         <div className="space-y-2 text-sm mb-4">
           {(practica.municipio || practica.provincia || practica.ccaa) && (
-            <div className="flex items-center gap-2 text-gray-600">
-              <MapPin className="h-4 w-4 text-[#FF6900] flex-shrink-0" />
-              <span className="line-clamp-1">
-                {[practica.municipio, practica.provincia, practica.ccaa].filter(Boolean).join(', ')}
-              </span>
-            </div>
+            <LocationLinks
+              municipio={practica.municipio}
+              provincia={practica.provincia}
+              ccaa={practica.ccaa}
+              size="sm"
+            />
           )}
           {practica.entidadResponsable && (
             <div className="flex items-center gap-2 text-gray-600">

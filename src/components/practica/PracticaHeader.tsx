@@ -46,7 +46,38 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
         {(practica.municipio || practica.provincia || practica.ccaa) && (
           <div className="flex items-center gap-2 text-gray-600">
             <MapPin className="w-5 h-5 text-[#FF6900]" />
-            <span>{[practica.municipio, practica.provincia, practica.ccaa].filter(Boolean).join(', ')}</span>
+            <span className="flex items-center gap-1 flex-wrap">
+              {practica.municipio && (
+                <>
+                  <Link
+                    href={`/practicas/?localidad=${encodeURIComponent(practica.municipio)}`}
+                    className="hover:text-[#FF6900] hover:underline transition-colors"
+                  >
+                    {practica.municipio}
+                  </Link>
+                  {(practica.provincia || practica.ccaa) && <span>,</span>}
+                </>
+              )}
+              {practica.provincia && (
+                <>
+                  <Link
+                    href={`/practicas/?localidad=${encodeURIComponent(practica.provincia)}`}
+                    className="hover:text-[#FF6900] hover:underline transition-colors"
+                  >
+                    {practica.provincia}
+                  </Link>
+                  {practica.ccaa && <span>,</span>}
+                </>
+              )}
+              {practica.ccaa && (
+                <Link
+                  href={`/practicas/?ccaa=${encodeURIComponent(practica.ccaa)}`}
+                  className="hover:text-[#FF6900] hover:underline transition-colors"
+                >
+                  {practica.ccaa}
+                </Link>
+              )}
+            </span>
           </div>
         )}
 
