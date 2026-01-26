@@ -201,13 +201,6 @@ export function Footer() {
               </a>
               <div className="bg-white rounded-lg p-2">
                 <img
-                  src="/logos/footer/logo-CAS.png"
-                  alt="Colectivo de Acción Solidaria"
-                  className="h-8 w-auto object-contain"
-                />
-              </div>
-              <div className="bg-white rounded-lg p-2">
-                <img
                   src="/logos/footer/ANAGRAMA-COAG-.png"
                   alt="COAG"
                   className="h-8 w-auto object-contain"
