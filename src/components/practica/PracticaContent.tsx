@@ -110,17 +110,15 @@ export function PracticaContent({ practica }: PracticaContentProps) {
             {practica.nivelTransferibilidad && (
               <TransferLevel nivel={practica.nivelTransferibilidad} />
             )}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {practica.requisitosImplementacion && (
-                <TransferItem
-                  label="Requisitos"
-                  html={practica.requisitosImplementacion}
-                />
-              )}
-              {practica.sostenibilidad && (
-                <TransferItem label="Sostenibilidad" html={practica.sostenibilidad} />
-              )}
-            </div>
+            {practica.requisitosImplementacion && (
+              <TransferItem
+                label="Requisitos"
+                html={practica.requisitosImplementacion}
+              />
+            )}
+            {practica.sostenibilidad && (
+              <TransferItem label="Sostenibilidad" html={practica.sostenibilidad} />
+            )}
           </div>
         </ContentCard>
       )}
