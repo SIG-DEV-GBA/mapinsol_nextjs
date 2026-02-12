@@ -1,12 +1,11 @@
 import { Target, BookOpen, TrendingUp, Lightbulb, Heart, Globe, CheckCircle2 } from 'lucide-react';
 import type { BuenaPractica } from '@/types';
 import { cn } from '@/lib/utils';
+import { SafeHtml } from '@/components/ui/SafeHtml';
 
 interface PracticaContentProps {
   practica: BuenaPractica;
 }
-
-const stripHtml = (html: string) => html?.replace(/<[^>]*>/g, '').trim() || '';
 
 export function PracticaContent({ practica }: PracticaContentProps) {
   const hasDescripcion =
@@ -27,23 +26,23 @@ export function PracticaContent({ practica }: PracticaContentProps) {
     <div className="space-y-6">
       {/* Objetivo Principal */}
       {practica.objetivoPrincipal && (
-        <ObjetivoCard objetivo={stripHtml(practica.objetivoPrincipal)} />
+        <ObjetivoCard objetivo={practica.objetivoPrincipal} />
       )}
 
       {/* Descripción */}
       {hasDescripcion && (
         <ContentCard title="Descripción" icon={BookOpen}>
           {practica.descripcionGrupo && (
-            <Field label="Descripción General" value={stripHtml(practica.descripcionGrupo)} />
+            <HtmlField label="Descripción General" html={practica.descripcionGrupo} />
           )}
           {practica.actividadesDesarrolladas && (
-            <Field
+            <HtmlField
               label="Actividades Desarrolladas"
-              value={stripHtml(practica.actividadesDesarrolladas)}
+              html={practica.actividadesDesarrolladas}
             />
           )}
           {practica.metodologiaAplicada && (
-            <Field label="Metodología" value={stripHtml(practica.metodologiaAplicada)} />
+            <HtmlField label="Metodología" html={practica.metodologiaAplicada} />
           )}
         </ContentCard>
       )}
@@ -52,20 +51,16 @@ export function PracticaContent({ practica }: PracticaContentProps) {
       {hasResultados && (
         <ContentCard title="Resultados y Evaluación" icon={TrendingUp} titleColor="text-green-600">
           {practica.resultadosObtenidos && (
-            <Highlight color="green" label="Resultados Obtenidos">
-              {stripHtml(practica.resultadosObtenidos)}
-            </Highlight>
+            <HtmlHighlight color="green" label="Resultados Obtenidos" html={practica.resultadosObtenidos} />
           )}
           {practica.indicadoresEvaluacion && (
-            <Field
+            <HtmlField
               label="Indicadores de Evaluación"
-              value={stripHtml(practica.indicadoresEvaluacion)}
+              html={practica.indicadoresEvaluacion}
             />
           )}
           {practica.leccionesAprendidas && (
-            <Highlight color="yellow" label="Lecciones Aprendidas" icon={Lightbulb}>
-              {stripHtml(practica.leccionesAprendidas)}
-            </Highlight>
+            <HtmlHighlight color="yellow" label="Lecciones Aprendidas" icon={Lightbulb} html={practica.leccionesAprendidas} />
           )}
         </ContentCard>
       )}
@@ -74,10 +69,10 @@ export function PracticaContent({ practica }: PracticaContentProps) {
       {hasInnovacion && (
         <ContentCard title="Innovación y Tecnología" icon={Lightbulb} titleColor="text-purple-600">
           {practica.elementoInnovador && (
-            <Field label="Elemento Innovador" value={stripHtml(practica.elementoInnovador)} />
+            <HtmlField label="Elemento Innovador" html={practica.elementoInnovador} />
           )}
           {practica.usoTecnologia && (
-            <Field label="Uso de Tecnología" value={stripHtml(practica.usoTecnologia)} />
+            <HtmlField label="Uso de Tecnología" html={practica.usoTecnologia} />
           )}
         </ContentCard>
       )}
@@ -89,19 +84,19 @@ export function PracticaContent({ practica }: PracticaContentProps) {
             {practica.respetoDignidadAutonomia && (
               <EthicsItem
                 title="Dignidad y Autonomía"
-                content={stripHtml(practica.respetoDignidadAutonomia)}
+                html={practica.respetoDignidadAutonomia}
               />
             )}
             {practica.prevencionMaltrato && (
               <EthicsItem
                 title="Prevención del Maltrato"
-                content={stripHtml(practica.prevencionMaltrato)}
+                html={practica.prevencionMaltrato}
               />
             )}
             {practica.participacionPersonas && (
               <EthicsItem
                 title="Participación"
-                content={stripHtml(practica.participacionPersonas)}
+                html={practica.participacionPersonas}
               />
             )}
           </div>
@@ -119,11 +114,11 @@ export function PracticaContent({ practica }: PracticaContentProps) {
               {practica.requisitosImplementacion && (
                 <TransferItem
                   label="Requisitos"
-                  value={stripHtml(practica.requisitosImplementacion)}
+                  html={practica.requisitosImplementacion}
                 />
               )}
               {practica.sostenibilidad && (
-                <TransferItem label="Sostenibilidad" value={stripHtml(practica.sostenibilidad)} />
+                <TransferItem label="Sostenibilidad" html={practica.sostenibilidad} />
               )}
             </div>
           </div>
@@ -145,7 +140,7 @@ function ObjetivoCard({ objetivo }: { objetivo: string }) {
           <h2 className="text-sm font-semibold text-orange-700 uppercase tracking-wide mb-2">
             Objetivo Principal
           </h2>
-          <p className="text-gray-800 leading-relaxed">{objetivo}</p>
+          <SafeHtml html={objetivo} className="text-gray-800 leading-relaxed" />
         </div>
       </div>
     </section>
@@ -176,25 +171,25 @@ function ContentCard({ title, icon: Icon, titleColor, children }: ContentCardPro
   );
 }
 
-function Field({ label, value }: { label: string; value: string }) {
+function HtmlField({ label, html }: { label: string; html: string }) {
   return (
     <div>
       <label className="block text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-2">
         {label}
       </label>
-      <p className="text-gray-600 leading-relaxed">{value}</p>
+      <SafeHtml html={html} className="text-gray-600 leading-relaxed" />
     </div>
   );
 }
 
-interface HighlightProps {
+interface HtmlHighlightProps {
   color: 'green' | 'yellow';
   label: string;
   icon?: React.ComponentType<{ className?: string }>;
-  children: React.ReactNode;
+  html: string;
 }
 
-function Highlight({ color, label, icon: Icon, children }: HighlightProps) {
+function HtmlHighlight({ color, label, icon: Icon, html }: HtmlHighlightProps) {
   const colorClasses = {
     green: 'bg-green-50 border-l-green-500 [&_strong]:text-green-800',
     yellow: 'bg-yellow-50 border-l-yellow-500 [&_strong]:text-yellow-800',
@@ -206,18 +201,18 @@ function Highlight({ color, label, icon: Icon, children }: HighlightProps) {
         {Icon && <Icon className="w-4 h-4" />}
         <strong className="text-sm font-semibold">{label}</strong>
       </div>
-      <p className="text-gray-600 text-[15px] leading-relaxed">{children}</p>
+      <SafeHtml html={html} className="text-gray-600 text-[15px] leading-relaxed" />
     </div>
   );
 }
 
-function EthicsItem({ title, content }: { title: string; content: string }) {
+function EthicsItem({ title, html }: { title: string; html: string }) {
   return (
     <div className="flex gap-3.5 p-4 bg-rose-50 rounded-xl">
       <CheckCircle2 className="w-5 h-5 text-rose-500 flex-shrink-0 mt-0.5" />
       <div>
         <strong className="block text-sm text-rose-700 mb-1">{title}</strong>
-        <p className="text-sm text-gray-600 leading-relaxed">{content}</p>
+        <SafeHtml html={html} className="text-sm text-gray-600 leading-relaxed" />
       </div>
     </div>
   );
@@ -261,13 +256,13 @@ function TransferLevel({ nivel }: { nivel: string }) {
   );
 }
 
-function TransferItem({ label, value }: { label: string; value: string }) {
+function TransferItem({ label, html }: { label: string; html: string }) {
   return (
     <div className="p-4 bg-sky-50 rounded-lg">
       <span className="block text-[10px] font-bold uppercase tracking-wider text-sky-600 mb-1.5">
         {label}
       </span>
-      <p className="text-sm text-gray-600 leading-relaxed">{value}</p>
+      <SafeHtml html={html} className="text-sm text-gray-600 leading-relaxed" />
     </div>
   );
 }

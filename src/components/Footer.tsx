@@ -60,23 +60,25 @@ export function Footer() {
   return (
     <footer className="bg-[#6B1E3D] text-white">
       {/* Main Content */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 py-14 lg:py-16">
 
-          {/* Logo y descripción - Columna principal */}
-          <div className="lg:col-span-4">
+        {/* Top Row: Logo grande a la izquierda, resto a la derecha */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
+
+          {/* Logo y descripción */}
+          <div className="lg:w-[380px] flex-shrink-0">
             <a href="https://fundacionpadrinosdelavejez.es/" target="_blank" rel="noopener noreferrer" className="inline-block mb-6">
-              <div className="bg-white rounded-xl p-4 inline-block">
+              <div className="bg-white rounded-2xl p-6 inline-block shadow-lg">
                 <Image
-                  src="/logos/logo_fpv.webp"
+                  src="/logos/logo FPV.png"
                   alt="Fundación Padrinos de la Vejez"
-                  width={200}
-                  height={70}
-                  className="h-14 w-auto"
+                  width={340}
+                  height={120}
+                  className="h-32 w-auto object-contain"
                 />
               </div>
             </a>
-            <p className="text-white/80 text-sm leading-relaxed mb-6 max-w-sm">
+            <p className="text-white/85 text-base leading-relaxed mb-6">
               Recurso social especializado en la protección de personas mayores, con discapacidad
               o dependencia en situación de vulnerabilidad, a través de servicios domiciliarios
               y de proximidad que les permitan seguir viviendo en su hogar.
@@ -90,7 +92,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-[#FF6900] hover:scale-110 transition-all duration-300"
+                  className="w-11 h-11 flex items-center justify-center rounded-full bg-white/15 text-white hover:bg-[#FF6900] hover:scale-110 transition-all duration-300"
                   aria-label={social.name}
                 >
                   <social.icon className="w-5 h-5" />
@@ -99,112 +101,112 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Enlaces */}
-          <div className="lg:col-span-2">
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-5 text-white">
-              Enlaces
-            </h4>
-            <ul className="space-y-3">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  {link.href.startsWith('http') ? (
-                    <a
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white/70 hover:text-[#FF6900] transition-colors text-sm"
-                    >
-                      {link.name}
-                    </a>
-                  ) : (
-                    <Link
-                      href={link.href}
-                      className="text-white/70 hover:text-[#FF6900] transition-colors text-sm"
-                    >
-                      {link.name}
-                    </Link>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Columnas de contenido */}
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-10 lg:gap-8">
 
-          {/* Contacto */}
-          <div className="lg:col-span-3">
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-5 text-white">
-              Contacto
-            </h4>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="https://maps.google.com/?q=Calle+Agustín+de+Betancourt+17+Madrid"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-white/70 hover:text-white transition-colors text-sm"
-                >
-                  <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#FF6900]" />
-                  <span>
-                    C/ Agustín de Betancourt, 17<br />
-                    6ª planta · 28003 Madrid
-                  </span>
-                </a>
-              </li>
-              <li>
-                <div className="flex items-center gap-3 text-sm">
-                  <Phone className="w-4 h-4 flex-shrink-0 text-[#FF6900]" />
-                  <div>
-                    <a href="tel:918028853" className="text-white/70 hover:text-white transition-colors">
-                      918 028 853
-                    </a>
-                    <span className="text-white/40 mx-1">·</span>
-                    <a href="tel:686194022" className="text-white/70 hover:text-white transition-colors">
-                      686 194 022
-                    </a>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <a
-                  href="mailto:consultas@fundacionpadrinosdelavejez.es"
-                  className="flex items-center gap-3 text-white/70 hover:text-white transition-colors text-sm"
-                >
-                  <Mail className="w-4 h-4 flex-shrink-0 text-[#FF6900]" />
-                  <span className="whitespace-nowrap">consultas@fundacionpadrinosdelavejez.es</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Financiadores y Colaboradores */}
-          <div className="lg:col-span-3">
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-5 text-white">
-              Financia
-            </h4>
-            <div className="bg-white rounded-lg p-3 inline-block mb-6">
-              <img
-                src="/logos/footer/Logo-IMSERSO-2024.webp"
-                alt="IMSERSO"
-                className="h-12 w-auto object-contain"
-              />
+            {/* Enlaces */}
+            <div>
+              <h4 className="text-base font-bold uppercase tracking-wider mb-6 text-white border-b border-white/20 pb-3">
+                Enlaces
+              </h4>
+              <ul className="space-y-4">
+                {quickLinks.map((link) => (
+                  <li key={link.name}>
+                    {link.href.startsWith('http') ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/75 hover:text-[#FF6900] transition-colors text-base"
+                      >
+                        {link.name}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-white/75 hover:text-[#FF6900] transition-colors text-base"
+                      >
+                        {link.name}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <h4 className="text-sm font-bold uppercase tracking-wider mb-4 text-white">
-              Colaboradores
-            </h4>
-            <div className="flex flex-wrap gap-3 items-center">
-              <a href="https://solidaridadintergeneracional.es/wp/" target="_blank" rel="noopener noreferrer" className="bg-white rounded-lg p-2 hover:scale-105 transition-transform">
+            {/* Contacto */}
+            <div>
+              <h4 className="text-base font-bold uppercase tracking-wider mb-6 text-white border-b border-white/20 pb-3">
+                Contacto
+              </h4>
+              <ul className="space-y-4">
+                <li>
+                  <a
+                    href="https://maps.google.com/?q=Calle+Agustín+de+Betancourt+17+Madrid"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-start gap-3 text-white/75 hover:text-white transition-colors text-base"
+                  >
+                    <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#FF6900]" />
+                    <span>
+                      C/ Agustín de Betancourt, 17<br />
+                      6ª planta · 28003 Madrid
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <div className="flex items-start gap-3 text-base">
+                    <Phone className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#FF6900]" />
+                    <div className="text-white/75">
+                      <a href="tel:918028853" className="hover:text-white transition-colors">918 028 853</a>
+                      <br />
+                      <a href="tel:686194022" className="hover:text-white transition-colors">686 194 022</a>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <a
+                    href="mailto:consultas@fundacionpadrinosdelavejez.es"
+                    className="flex items-start gap-3 text-white/75 hover:text-white transition-colors text-base"
+                  >
+                    <Mail className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#FF6900]" />
+                    <span className="break-all">consultas@fundacionpadrinosdelavejez.es</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* Financiadores y Colaboradores */}
+            <div>
+              <h4 className="text-base font-bold uppercase tracking-wider mb-6 text-white border-b border-white/20 pb-3">
+                Financia
+              </h4>
+              <div className="bg-white rounded-xl p-4 inline-block mb-8 shadow-md">
                 <img
-                  src="/logos/footer/logo-solidaridad.png"
-                  alt="Solidaridad Intergeneracional"
-                  className="h-8 w-auto object-contain"
+                  src="/logos/footer/Logo-IMSERSO-2024.webp"
+                  alt="IMSERSO"
+                  className="h-20 w-auto object-contain"
                 />
-              </a>
-              <div className="bg-white rounded-lg p-2">
-                <img
-                  src="/logos/footer/ANAGRAMA-COAG-.png"
-                  alt="COAG"
-                  className="h-8 w-auto object-contain"
-                />
+              </div>
+
+              <h4 className="text-base font-bold uppercase tracking-wider mb-5 text-white border-b border-white/20 pb-3">
+                Colaboradores
+              </h4>
+              <div className="flex flex-col gap-3">
+                <a href="https://solidaridadintergeneracional.es/wp/" target="_blank" rel="noopener noreferrer" className="bg-white rounded-xl p-3 inline-block hover:scale-105 transition-transform shadow-md w-fit">
+                  <img
+                    src="/logos/footer/logo-solidaridad.png"
+                    alt="Solidaridad Intergeneracional"
+                    className="h-12 w-auto object-contain"
+                  />
+                </a>
+                <div className="bg-white rounded-xl p-3 inline-block shadow-md w-fit">
+                  <img
+                    src="/logos/footer/ANAGRAMA-COAG-.png"
+                    alt="COAG"
+                    className="h-12 w-auto object-contain"
+                  />
+                </div>
               </div>
             </div>
           </div>
