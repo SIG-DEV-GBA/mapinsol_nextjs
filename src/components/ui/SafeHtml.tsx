@@ -1,6 +1,6 @@
 'use client';
 
-import DOMPurify from 'isomorphic-dompurify';
+import { useEffect, useState } from 'react';
 
 interface SafeHtmlProps {
   html: string;
@@ -8,7 +8,7 @@ interface SafeHtmlProps {
   as?: 'div' | 'span' | 'p';
 }
 
-// Configuración de DOMPurify - solo permitir tags seguros de formato
+// Tags seguros permitidos
 const ALLOWED_TAGS = [
   'p', 'br', 'strong', 'b', 'em', 'i', 'u', 's', 'strike',
   'ul', 'ol', 'li',
@@ -22,20 +22,32 @@ const ALLOWED_TAGS = [
 const ALLOWED_ATTR = ['href', 'target', 'rel', 'class'];
 
 export function SafeHtml({ html, className = '', as: Component = 'div' }: SafeHtmlProps) {
+  const [cleanHtml, setCleanHtml] = useState<string>('');
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+
+    // Importar DOMPurify solo en el cliente
+    import('dompurify').then((DOMPurify) => {
+      const purify = DOMPurify.default;
+      const sanitized = purify.sanitize(html || '', {
+        ALLOWED_TAGS,
+        ALLOWED_ATTR,
+        FORBID_TAGS: ['script', 'style', 'iframe', 'form', 'input', 'button'],
+        FORBID_ATTR: ['onerror', 'onclick', 'onload', 'onmouseover'],
+      });
+      setCleanHtml(sanitized);
+    });
+  }, [html]);
+
   if (!html) return null;
 
-  const cleanHtml = DOMPurify.sanitize(html, {
-    ALLOWED_TAGS,
-    ALLOWED_ATTR,
-    // Añadir rel="noopener noreferrer" a enlaces externos
-    ADD_ATTR: ['target'],
-    FORBID_TAGS: ['script', 'style', 'iframe', 'form', 'input', 'button'],
-    FORBID_ATTR: ['onerror', 'onclick', 'onload', 'onmouseover'],
-  });
-
-  // Si después de sanitizar no hay contenido visible, no renderizar
-  const textContent = cleanHtml.replace(/<[^>]*>/g, '').trim();
-  if (!textContent) return null;
+  // Durante SSR o mientras carga, mostrar texto sin formato
+  if (!isClient || !cleanHtml) {
+    const textContent = html.replace(/<[^>]*>/g, '').trim();
+    return <Component className={className}>{textContent}</Component>;
+  }
 
   return (
     <Component
