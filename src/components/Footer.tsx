@@ -160,7 +160,7 @@ export function Footer() {
                     <div className="text-white/75">
                       <a href="tel:918028853" className="hover:text-white transition-colors">918 028 853</a>
                       <br />
-                      <a href="tel:686194022" className="hover:text-white transition-colors">686 194 022</a>
+                      <a href="tel:676870594" className="hover:text-white transition-colors">676 870 594</a>
                     </div>
                   </div>
                 </li>
