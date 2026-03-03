@@ -74,6 +74,24 @@ const nextConfig: NextConfig = {
   },
 
   /**
+   * HEADERS DE SEGURIDAD
+   * --------------------
+   * Cabeceras HTTP para mejorar la seguridad del sitio.
+   */
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+        ],
+      },
+    ];
+  },
+
+  /**
    * CONFIGURACIÓN EXPERIMENTAL
    * --------------------------
    * Funcionalidades en fase experimental de Next.js.

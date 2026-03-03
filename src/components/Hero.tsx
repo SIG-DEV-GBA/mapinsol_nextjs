@@ -69,8 +69,9 @@ export async function Hero() {
       <div className="absolute inset-0 z-0">
         <img
           src="/logos/hero/prueba_hero.webp"
-          alt="Fundación Padrinos de la Vejez"
+          alt=""
           className="h-full w-full object-cover"
+          fetchPriority="high"
         />
       </div>
 

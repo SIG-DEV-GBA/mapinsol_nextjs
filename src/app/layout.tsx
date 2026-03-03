@@ -18,10 +18,11 @@
  * @module app/layout
  */
 
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins, Nunito, Lato } from "next/font/google";
 import "./globals.css";
 import { Navbar, Footer, ScrollToTop } from "@/components";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 /** Poppins - Fuente para títulos principales (h1, h2) */
 const poppins = Poppins({
@@ -47,10 +48,42 @@ const lato = Lato({
   display: "swap",
 });
 
-/** Metadatos globales de la aplicación para SEO */
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#700D39',
+};
+
 export const metadata: Metadata = {
-  title: "Buenas Prácticas - Mapinsol",
-  description: "Base de datos de buenas prácticas para el cuidado de personas mayores. Proyecto Mapinsol de la Fundación Padrinos de la Vejez.",
+  metadataBase: new URL('https://mapinsol.es'),
+  title: {
+    template: '%s | Mapinsol',
+    default: 'Buenas Prácticas que Transforman Vidas | Mapinsol',
+  },
+  description: 'Catálogo de buenas prácticas innovadoras en atención y cuidado de personas mayores. Proyecto de la Fundación Padrinos de la Vejez.',
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'es_ES',
+    siteName: 'Mapinsol - Buenas Prácticas',
+    images: [
+      {
+        url: '/logos/og-default.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Mapinsol - Buenas Prácticas en Atención a Personas Mayores',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
   icons: {
     icon: "/logos/favicon.webp",
   },
@@ -77,6 +110,14 @@ export default function RootLayout({
         {/* Fondo con gradiente radial */}
         <div className="absolute top-0 z-[-2] h-screen w-screen rotate-180 transform bg-white bg-[radial-gradient(60%_120%_at_50%_50%,hsla(0,0%,100%,0)_0,rgba(252,205,238,.5)_100%)]" />
 
+        <JsonLd data={{
+          '@context': 'https://schema.org',
+          '@type': 'Organization',
+          name: 'Fundación Padrinos de la Vejez',
+          url: 'https://fundacionpadrinosdelavejez.es',
+          logo: 'https://mapinsol.es/logos/logo%20FPV.png',
+          sameAs: [],
+        }} />
         <Navbar />
         {children}
         <Footer />

@@ -43,7 +43,7 @@ const socialLinks = [
 /** Enlaces rápidos del footer (internos usan Link, externos usan <a>) */
 const quickLinks = [
   { name: 'Inicio', href: '/' },
-  { name: 'Buenas Prácticas', href: '/practicas' },
+  { name: 'Buenas Prácticas', href: '/practicas/' },
   { name: 'Quiénes Somos', href: 'https://fundacionpadrinosdelavejez.es/quienes-somos/' },
   { name: 'Contacto', href: 'https://fundacionpadrinosdelavejez.es/contacto/' },
 ];

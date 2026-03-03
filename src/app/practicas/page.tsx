@@ -19,8 +19,10 @@
  */
 
 import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import { getBuenasPracticas, getCategories, getTags } from '@/lib/wordpress';
 import { HeroSearch, PracticasClient } from '@/components/practicas';
+import { JsonLd } from '@/components/seo/JsonLd';
 
 /**
  * ISR: Revalidar cada 60 segundos
@@ -28,10 +30,12 @@ import { HeroSearch, PracticasClient } from '@/components/practicas';
  */
 export const revalidate = 60;
 
-/** Metadatos para SEO de la página de listado */
-export const metadata = {
-  title: 'Explorar Buenas Prácticas - Mapinsol',
-  description: 'Descubre iniciativas innovadoras en atención y cuidado de personas mayores. Explora el catálogo de buenas prácticas.',
+export const metadata: Metadata = {
+  title: 'Explorar Buenas Prácticas',
+  description: 'Descubre iniciativas innovadoras en atención y cuidado de personas mayores. Explora el catálogo completo de buenas prácticas.',
+  alternates: {
+    canonical: '/practicas/',
+  },
 };
 
 /**
@@ -79,6 +83,18 @@ export default async function PracticasPage() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'Catálogo de Buenas Prácticas',
+        description: 'Iniciativas innovadoras en atención a personas mayores',
+        url: 'https://mapinsol.es/practicas/',
+        isPartOf: {
+          '@type': 'WebSite',
+          name: 'Mapinsol',
+          url: 'https://mapinsol.es/',
+        },
+      }} />
       <HeroSearch total={total} entidades={entidadesUnicas} />
       <Suspense fallback={<FiltersLoading />}>
         <PracticasClient

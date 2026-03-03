@@ -35,6 +35,7 @@ import {
 } from '@/components/practica';
 import { BackLink, PdfLink } from '@/components/practica/PracticaHeader';
 import type { BuenaPractica } from '@/types';
+import { JsonLd } from '@/components/seo/JsonLd';
 
 /**
  * ISR: Revalidar cada 60 segundos
@@ -67,11 +68,30 @@ export async function generateMetadata({
     return { title: 'Práctica no encontrada' };
   }
 
+  const descripcionLimpia = practica.objetivoPrincipal
+    ? practica.objetivoPrincipal.replace(/<[^>]*>/g, '').slice(0, 160)
+    : `Buena práctica: ${practica.title}`;
+
   return {
-    title: `${practica.title} - Buenas Prácticas`,
-    description: practica.objetivoPrincipal
-      ? practica.objetivoPrincipal.replace(/<[^>]*>/g, '').slice(0, 160)
-      : `Buena práctica: ${practica.title}`,
+    title: practica.title,
+    description: descripcionLimpia,
+    alternates: {
+      canonical: `/practica/${slug}/`,
+    },
+    openGraph: {
+      title: practica.title,
+      description: descripcionLimpia,
+      type: 'article',
+      images: practica.featuredMediaUrl
+        ? [{ url: practica.featuredMediaUrl, width: 1200, height: 630 }]
+        : undefined,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: practica.title,
+      description: descripcionLimpia,
+      images: practica.featuredMediaUrl ? [practica.featuredMediaUrl] : undefined,
+    },
   };
 }
 
@@ -196,6 +216,36 @@ export default async function PracticaPage({
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 pb-16">
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://mapinsol.es/' },
+          { '@type': 'ListItem', position: 2, name: 'Buenas Prácticas', item: 'https://mapinsol.es/practicas/' },
+          { '@type': 'ListItem', position: 3, name: practica.title },
+        ],
+      }} />
+      <JsonLd data={{
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: practica.title,
+        description: practica.objetivoPrincipal
+          ? practica.objetivoPrincipal.replace(/<[^>]*>/g, '').slice(0, 160)
+          : practica.title,
+        author: {
+          '@type': 'Organization',
+          name: practica.entidadResponsable || 'Fundación Padrinos de la Vejez',
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Fundación Padrinos de la Vejez',
+          logo: { '@type': 'ImageObject', url: 'https://mapinsol.es/logos/logo%20FPV.png' },
+        },
+        image: practica.featuredMediaUrl || undefined,
+        datePublished: practica.datePublished ? practica.datePublished.toISOString() : undefined,
+        dateModified: practica.dateModified ? practica.dateModified.toISOString() : undefined,
+        mainEntityOfPage: `https://mapinsol.es/practica/${practica.slug}/`,
+      }} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <BackLink />
 
