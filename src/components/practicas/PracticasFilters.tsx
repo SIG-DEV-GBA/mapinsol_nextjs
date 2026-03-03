@@ -279,11 +279,21 @@ export function PracticasFilters({
       getCheckboxKeys(p.poblacionDestinataria).forEach((k) => allPoblacion.add(k));
     });
 
+    // Contar categorías y etiquetas reales (solo prácticas publicadas cargadas)
+    const catCounts = new Map<number, number>();
+    const tagCounts = new Map<number, number>();
+    practicas.forEach((p) => {
+      p.categories.forEach((id) => catCounts.set(id, (catCounts.get(id) || 0) + 1));
+      p.tags.forEach((id) => tagCounts.set(id, (tagCounts.get(id) || 0) + 1));
+    });
+
     return {
       years,
       estados,
       ccaas,
       poblaciones: [...allPoblacion].sort(),
+      catCounts,
+      tagCounts,
     };
   }, [practicas]);
 
@@ -442,7 +452,7 @@ export function PracticasFilters({
               options={categorias.map((c) => ({
                 value: c.id,
                 label: expandAcronyms(c.name),
-                count: c.count,
+                count: filterOptions.catCounts.get(c.id) || 0,
               }))}
               selectedValues={selectedCategories}
               onSelectionChange={setSelectedCategories}
@@ -455,7 +465,7 @@ export function PracticasFilters({
               options={etiquetas.map((t) => ({
                 value: t.id,
                 label: t.name,
-                count: t.count,
+                count: filterOptions.tagCounts.get(t.id) || 0,
               }))}
               selectedValues={selectedTags}
               onSelectionChange={setSelectedTags}
