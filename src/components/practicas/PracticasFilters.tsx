@@ -11,7 +11,6 @@
  * - Categoría (temática principal)
  * - Etiquetas (palabras clave)
  * - Población destinataria
- * - Agentes implicados
  * - CCAA (Comunidad Autónoma)
  * - Internacional (toggle)
  * - Año de inicio
@@ -30,7 +29,7 @@
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { Search, SlidersHorizontal, X, Building2, Calendar, Filter, Tag, Users, UserCheck, MapPin, Globe } from 'lucide-react';
+import { Search, SlidersHorizontal, X, Building2, Calendar, Filter, Tag, Users, MapPin, Globe } from 'lucide-react';
 import type { BuenaPractica, Categoria, Etiqueta } from '@/types';
 import { FilterDropdown } from './FilterDropdown';
 import { expandAcronyms, formatLabel } from '@/lib/labelMappings';
@@ -102,15 +101,6 @@ const filterColors = {
     badge: 'bg-rose-600',
     hoverBg: 'hover:bg-rose-50',
   },
-  agentes: {
-    bg: 'bg-cyan-50',
-    border: 'border-cyan-200',
-    text: 'text-cyan-600',
-    icon: 'text-cyan-500',
-    hover: 'hover:bg-cyan-100 hover:border-cyan-300',
-    badge: 'bg-cyan-600',
-    hoverBg: 'hover:bg-cyan-50',
-  },
   ubicacion: {
     bg: 'bg-teal-50',
     border: 'border-teal-200',
@@ -156,7 +146,6 @@ export function PracticasFilters({
   const [selectedStatus, setSelectedStatus] = useState<(string | number)[]>([]);
   const [selectedTags, setSelectedTags] = useState<(string | number)[]>([]);
   const [selectedPoblacion, setSelectedPoblacion] = useState<(string | number)[]>([]);
-  const [selectedAgentes, setSelectedAgentes] = useState<(string | number)[]>([]);
   const [selectedCCAA, setSelectedCCAA] = useState<(string | number)[]>([]);
   const [soloInternacional, setSoloInternacional] = useState(false);
   const [searchLocalidad, setSearchLocalidad] = useState('');
@@ -193,12 +182,6 @@ export function PracticasFilters({
     const poblacionParam = searchParams.get('poblacion');
     if (poblacionParam) {
       setSelectedPoblacion([poblacionParam]);
-    }
-
-    // Leer agentes
-    const agentesParam = searchParams.get('agentes');
-    if (agentesParam) {
-      setSelectedAgentes([agentesParam]);
     }
 
     // Leer etiqueta
@@ -256,10 +239,6 @@ export function PracticasFilters({
       params.set('poblacion', String(selectedPoblacion[0]));
     }
 
-    if (selectedAgentes.length === 1) {
-      params.set('agentes', String(selectedAgentes[0]));
-    }
-
     if (selectedTags.length === 1) {
       const tag = etiquetas.find(t => t.id === selectedTags[0]);
       if (tag) params.set('etiqueta', tag.name);
@@ -284,7 +263,7 @@ export function PracticasFilters({
     if (params.toString() !== currentParams) {
       router.replace(newUrl, { scroll: false });
     }
-  }, [selectedCategories, search, selectedStatus, selectedPoblacion, selectedAgentes, selectedTags, selectedCCAA, soloInternacional, searchLocalidad, categorias, etiquetas, router, searchParams, initialized]);
+  }, [selectedCategories, search, selectedStatus, selectedPoblacion, selectedTags, selectedCCAA, soloInternacional, searchLocalidad, categorias, etiquetas, router, searchParams, initialized]);
 
   // Extract unique filter values from practicas
   const filterOptions = useMemo(() => {
@@ -295,11 +274,9 @@ export function PracticasFilters({
     const ccaas = [...new Set(practicas.map((p) => p.ccaa).filter(Boolean))].sort();
 
     const allPoblacion = new Set<string>();
-    const allAgentes = new Set<string>();
 
     practicas.forEach((p) => {
       getCheckboxKeys(p.poblacionDestinataria).forEach((k) => allPoblacion.add(k));
-      getCheckboxKeys(p.agentesImplicados).forEach((k) => allAgentes.add(k));
     });
 
     return {
@@ -307,7 +284,6 @@ export function PracticasFilters({
       estados,
       ccaas,
       poblaciones: [...allPoblacion].sort(),
-      agentes: [...allAgentes].sort(),
     };
   }, [practicas]);
 
@@ -355,13 +331,6 @@ export function PracticasFilters({
         if (!hasPoblacion) return false;
       }
 
-      // Agentes filter
-      if (selectedAgentes.length > 0) {
-        const keys = getCheckboxKeys(p.agentesImplicados);
-        const hasAgente = selectedAgentes.some((sa) => keys.includes(String(sa)));
-        if (!hasAgente) return false;
-      }
-
       // CCAA filter
       if (selectedCCAA.length > 0) {
         if (!selectedCCAA.includes(p.ccaa ?? '')) return false;
@@ -392,7 +361,6 @@ export function PracticasFilters({
     selectedStatus,
     selectedTags,
     selectedPoblacion,
-    selectedAgentes,
     selectedCCAA,
     soloInternacional,
     searchLocalidad,
@@ -410,7 +378,6 @@ export function PracticasFilters({
     setSelectedStatus([]);
     setSelectedTags([]);
     setSelectedPoblacion([]);
-    setSelectedAgentes([]);
     setSelectedCCAA([]);
     setSoloInternacional(false);
     setSearchLocalidad('');
@@ -425,7 +392,6 @@ export function PracticasFilters({
     selectedStatus.length > 0 ||
     selectedTags.length > 0 ||
     selectedPoblacion.length > 0 ||
-    selectedAgentes.length > 0 ||
     selectedCCAA.length > 0 ||
     soloInternacional ||
     searchLocalidad;
@@ -513,18 +479,6 @@ export function PracticasFilters({
               selectedValues={selectedPoblacion}
               onSelectionChange={setSelectedPoblacion}
               colorScheme={filterColors.poblacion}
-            />
-            <FilterDropdown
-              icon={UserCheck}
-              label="Agentes"
-              description="Quién participa"
-              options={filterOptions.agentes.map((a) => ({
-                value: a,
-                label: formatLabel(a),
-              }))}
-              selectedValues={selectedAgentes}
-              onSelectionChange={setSelectedAgentes}
-              colorScheme={filterColors.agentes}
             />
           </div>
 
