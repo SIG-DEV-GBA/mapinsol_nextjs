@@ -37,7 +37,7 @@ const menuItems = [
   { label: 'Buenas Prácticas', href: '/practicas/' },
   { label: 'Sugerencias', href: 'https://fundacionpadrinosdelavejez.es/pagina-en-construccion-mapinsol/', external: true },
   { label: 'Contacto', href: 'https://fundacionpadrinosdelavejez.es/pagina-en-construccion-mapinsol/', external: true },
-  { label: 'Boletines', href: 'https://fundacionpadrinosdelavejez.es/mapinsol/boletines/', external: true },
+  { label: 'Boletines', href: 'https://fundacionpadrinosdelavejez.es/pagina-en-construccion-mapinsol/', external: true },
 ];
 
 /**
