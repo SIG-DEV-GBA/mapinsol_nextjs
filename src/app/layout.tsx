@@ -21,6 +21,7 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Nunito, Lato } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import { Navbar, Footer, ScrollToTop } from "@/components";
 import { JsonLd } from "@/components/seo/JsonLd";
 
@@ -106,6 +107,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${poppins.variable} ${nunito.variable} ${lato.variable}`}>
+      <head>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-Z222Z7CJWF" strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Z222Z7CJWF');`}
+        </Script>
+      </head>
       <body className="min-h-screen flex flex-col font-lato antialiased relative overflow-x-hidden" suppressHydrationWarning>
         {/* Fondo con gradiente radial */}
         <div className="absolute top-0 z-[-2] h-screen w-screen rotate-180 transform bg-white bg-[radial-gradient(60%_120%_at_50%_50%,hsla(0,0%,100%,0)_0,rgba(252,205,238,.5)_100%)]" />
