@@ -181,7 +181,7 @@ export function MediaGallery({
                   key={index}
                   className={`relative rounded-xl overflow-hidden bg-gray-100 cursor-pointer flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 group transition-all duration-300 ${
                     isThisSwapping ? 'opacity-50 scale-95' : ''
-                  } ${index === mainIndex ? 'ring-2 ring-[#700D39] ring-offset-1' : 'hover:ring-2 hover:ring-gray-300'}`}
+                  } ${index === mainIndex ? 'ring-2 ring-[#A10D5E] ring-offset-1' : 'hover:ring-2 hover:ring-gray-300'}`}
                   onClick={() => handleImageClick(index)}
                 >
                   <Image

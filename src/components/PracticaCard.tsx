@@ -78,8 +78,8 @@ export function PracticaCard({ practica }: PracticaCardProps) {
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#FF6900]/5 to-[#700D39]/5">
-            <Building2 className="h-16 w-16 text-[#FF6900]/20" />
+          <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#F29429]/5 to-[#A10D5E]/5">
+            <Building2 className="h-16 w-16 text-[#F29429]/20" />
           </div>
         )}
 
@@ -101,7 +101,7 @@ export function PracticaCard({ practica }: PracticaCardProps) {
       <div className="p-5 flex flex-col flex-grow">
         {/* Título */}
         <Link href={`/practica/${practica.slug}/`} className="block mb-3">
-          <h3 className="text-lg font-bold text-[#700D39] line-clamp-2 group-hover:text-[#F29429] transition-colors duration-300 leading-tight">
+          <h3 className="text-lg font-bold text-[#A10D5E] line-clamp-2 group-hover:text-[#F29429] transition-colors duration-300 leading-tight">
             {practica.title}
           </h3>
         </Link>
@@ -118,7 +118,7 @@ export function PracticaCard({ practica }: PracticaCardProps) {
           )}
           {practica.entidadResponsable && (
             <div className="flex items-center gap-2 text-gray-600">
-              <Building2 className="h-4 w-4 text-[#700D39] flex-shrink-0" />
+              <Building2 className="h-4 w-4 text-[#A10D5E] flex-shrink-0" />
               <span className="line-clamp-1">{practica.entidadResponsable}</span>
             </div>
           )}
@@ -142,13 +142,13 @@ export function PracticaCard({ practica }: PracticaCardProps) {
                 {categoriasVisibles.map((cat) => (
                   <span
                     key={cat.id}
-                    className="inline-flex items-center gap-1 bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-blue-200"
+                    className="inline-flex items-center gap-1 bg-orange-50 text-[#F29429] text-xs font-semibold px-2.5 py-1 rounded-full border border-orange-200"
                   >
                     {expandAcronyms(cat.name)}
                   </span>
                 ))}
                 {categoriasRestantes > 0 && (
-                  <span className="text-xs text-blue-400 font-medium">+{categoriasRestantes}</span>
+                  <span className="text-xs text-orange-400 font-medium">+{categoriasRestantes}</span>
                 )}
               </div>
             )}
@@ -159,13 +159,13 @@ export function PracticaCard({ practica }: PracticaCardProps) {
                 {tagsVisibles.map((tag) => (
                   <span
                     key={tag.id}
-                    className="inline-flex items-center gap-1 bg-purple-50 text-purple-700 text-xs font-medium px-2 py-0.5 rounded-md border border-purple-200"
+                    className="inline-flex items-center gap-1 bg-[#A61966]/10 text-[#A61966] text-xs font-medium px-2 py-0.5 rounded-md border border-[#A61966]/20"
                   >
                     #{tag.name}
                   </span>
                 ))}
                 {tagsRestantes > 0 && (
-                  <span className="text-xs text-purple-400 font-medium">+{tagsRestantes}</span>
+                  <span className="text-xs text-[#A61966] font-medium">+{tagsRestantes}</span>
                 )}
               </div>
             )}
@@ -175,7 +175,7 @@ export function PracticaCard({ practica }: PracticaCardProps) {
         {/* CTA */}
         <Link
           href={`/practica/${practica.slug}/`}
-          className="inline-flex items-center gap-2 text-[#FF6900] font-semibold text-sm mt-4 group-hover:gap-3 transition-all duration-300"
+          className="inline-flex items-center gap-2 text-[#F29429] font-semibold text-sm mt-4 group-hover:gap-3 transition-all duration-300"
         >
           Ver detalles
           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

@@ -28,7 +28,7 @@ export function InfografiaViewer({ src, alt }: { src: string; alt: string }) {
         {/* Hover overlay */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 rounded-xl flex items-center justify-center">
           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg">
-            <ZoomIn className="h-6 w-6 text-[#700D39]" />
+            <ZoomIn className="h-6 w-6 text-[#A10D5E]" />
           </div>
         </div>
       </button>

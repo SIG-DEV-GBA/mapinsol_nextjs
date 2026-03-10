@@ -55,60 +55,63 @@ interface PracticasFiltersProps {
  * - Color del badge de contador
  */
 const filterColors = {
-  /** Categorías - Azul */
+  /** Temática - Naranja: fondo blanco, texto/icono naranja */
   categories: {
-    bg: 'bg-blue-50',
-    border: 'border-blue-200',
-    text: 'text-blue-600',
-    icon: 'text-blue-500',
-    hover: 'hover:bg-blue-100 hover:border-blue-300',
-    badge: 'bg-blue-600',
-    hoverBg: 'hover:bg-blue-50',
-  },
-  year: {
-    bg: 'bg-emerald-50',
-    border: 'border-emerald-200',
-    text: 'text-emerald-600',
-    icon: 'text-emerald-500',
-    hover: 'hover:bg-emerald-100 hover:border-emerald-300',
-    badge: 'bg-emerald-600',
-    hoverBg: 'hover:bg-emerald-50',
-  },
-  status: {
-    bg: 'bg-amber-50',
-    border: 'border-amber-200',
-    text: 'text-amber-600',
-    icon: 'text-amber-500',
-    hover: 'hover:bg-amber-100 hover:border-amber-300',
-    badge: 'bg-amber-600',
-    hoverBg: 'hover:bg-amber-50',
+    bg: 'bg-white',
+    border: 'border-[#F29429]',
+    text: 'text-[#F29429]',
+    icon: 'text-[#F29429]',
+    hover: 'hover:bg-[#f9ece1] hover:border-[#e0872a]',
+    badge: 'bg-[#F29429]',
+    hoverBg: 'hover:bg-[#f9ece1]',
   },
   tags: {
-    bg: 'bg-purple-50',
-    border: 'border-purple-200',
-    text: 'text-purple-600',
-    icon: 'text-purple-500',
-    hover: 'hover:bg-purple-100 hover:border-purple-300',
-    badge: 'bg-purple-600',
-    hoverBg: 'hover:bg-purple-50',
+    bg: 'bg-white',
+    border: 'border-[#F29429]',
+    text: 'text-[#F29429]',
+    icon: 'text-[#F29429]',
+    hover: 'hover:bg-[#f9ece1] hover:border-[#e0872a]',
+    badge: 'bg-[#F29429]',
+    hoverBg: 'hover:bg-[#f9ece1]',
   },
+  /** Destinatarios - Morado: fondo morado, texto/icono blanco */
   poblacion: {
-    bg: 'bg-rose-50',
-    border: 'border-rose-200',
-    text: 'text-rose-600',
-    icon: 'text-rose-500',
-    hover: 'hover:bg-rose-100 hover:border-rose-300',
-    badge: 'bg-rose-600',
-    hoverBg: 'hover:bg-rose-50',
+    bg: 'bg-[#A10D5E]',
+    border: 'border-[#A10D5E]',
+    text: 'text-white',
+    icon: 'text-white',
+    hover: 'hover:bg-[#8B1547] hover:border-[#8B1547]',
+    badge: 'bg-white/30',
+    hoverBg: 'hover:bg-[#A10D5E]/5',
   },
+  /** Ubicación - Naranja: fondo blanco, texto/icono naranja */
   ubicacion: {
-    bg: 'bg-teal-50',
-    border: 'border-teal-200',
-    text: 'text-teal-600',
-    icon: 'text-teal-500',
-    hover: 'hover:bg-teal-100 hover:border-teal-300',
-    badge: 'bg-teal-600',
-    hoverBg: 'hover:bg-teal-50',
+    bg: 'bg-white',
+    border: 'border-[#F29429]',
+    text: 'text-[#F29429]',
+    icon: 'text-[#F29429]',
+    hover: 'hover:bg-[#f9ece1] hover:border-[#e0872a]',
+    badge: 'bg-[#F29429]',
+    hoverBg: 'hover:bg-[#f9ece1]',
+  },
+  /** Tiempo - Año: naranja, fondo blanco */
+  year: {
+    bg: 'bg-white',
+    border: 'border-[#F29429]',
+    text: 'text-[#F29429]',
+    icon: 'text-[#F29429]',
+    hover: 'hover:bg-[#f9ece1] hover:border-[#e0872a]',
+    badge: 'bg-[#F29429]',
+    hoverBg: 'hover:bg-[#f9ece1]',
+  },
+  status: {
+    bg: 'bg-[#A10D5E]',
+    border: 'border-[#A10D5E]',
+    text: 'text-white',
+    icon: 'text-white',
+    hover: 'hover:bg-[#8B1547] hover:border-[#8B1547]',
+    badge: 'bg-white/30',
+    hoverBg: 'hover:bg-[#A10D5E]/5',
   },
 };
 
@@ -418,14 +421,14 @@ export function PracticasFilters({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar por título, entidad o lugar..."
-              className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-700 placeholder-gray-400 focus:border-[#FF6900] focus:ring-2 focus:ring-orange-100 transition-all text-sm outline-none"
+              className="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white text-gray-700 placeholder-gray-400 focus:border-[#F29429] focus:ring-2 focus:ring-orange-100 transition-all text-sm outline-none"
             />
           </div>
 
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 text-sm">
               <span className="text-gray-500">Resultados:</span>
-              <span className="font-bold text-[#700D39]">{filteredPracticas.length}</span>
+              <span className="font-bold text-[#A10D5E]">{filteredPracticas.length}</span>
             </div>
 
             {hasActiveFilters && (
@@ -513,14 +516,14 @@ export function PracticasFilters({
               onClick={() => setSoloInternacional(!soloInternacional)}
               className={`group flex items-center gap-2 px-4 py-2.5 rounded-full border-2 transition-all duration-200 ${
                 soloInternacional
-                  ? 'bg-violet-100 border-violet-300 text-violet-700 hover:bg-violet-200 hover:border-violet-400'
-                  : 'bg-violet-50 border-violet-200 text-violet-600 hover:bg-violet-100 hover:border-violet-300'
+                  ? 'bg-[#f9ece1] border-[#e0872a] text-[#F29429] hover:bg-[#f5e0cc] hover:border-[#d07a20]'
+                  : 'bg-white border-[#F29429] text-[#F29429] hover:bg-[#f9ece1] hover:border-[#e0872a]'
               }`}
             >
-              <Globe className="w-4 h-4 text-violet-500" />
+              <Globe className="w-4 h-4 text-[#F29429]" />
               <span className="text-sm font-semibold">Internacional</span>
               {soloInternacional && (
-                <span className="flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-violet-600 text-white text-xs font-bold">
+                <span className="flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-[#F29429] text-white text-xs font-bold">
                   ✓
                 </span>
               )}

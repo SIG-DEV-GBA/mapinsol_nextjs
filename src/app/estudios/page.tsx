@@ -38,7 +38,7 @@ export default async function EstudiosPage() {
   const { data: estudios, total } = await getEstudios({ per_page: 50 });
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <main className="min-h-screen bg-white">
       <JsonLd data={{
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
@@ -52,42 +52,20 @@ export default async function EstudiosPage() {
         },
       }} />
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#700D39] via-[#8B1547] to-[#700D39] text-white">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
-        </div>
-
-        <div className="relative container mx-auto px-4 py-16 md:py-24">
-          <div className="max-w-4xl mx-auto text-center">
-            {/* Icon */}
-            <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl mb-6">
-              <BookOpen className="h-10 w-10 text-white" />
-            </div>
-
-            {/* Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-poppins">
+      {/* Hero Section + Wave en un solo bloque */}
+      <div className="bg-gradient-to-b from-[#A10D5E] to-[#8B1547] text-white">
+        <div className="container mx-auto px-4 pt-10 pb-6 md:pt-14 md:pb-8">
+          <div className="flex items-center justify-center gap-3 md:gap-4">
+            <BookOpen className="h-7 w-7 md:h-8 md:w-8 text-white flex-shrink-0" />
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold font-poppins">
               Estudios e Investigaciones
             </h1>
-
-            {/* Description */}
-            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
-              Investigaciones, informes y publicaciones sobre la soledad no deseada
-              en personas mayores: causas, impacto y estrategias de intervención.
-            </p>
           </div>
         </div>
-
-        {/* Wave decoration */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-            <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB"/>
-          </svg>
-        </div>
-      </section>
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block">
+          <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+        </svg>
+      </div>
 
       {/* Contenido */}
       <section className="container mx-auto px-4 py-12 md:py-16">
@@ -106,7 +84,7 @@ export default async function EstudiosPage() {
             </p>
             <Link
               href="/practicas/"
-              className="inline-flex items-center gap-2 bg-[#700D39] text-white font-semibold px-6 py-3 rounded-full hover:bg-[#8B1547] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#A10D5E] text-white font-semibold px-6 py-3 rounded-full hover:bg-[#8B1547] transition-colors"
             >
               Explorar buenas prácticas
               <ArrowRight className="h-4 w-4" />
@@ -137,27 +115,6 @@ export default async function EstudiosPage() {
         )}
       </section>
 
-      {/* CTA Section */}
-      {estudios.length > 0 && (
-        <section className="bg-gradient-to-r from-gray-50 to-gray-100 py-12">
-          <div className="container mx-auto px-4 text-center">
-            <h3 className="text-xl font-bold text-gray-900 mb-4 font-nunito">
-              ¿Conoces alguna investigación relevante?
-            </h3>
-            <p className="text-gray-600 mb-6 max-w-xl mx-auto">
-              Si conoces estudios o publicaciones que puedan enriquecer este catálogo,
-              nos encantaría saberlo.
-            </p>
-            <a
-              href="mailto:info@fundacionpadrinosdelavejez.es"
-              className="inline-flex items-center gap-2 bg-[#FF6900] text-white font-semibold px-6 py-3 rounded-full hover:bg-[#E55A00] transition-colors"
-            >
-              Contactar
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-        </section>
-      )}
     </main>
   );
 }
@@ -185,101 +142,94 @@ function EstudioFeatured({ estudio }: { estudio: Estudio }) {
     <div className="max-w-5xl mx-auto">
       <Link
         href={`/estudio/${estudio.slug}/`}
-        className="group block bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-[#700D39]/20"
+        className="group block bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-[#A10D5E]/20"
       >
-        {/* Imagen grande */}
-        <div className="relative h-72 sm:h-96 md:h-[28rem] overflow-hidden bg-white">
-          {imagenUrl ? (
-            <img
-              src={imagenUrl}
-              alt={estudio.title}
-              className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-700"
-            />
-          ) : (
-            <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#700D39]/5 to-[#F29429]/5">
-              <BookOpen className="h-24 w-24 text-[#700D39]/15" />
+        <div className="flex flex-col md:flex-row">
+          {/* Imagen */}
+          <div className="relative md:w-1/2 flex-shrink-0">
+            <div className="relative h-64 sm:h-80 md:h-full md:min-h-[26rem] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-6 md:p-8">
+              {imagenUrl ? (
+                <img
+                  src={imagenUrl}
+                  alt={estudio.title}
+                  className="max-h-full max-w-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-700"
+                />
+              ) : (
+                <BookOpen className="h-24 w-24 text-[#A10D5E]/15" />
+              )}
             </div>
-          )}
 
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-
-          {/* Badges sobre la imagen */}
-          <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-            {estudio.ambitoGeografico && (
-              <span className="inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-gray-700 text-sm font-semibold px-3 py-1.5 rounded-full shadow-sm">
-                <Globe className="h-3.5 w-3.5 text-[#700D39]" />
-                {AMBITO_LABELS[estudio.ambitoGeografico] || estudio.ambitoGeografico}
-              </span>
-            )}
-            {tieneDocumentos && (
-              <span className="inline-flex items-center gap-1.5 bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-full shadow-lg">
-                <FileText className="h-3.5 w-3.5" />
-                PDF disponible
-              </span>
-            )}
+            {/* Badges */}
+            <div className="absolute top-4 left-4 flex flex-wrap gap-2">
+              {estudio.ambitoGeografico && (
+                <span className="inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-gray-700 text-sm font-semibold px-3 py-1.5 rounded-full shadow-sm">
+                  <Globe className="h-3.5 w-3.5 text-[#A10D5E]" />
+                  {AMBITO_LABELS[estudio.ambitoGeografico] || estudio.ambitoGeografico}
+                </span>
+              )}
+              {tieneDocumentos && (
+                <span className="inline-flex items-center gap-1.5 bg-red-500 text-white text-sm font-bold px-3 py-1.5 rounded-full shadow-lg">
+                  <FileText className="h-3.5 w-3.5" />
+                  PDF
+                </span>
+              )}
+            </div>
           </div>
 
-          {/* Título sobre la imagen en mobile */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 md:hidden">
-            <h2 className="text-2xl font-bold text-white font-poppins leading-tight">
+          {/* Contenido */}
+          <div className="p-6 md:p-10 md:w-1/2 flex flex-col justify-center">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#A10D5E] group-hover:text-[#F29429] transition-colors duration-300 font-poppins mb-5 leading-tight">
               {estudio.title}
             </h2>
-          </div>
-        </div>
 
-        {/* Contenido debajo */}
-        <div className="p-6 md:p-10">
-          {/* Título (desktop) */}
-          <h2 className="hidden md:block text-3xl lg:text-4xl font-bold text-[#700D39] group-hover:text-[#F29429] transition-colors duration-300 font-poppins mb-6 leading-tight">
-            {estudio.title}
-          </h2>
-
-          {/* Meta info */}
-          <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-6 text-sm">
-            {estudio.promotor && (
-              <div className="flex items-center gap-2 text-gray-600">
-                <Building2 className="h-4 w-4 text-[#700D39] flex-shrink-0" />
-                <span className="font-medium">{estudio.promotor}</span>
-              </div>
-            )}
-            {rangoAnios && (
-              <div className="flex items-center gap-2 text-gray-500">
-                <Calendar className="h-4 w-4 text-gray-400 flex-shrink-0" />
-                <span>{rangoAnios}</span>
-              </div>
-            )}
-          </div>
-
-          {/* Descripción */}
-          {estudio.descripcion && (
-            <p
-              className="text-gray-600 text-base md:text-lg leading-relaxed mb-8 line-clamp-4"
-              dangerouslySetInnerHTML={{
-                __html: estudio.descripcion.replace(/<[^>]*>/g, '').slice(0, 300) + '...'
-              }}
-            />
-          )}
-
-          {/* Categorías */}
-          {estudio.categoriesDetails && estudio.categoriesDetails.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 mb-8">
-              {estudio.categoriesDetails.map((cat) => (
-                <span
-                  key={cat.id}
-                  className="inline-flex items-center gap-1 bg-teal-50 text-teal-700 text-sm font-semibold px-3 py-1.5 rounded-full border border-teal-200"
-                >
-                  {cat.name}
-                </span>
-              ))}
+            {/* Meta info */}
+            <div className="flex flex-wrap items-center gap-4 mb-5 text-sm">
+              {estudio.promotor && (
+                <div className="flex items-center gap-2 text-gray-600">
+                  <Building2 className="h-4 w-4 text-[#A10D5E] flex-shrink-0" />
+                  <span className="font-medium">{estudio.promotor}</span>
+                </div>
+              )}
+              {rangoAnios && (
+                <div className="flex items-center gap-2 text-gray-500">
+                  <Calendar className="h-4 w-4 text-gray-400 flex-shrink-0" />
+                  <span>{rangoAnios}</span>
+                </div>
+              )}
             </div>
-          )}
 
-          {/* CTA */}
-          <span className="inline-flex items-center gap-3 bg-[#700D39] text-white font-semibold px-8 py-4 rounded-full group-hover:bg-[#8B1547] transition-all duration-300 text-base">
-            Ver estudio completo
-            <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
-          </span>
+            {/* Descripción */}
+            {estudio.descripcion && (
+              <p
+                className="text-gray-600 text-base leading-relaxed mb-6 line-clamp-4"
+                dangerouslySetInnerHTML={{
+                  __html: estudio.descripcion.replace(/<[^>]*>/g, '').slice(0, 300) + '...'
+                }}
+              />
+            )}
+
+            {/* Categorías */}
+            {estudio.categoriesDetails && estudio.categoriesDetails.length > 0 && (
+              <div className="flex flex-wrap items-center gap-2 mb-6">
+                {estudio.categoriesDetails.map((cat) => (
+                  <span
+                    key={cat.id}
+                    className="inline-flex items-center gap-1 bg-orange-50 text-[#F29429] text-sm font-semibold px-3 py-1.5 rounded-full border border-orange-200"
+                  >
+                    {cat.name}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* CTA */}
+            <div>
+              <span className="inline-flex items-center gap-3 bg-[#A10D5E] text-white font-semibold px-8 py-4 rounded-full group-hover:bg-[#8B1547] transition-all duration-300 text-base">
+                Ver estudio completo
+                <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </div>
+          </div>
         </div>
       </Link>
     </div>

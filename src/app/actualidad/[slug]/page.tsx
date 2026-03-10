@@ -13,12 +13,12 @@ import { MediaGallery } from '@/components/ui';
 import type { TipoContenido, Actualidad } from '@/types';
 
 const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; color: string; bg: string; border: string; heroAccent: string }> = {
-  boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#700D39]', bg: 'bg-[#700D39]/10', border: 'border-[#700D39]/20', heroAccent: 'from-[#700D39] via-[#8B1547] to-[#700D39]' },
-  nota_prensa: { label: 'Nota de prensa', icon: FileText, color: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200', heroAccent: 'from-[#700D39] via-[#8B1547] to-[#700D39]' },
-  evento: { label: 'Evento', icon: CalendarDays, color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-200', heroAccent: 'from-[#700D39] via-[#8B1547] to-[#700D39]' },
-  taller: { label: 'Taller', icon: GraduationCap, color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', heroAccent: 'from-[#700D39] via-[#8B1547] to-[#700D39]' },
-  video: { label: 'Video', icon: Video, color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', heroAccent: 'from-[#700D39] via-[#8B1547] to-[#700D39]' },
-  infografia: { label: 'Infografía', icon: ImageIcon, color: 'text-purple-700', bg: 'bg-purple-50', border: 'border-purple-200', heroAccent: 'from-[#700D39] via-[#8B1547] to-[#700D39]' },
+  boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#A10D5E]', bg: 'bg-[#A10D5E]/10', border: 'border-[#A10D5E]/20', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
+  nota_prensa: { label: 'Nota de prensa', icon: FileText, color: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
+  evento: { label: 'Evento', icon: CalendarDays, color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
+  taller: { label: 'Taller', icon: GraduationCap, color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
+  video: { label: 'Video', icon: Video, color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
+  infografia: { label: 'Infografía', icon: ImageIcon, color: 'text-purple-700', bg: 'bg-purple-50', border: 'border-purple-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
 };
 
 /** Checks if an HTML string has real visible content (not just empty tags/nbsp) */
@@ -72,7 +72,7 @@ function RelatedCard({ item }: { item: Actualidad }) {
   return (
     <Link
       href={`/actualidad/${item.slug}/`}
-      className="group flex gap-4 p-4 rounded-xl bg-white border border-gray-100 hover:border-[#700D39]/20 hover:shadow-md transition-all duration-300"
+      className="group flex gap-4 p-4 rounded-xl bg-white border border-gray-100 hover:border-[#A10D5E]/20 hover:shadow-md transition-all duration-300"
     >
       {item.featuredMediaUrl ? (
         <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-gray-100">
@@ -88,11 +88,11 @@ function RelatedCard({ item }: { item: Actualidad }) {
           <Icon className="h-3 w-3" />
           {config.label}
         </div>
-        <h4 className="text-sm font-bold text-gray-900 line-clamp-2 group-hover:text-[#700D39] transition-colors">
+        <h4 className="text-sm font-bold text-gray-900 line-clamp-2 group-hover:text-[#A10D5E] transition-colors">
           {decodeHtmlEntities(item.title)}
         </h4>
       </div>
-      <ChevronRight className="h-5 w-5 text-gray-300 group-hover:text-[#700D39] transition-colors flex-shrink-0 self-center" />
+      <ChevronRight className="h-5 w-5 text-gray-300 group-hover:text-[#A10D5E] transition-colors flex-shrink-0 self-center" />
     </Link>
   );
 }
@@ -231,7 +231,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                       href={item.pdfInfografiaUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#700D39] text-white rounded-xl hover:bg-[#8B1547] transition-colors font-semibold text-sm shadow-md"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#A10D5E] text-white rounded-xl hover:bg-[#8B1547] transition-colors font-semibold text-sm shadow-md"
                     >
                       <Download className="h-4 w-4" />
                       Descargar infografía en PDF
@@ -260,7 +260,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
             {/* Descripción / Contenido - después del contenido protagonista */}
             {(hasContent(item.descripcionCorta) || hasContent(item.content)) && (
               <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-10">
-                <div className="prose prose-lg max-w-none prose-headings:font-poppins prose-headings:text-[#700D39] prose-a:text-[#700D39] hover:prose-a:text-[#F29429] prose-img:rounded-xl">
+                <div className="prose prose-lg max-w-none prose-headings:font-poppins prose-headings:text-[#A10D5E] prose-a:text-[#A10D5E] hover:prose-a:text-[#F29429] prose-img:rounded-xl">
                   <SafeHtml html={hasContent(item.descripcionCorta) ? item.descripcionCorta : item.content} />
                 </div>
               </div>
@@ -283,8 +283,8 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {item.fechaEvento && (
                     <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
-                      <div className="w-10 h-10 rounded-lg bg-[#700D39]/10 flex items-center justify-center flex-shrink-0">
-                        <CalendarDays className="h-5 w-5 text-[#700D39]" />
+                      <div className="w-10 h-10 rounded-lg bg-[#A10D5E]/10 flex items-center justify-center flex-shrink-0">
+                        <CalendarDays className="h-5 w-5 text-[#A10D5E]" />
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 font-medium">Fecha</p>
@@ -294,8 +294,8 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                   )}
                   {item.horaInicio && (
                     <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
-                      <div className="w-10 h-10 rounded-lg bg-[#700D39]/10 flex items-center justify-center flex-shrink-0">
-                        <Clock className="h-5 w-5 text-[#700D39]" />
+                      <div className="w-10 h-10 rounded-lg bg-[#A10D5E]/10 flex items-center justify-center flex-shrink-0">
+                        <Clock className="h-5 w-5 text-[#A10D5E]" />
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 font-medium">Hora de inicio</p>
@@ -305,8 +305,8 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                   )}
                   {item.lugarEvento && (
                     <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
-                      <div className="w-10 h-10 rounded-lg bg-[#700D39]/10 flex items-center justify-center flex-shrink-0">
-                        <MapPin className="h-5 w-5 text-[#700D39]" />
+                      <div className="w-10 h-10 rounded-lg bg-[#A10D5E]/10 flex items-center justify-center flex-shrink-0">
+                        <MapPin className="h-5 w-5 text-[#A10D5E]" />
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 font-medium">Lugar</p>
@@ -316,8 +316,8 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                   )}
                   {item.horaFin && (
                     <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
-                      <div className="w-10 h-10 rounded-lg bg-[#700D39]/10 flex items-center justify-center flex-shrink-0">
-                        <Clock className="h-5 w-5 text-[#700D39]" />
+                      <div className="w-10 h-10 rounded-lg bg-[#A10D5E]/10 flex items-center justify-center flex-shrink-0">
+                        <Clock className="h-5 w-5 text-[#A10D5E]" />
                       </div>
                       <div>
                         <p className="text-xs text-gray-500 font-medium">Hora de fin</p>
@@ -335,7 +335,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                   return (
                     <div className="mt-5 pt-5 border-t border-gray-100">
                       <div className="flex items-center gap-2 mb-3">
-                        <MapPin className="h-4 w-4 text-[#700D39]" />
+                        <MapPin className="h-4 w-4 text-[#A10D5E]" />
                         <h3 className="text-sm font-semibold text-gray-700">Ubicación</h3>
                       </div>
                       <div className="rounded-xl overflow-hidden border border-gray-200 shadow-sm">
@@ -352,7 +352,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 mt-3 text-sm text-[#700D39] hover:text-[#F29429] font-medium transition-colors"
+                        className="inline-flex items-center gap-1.5 mt-3 text-sm text-[#A10D5E] hover:text-[#F29429] font-medium transition-colors"
                       >
                         <ExternalLink className="h-3.5 w-3.5" />
                         Abrir en Google Maps
@@ -374,9 +374,9 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                   href={item.pdfBoletin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3.5 rounded-xl bg-[#700D39]/5 hover:bg-[#700D39]/10 transition-colors border border-[#700D39]/10"
+                  className="flex items-center gap-3 p-3.5 rounded-xl bg-[#A10D5E]/5 hover:bg-[#A10D5E]/10 transition-colors border border-[#A10D5E]/10"
                 >
-                  <div className="flex items-center justify-center w-10 h-10 bg-[#700D39] rounded-xl flex-shrink-0">
+                  <div className="flex items-center justify-center w-10 h-10 bg-[#A10D5E] rounded-xl flex-shrink-0">
                     <Download className="h-5 w-5 text-white" />
                   </div>
                   <div>
@@ -392,7 +392,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                   href={item.enlaceInteresBoletin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3.5 rounded-xl bg-[#700D39]/5 hover:bg-[#700D39]/10 transition-colors border border-[#700D39]/10"
+                  className="flex items-center gap-3 p-3.5 rounded-xl bg-[#A10D5E]/5 hover:bg-[#A10D5E]/10 transition-colors border border-[#A10D5E]/10"
                 >
                   <div className="flex items-center justify-center w-10 h-10 bg-[#F29429] rounded-xl flex-shrink-0">
                     <ExternalLink className="h-5 w-5 text-white" />
@@ -429,7 +429,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
               {/* Back to listing */}
               <Link
                 href="/actualidad/"
-                className="flex items-center gap-2 p-3 rounded-xl text-sm font-medium text-gray-600 hover:text-[#700D39] hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-2 p-3 rounded-xl text-sm font-medium text-gray-600 hover:text-[#A10D5E] hover:bg-gray-50 transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Volver a Actualidad

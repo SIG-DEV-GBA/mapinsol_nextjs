@@ -64,7 +64,7 @@ export default function ContactoPage() {
         {/* Back Link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-[#700D39] font-medium text-sm mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-[#A10D5E] font-medium text-sm mb-8 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
           Volver al inicio
@@ -72,7 +72,7 @@ export default function ContactoPage() {
 
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#700D39] to-[#8B1547] rounded-2xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#A10D5E] to-[#8B1547] rounded-2xl mb-4">
             <Mail className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 font-poppins">
@@ -106,7 +106,7 @@ export default function ContactoPage() {
             {/* Datos personales */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-gray-700 font-semibold">
-                <User className="h-4 w-4 text-[#700D39]" />
+                <User className="h-4 w-4 text-[#A10D5E]" />
                 <span>Datos personales</span>
               </div>
 
@@ -123,7 +123,7 @@ export default function ContactoPage() {
                     value={formData.nombre}
                     onChange={handleChange}
                     required
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                     placeholder="Tu nombre"
                   />
                 </div>
@@ -141,7 +141,7 @@ export default function ContactoPage() {
                     onChange={handleChange}
                     min="1"
                     max="120"
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                     placeholder="Tu edad"
                   />
                 </div>
@@ -156,7 +156,7 @@ export default function ContactoPage() {
                     name="sexo"
                     value={formData.sexo}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors bg-white"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors bg-white"
                   >
                     <option value="">Seleccionar...</option>
                     {SEXO_OPTIONS.map(opt => (
@@ -170,7 +170,7 @@ export default function ContactoPage() {
             {/* Ubicación */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-gray-700 font-semibold">
-                <MapPin className="h-4 w-4 text-[#700D39]" />
+                <MapPin className="h-4 w-4 text-[#A10D5E]" />
                 <span>Ubicación</span>
               </div>
 
@@ -185,7 +185,7 @@ export default function ContactoPage() {
                     name="ccaa"
                     value={formData.ccaa}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors bg-white"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors bg-white"
                   >
                     <option value="">Seleccionar...</option>
                     {CCAA_LIST.map(ccaa => (
@@ -205,7 +205,7 @@ export default function ContactoPage() {
                     value={formData.provincia}
                     onChange={handleChange}
                     disabled={!formData.ccaa}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors bg-white disabled:bg-gray-100 disabled:cursor-not-allowed"
                   >
                     <option value="">Seleccionar...</option>
                     {provincias.map(prov => (
@@ -225,7 +225,7 @@ export default function ContactoPage() {
                     name="municipio"
                     value={formData.municipio}
                     onChange={handleChange}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                     placeholder="Tu municipio o población"
                   />
                 </div>
@@ -235,7 +235,7 @@ export default function ContactoPage() {
             {/* Contacto */}
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-gray-700 font-semibold">
-                <Mail className="h-4 w-4 text-[#700D39]" />
+                <Mail className="h-4 w-4 text-[#A10D5E]" />
                 <span>Mensaje</span>
               </div>
 
@@ -251,7 +251,7 @@ export default function ContactoPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                   placeholder="tu@email.com"
                 />
               </div>
@@ -268,7 +268,7 @@ export default function ContactoPage() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors resize-none"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors resize-none"
                   placeholder="Escribe tu mensaje aquí..."
                 />
               </div>
@@ -278,7 +278,7 @@ export default function ContactoPage() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#700D39] to-[#8B1547] text-white font-semibold py-3 px-6 rounded-xl hover:from-[#8B1547] hover:to-[#700D39] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#A10D5E] to-[#8B1547] text-white font-semibold py-3 px-6 rounded-xl hover:from-[#8B1547] hover:to-[#A10D5E] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
             >
               {isPending ? (
                 <>

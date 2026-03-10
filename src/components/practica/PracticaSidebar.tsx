@@ -288,7 +288,7 @@ function ContactBlock({ contact, isLast }: ContactBlockProps) {
         {contact.mail_contacto && (
           <a
             href={`mailto:${contact.mail_contacto}`}
-            className="inline-flex items-center gap-2 text-sm text-[#FF6900] hover:underline"
+            className="inline-flex items-center gap-2 text-sm text-[#F29429] hover:underline"
           >
             <Mail className="w-4 h-4" />
             <span>{contact.mail_contacto}</span>
@@ -297,7 +297,7 @@ function ContactBlock({ contact, isLast }: ContactBlockProps) {
         {contact.tlf_contacto && (
           <a
             href={`tel:${contact.tlf_contacto}`}
-            className="inline-flex items-center gap-2 text-sm text-[#FF6900] hover:underline"
+            className="inline-flex items-center gap-2 text-sm text-[#F29429] hover:underline"
           >
             <Phone className="w-4 h-4" />
             <span>{contact.tlf_contacto}</span>

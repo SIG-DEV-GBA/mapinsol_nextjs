@@ -28,12 +28,12 @@ export function FeaturedPracticesCarousel({ practicas }: FeaturedPracticesCarous
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 text-center">
-          <div className="inline-flex items-center gap-2 mb-4 text-[#FF6900]">
+          <div className="inline-flex items-center gap-2 mb-4 text-[#F29429]">
             <Star className="h-6 w-6 fill-current" />
             <span className="text-sm font-semibold uppercase tracking-wider">Destacadas</span>
             <Star className="h-6 w-6 fill-current" />
           </div>
-          <h2 className="text-3xl font-bold text-[#700D39] lg:text-4xl mb-3">
+          <h2 className="text-3xl font-bold text-[#A10D5E] lg:text-4xl mb-3">
             Buenas Prácticas Destacadas
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -90,14 +90,14 @@ export function FeaturedPracticesCarousel({ practicas }: FeaturedPracticesCarous
           {/* Navigation Buttons */}
           <button
             onClick={() => swiperRef.current?.slidePrev()}
-            className="absolute left-0 md:-left-2 lg:left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-[#FF6900] to-[#F18E19] rounded-full shadow-lg flex items-center justify-center text-white border-[3px] border-white hover:scale-110 transition-transform duration-300 hover:shadow-xl"
+            className="absolute left-0 md:-left-2 lg:left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-[#F29429] to-[#F18E19] rounded-full shadow-lg flex items-center justify-center text-white border-[3px] border-white hover:scale-110 transition-transform duration-300 hover:shadow-xl"
             aria-label="Anterior"
           >
             <ChevronLeft className="w-6 h-6" strokeWidth={3} />
           </button>
           <button
             onClick={() => swiperRef.current?.slideNext()}
-            className="absolute right-0 md:-right-2 lg:right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-[#FF6900] to-[#F18E19] rounded-full shadow-lg flex items-center justify-center text-white border-[3px] border-white hover:scale-110 transition-transform duration-300 hover:shadow-xl"
+            className="absolute right-0 md:-right-2 lg:right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-[#F29429] to-[#F18E19] rounded-full shadow-lg flex items-center justify-center text-white border-[3px] border-white hover:scale-110 transition-transform duration-300 hover:shadow-xl"
             aria-label="Siguiente"
           >
             <ChevronRight className="w-6 h-6" strokeWidth={3} />
@@ -133,7 +133,7 @@ export function FeaturedPracticesCarousel({ practicas }: FeaturedPracticesCarous
         }
 
         .featured-bullet-active {
-          background: linear-gradient(90deg, #FF6900 0%, #F18E19 100%);
+          background: linear-gradient(90deg, #F29429 0%, #F18E19 100%);
           width: 40px;
           box-shadow: 0 2px 8px rgba(255, 105, 0, 0.3);
         }

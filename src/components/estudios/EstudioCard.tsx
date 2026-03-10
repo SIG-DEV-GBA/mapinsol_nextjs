@@ -61,7 +61,7 @@ export function EstudioCard({ estudio }: EstudioCardProps) {
         'group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 h-full flex flex-col shadow-sm hover:shadow-xl border-2',
         esDestacado
           ? 'border-emerald-400 ring-2 ring-emerald-200'
-          : 'border-gray-100 hover:border-[#700D39]/20'
+          : 'border-gray-100 hover:border-[#A10D5E]/20'
       )}
     >
       {/* Badge Destacado */}
@@ -86,8 +86,8 @@ export function EstudioCard({ estudio }: EstudioCardProps) {
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#700D39]/5 to-[#FF6900]/5">
-            <BookOpen className="h-16 w-16 text-[#700D39]/20" />
+          <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#A10D5E]/5 to-[#F29429]/5">
+            <BookOpen className="h-16 w-16 text-[#A10D5E]/20" />
           </div>
         )}
 
@@ -97,7 +97,7 @@ export function EstudioCard({ estudio }: EstudioCardProps) {
         {/* Ámbito badge */}
         {estudio.ambitoGeografico && (
           <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-gray-700 text-xs font-semibold px-2.5 py-1.5 rounded-full shadow-sm">
-            <Globe className="h-3 w-3 text-[#700D39]" />
+            <Globe className="h-3 w-3 text-[#A10D5E]" />
             {AMBITO_LABELS[estudio.ambitoGeografico] || estudio.ambitoGeografico}
           </span>
         )}
@@ -118,14 +118,14 @@ export function EstudioCard({ estudio }: EstudioCardProps) {
       <div className="p-5 flex flex-col flex-grow">
         {/* Tipo de promotor */}
         {estudio.tipoPromotor && (
-          <span className="inline-flex self-start items-center gap-1 bg-[#700D39]/10 text-[#700D39] text-xs font-semibold px-2.5 py-1 rounded-full mb-3">
+          <span className="inline-flex self-start items-center gap-1 bg-[#A10D5E]/10 text-[#A10D5E] text-xs font-semibold px-2.5 py-1 rounded-full mb-3">
             {TIPO_PROMOTOR_LABELS[estudio.tipoPromotor] || estudio.tipoPromotor}
           </span>
         )}
 
         {/* Título */}
         <Link href={`/estudio/${estudio.slug}/`} className="block mb-3">
-          <h3 className="text-lg font-bold text-[#700D39] line-clamp-2 group-hover:text-[#F29429] transition-colors duration-300 leading-tight">
+          <h3 className="text-lg font-bold text-[#A10D5E] line-clamp-2 group-hover:text-[#F29429] transition-colors duration-300 leading-tight">
             {estudio.title}
           </h3>
         </Link>
@@ -134,7 +134,7 @@ export function EstudioCard({ estudio }: EstudioCardProps) {
         <div className="space-y-2 text-sm mb-4">
           {estudio.promotor && (
             <div className="flex items-center gap-2 text-gray-600">
-              <Building2 className="h-4 w-4 text-[#700D39] flex-shrink-0" />
+              <Building2 className="h-4 w-4 text-[#A10D5E] flex-shrink-0" />
               <span className="line-clamp-1">{estudio.promotor}</span>
             </div>
           )}
@@ -166,13 +166,13 @@ export function EstudioCard({ estudio }: EstudioCardProps) {
               {estudio.categoriesDetails.slice(0, 2).map((cat) => (
                 <span
                   key={cat.id}
-                  className="inline-flex items-center gap-1 bg-teal-50 text-teal-700 text-xs font-semibold px-2.5 py-1 rounded-full border border-teal-200"
+                  className="inline-flex items-center gap-1 bg-orange-50 text-[#F29429] text-xs font-semibold px-2.5 py-1 rounded-full border border-orange-200"
                 >
                   {cat.name}
                 </span>
               ))}
               {estudio.categoriesDetails.length > 2 && (
-                <span className="text-xs text-teal-400 font-medium">
+                <span className="text-xs text-orange-400 font-medium">
                   +{estudio.categoriesDetails.length - 2}
                 </span>
               )}
@@ -183,7 +183,7 @@ export function EstudioCard({ estudio }: EstudioCardProps) {
         {/* CTA */}
         <Link
           href={`/estudio/${estudio.slug}/`}
-          className="inline-flex items-center gap-2 text-[#700D39] font-semibold text-sm mt-4 group-hover:gap-3 transition-all duration-300"
+          className="inline-flex items-center gap-2 text-[#A10D5E] font-semibold text-sm mt-4 group-hover:gap-3 transition-all duration-300"
         >
           Ver estudio
           <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

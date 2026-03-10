@@ -728,6 +728,7 @@ function parseEstudio(raw: EstudioRaw): Estudio {
       typeof id === 'string' ? parseInt(id, 10) : id
     ) : [],
     enlaceVideo: meta.enlace_video || '',
+    pdfEstudio: meta.pdf_estudio ? (typeof meta.pdf_estudio === 'string' ? parseInt(meta.pdf_estudio, 10) : meta.pdf_estudio) : 0,
 
     estudioDestacado: meta.estudio_destacado === 'true' || meta.estudio_destacado === true,
     mostrarSlider: meta.mostrar_slider === 'true' || meta.mostrar_slider === true,
@@ -957,6 +958,21 @@ export async function enrichEstudioWithGaleria(estudio: Estudio): Promise<Estudi
   return {
     ...estudio,
     galeriaDetails,
+  };
+}
+
+/**
+ * Enriquece un estudio con la URL del PDF
+ */
+export async function enrichEstudioWithPdf(estudio: Estudio): Promise<Estudio> {
+  if (!estudio.pdfEstudio || estudio.pdfEstudio <= 0) {
+    return estudio;
+  }
+
+  const media = await getMediaById(estudio.pdfEstudio);
+  return {
+    ...estudio,
+    pdfEstudioUrl: media?.source_url,
   };
 }
 

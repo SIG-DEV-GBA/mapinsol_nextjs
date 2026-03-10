@@ -37,7 +37,7 @@ export default async function ActualidadPage({
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero - same pattern as /practicas HeroSearch */}
-      <section className="relative bg-gradient-to-br from-[#700D39] via-[#8B1547] to-[#700D39] pt-4 pb-8 sm:pt-6 sm:pb-10 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-[#A10D5E] via-[#8B1547] to-[#A10D5E] pt-4 pb-8 sm:pt-6 sm:pb-10 overflow-hidden">
         {/* Background decorations */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl" />
@@ -105,8 +105,8 @@ export default async function ActualidadPage({
                 href={href}
                 className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
                   isActive
-                    ? 'bg-[#700D39] text-white shadow-md shadow-[#700D39]/20 scale-105'
-                    : 'text-gray-600 hover:bg-[#700D39]/5 hover:text-[#700D39]'
+                    ? 'bg-[#A10D5E] text-white shadow-md shadow-[#A10D5E]/20 scale-105'
+                    : 'text-gray-600 hover:bg-[#A10D5E]/5 hover:text-[#A10D5E]'
                 }`}
               >
                 {Icon && <Icon className="h-4 w-4" />}
@@ -136,14 +136,14 @@ export default async function ActualidadPage({
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-[#700D39]/5 flex items-center justify-center">
-              <Newspaper className="h-10 w-10 text-[#700D39]/30" />
+            <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-[#A10D5E]/5 flex items-center justify-center">
+              <Newspaper className="h-10 w-10 text-[#A10D5E]/30" />
             </div>
             <h3 className="text-xl font-bold text-gray-900 mb-2 font-poppins">No hay contenido disponible</h3>
             <p className="text-gray-500 mb-6">No se encontraron publicaciones en esta categoría.</p>
             <Link
               href="/actualidad/"
-              className="inline-flex items-center gap-2 text-[#700D39] font-semibold hover:text-[#F29429] transition-colors"
+              className="inline-flex items-center gap-2 text-[#A10D5E] font-semibold hover:text-[#F29429] transition-colors"
             >
               Ver todas las publicaciones
               <ArrowRight className="h-4 w-4" />
@@ -154,7 +154,7 @@ export default async function ActualidadPage({
 
       {/* Newsletter CTA */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 pt-8">
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#700D39] to-[#8B1547] rounded-2xl p-8 md:p-12 text-center">
+        <div className="relative overflow-hidden bg-gradient-to-br from-[#A10D5E] to-[#8B1547] rounded-2xl p-8 md:p-12 text-center">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 right-0 w-64 h-64 bg-[#F29429] rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white rounded-full blur-3xl" />
@@ -168,7 +168,7 @@ export default async function ActualidadPage({
             </p>
             <Link
               href="/boletines/"
-              className="inline-flex items-center gap-2 bg-white text-[#700D39] font-semibold px-8 py-3.5 rounded-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-lg"
+              className="inline-flex items-center gap-2 bg-white text-[#A10D5E] font-semibold px-8 py-3.5 rounded-xl hover:scale-105 hover:shadow-2xl transition-all duration-300 shadow-lg"
             >
               <Newspaper className="h-5 w-5" />
               Ir a suscripción

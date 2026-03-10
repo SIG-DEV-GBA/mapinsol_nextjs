@@ -15,7 +15,7 @@ export function LocationLinks({ municipio, provincia, ccaa, size = 'md' }: Locat
 
   return (
     <div className={`flex items-center gap-1.5 text-gray-${isSm ? '500' : '600'} ${isSm ? 'text-xs' : ''}`}>
-      <MapPin className={`${isSm ? 'w-3.5 h-3.5' : 'w-5 h-5'} text-[#FF6900] flex-shrink-0`} />
+      <MapPin className={`${isSm ? 'w-3.5 h-3.5' : 'w-5 h-5'} text-[#F29429] flex-shrink-0`} />
       <span className={`flex items-center gap-1 flex-wrap ${isSm ? 'truncate' : ''}`}>
         {municipio && (
           <>

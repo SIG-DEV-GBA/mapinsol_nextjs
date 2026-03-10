@@ -53,7 +53,7 @@ const lato = Lato({
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#700D39',
+  themeColor: '#A10D5E',
 };
 
 export const metadata: Metadata = {

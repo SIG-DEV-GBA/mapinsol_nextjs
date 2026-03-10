@@ -120,7 +120,7 @@ function PageButton({ page, isActive, onClick }: PageButtonProps) {
       className={cn(
         'w-10 h-10 rounded-xl font-medium transition-all',
         isActive
-          ? 'bg-[#FF6900] text-white'
+          ? 'bg-[#F29429] text-white'
           : 'text-gray-700 hover:bg-gray-100'
       )}
     >

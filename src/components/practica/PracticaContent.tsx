@@ -129,9 +129,9 @@ export function PracticaContent({ practica }: PracticaContentProps) {
 function ObjetivoCard({ objetivo }: { objetivo: string }) {
   return (
     <section className="relative bg-gradient-to-br from-orange-50 to-amber-50 rounded-2xl overflow-hidden">
-      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#FF6900]" />
+      <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#F29429]" />
       <div className="flex gap-5 p-6 pl-8">
-        <div className="w-12 h-12 bg-[#FF6900] rounded-xl flex items-center justify-center text-white flex-shrink-0">
+        <div className="w-12 h-12 bg-[#F29429] rounded-xl flex items-center justify-center text-white flex-shrink-0">
           <Target className="w-6 h-6" />
         </div>
         <div>

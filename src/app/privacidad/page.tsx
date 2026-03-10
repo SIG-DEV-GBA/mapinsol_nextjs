@@ -13,7 +13,7 @@ export default function PrivacidadPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-[#700D39] font-medium text-sm mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-[#A10D5E] font-medium text-sm mb-8 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
           Volver al inicio
@@ -21,7 +21,7 @@ export default function PrivacidadPage() {
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-10">
           <div className="flex items-center gap-4 mb-8">
-            <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-[#700D39] to-[#8B1547] rounded-xl">
+            <div className="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-[#A10D5E] to-[#8B1547] rounded-xl">
               <Shield className="h-7 w-7 text-white" />
             </div>
             <div>

@@ -4,7 +4,7 @@ import type { Actualidad, TipoContenido } from '@/types';
 import { cn } from '@/lib/utils';
 
 const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; color: string; bg: string; accent: string }> = {
-  boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#700D39]', bg: 'bg-[#700D39]/10', accent: 'border-[#700D39]/30' },
+  boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#A10D5E]', bg: 'bg-[#A10D5E]/10', accent: 'border-[#A10D5E]/30' },
   nota_prensa: { label: 'Nota de prensa', icon: FileText, color: 'text-blue-700', bg: 'bg-blue-50', accent: 'border-blue-200' },
   evento: { label: 'Evento', icon: CalendarDays, color: 'text-emerald-700', bg: 'bg-emerald-50', accent: 'border-emerald-200' },
   taller: { label: 'Taller', icon: GraduationCap, color: 'text-amber-700', bg: 'bg-amber-50', accent: 'border-amber-200' },
@@ -45,7 +45,7 @@ export function ActualidadCard({ item }: { item: Actualidad }) {
         'group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 h-full flex flex-col shadow-sm hover:shadow-xl border-2',
         item.destacado
           ? 'border-[#F29429] ring-2 ring-[#F29429]/20'
-          : 'border-gray-100 hover:border-[#700D39]/20'
+          : 'border-gray-100 hover:border-[#A10D5E]/20'
       )}
     >
       {/* Destacado badge */}
@@ -70,8 +70,8 @@ export function ActualidadCard({ item }: { item: Actualidad }) {
             loading="lazy"
           />
         ) : (
-          <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#700D39]/5 to-[#F29429]/5">
-            <Icon className="h-16 w-16 text-[#700D39]/15" />
+          <div className="flex h-full items-center justify-center bg-gradient-to-br from-[#A10D5E]/5 to-[#F29429]/5">
+            <Icon className="h-16 w-16 text-[#A10D5E]/15" />
           </div>
         )}
 
@@ -93,7 +93,7 @@ export function ActualidadCard({ item }: { item: Actualidad }) {
       {/* Content */}
       <div className="p-5 flex flex-col flex-grow">
         <Link href={`/actualidad/${item.slug}/`} className="block mb-3">
-          <h3 className="text-lg font-bold text-[#700D39] line-clamp-2 group-hover:text-[#F29429] transition-colors duration-300 leading-tight font-poppins">
+          <h3 className="text-lg font-bold text-[#A10D5E] line-clamp-2 group-hover:text-[#F29429] transition-colors duration-300 leading-tight font-poppins">
             {decodeHtmlEntities(item.title)}
           </h3>
         </Link>
@@ -105,7 +105,7 @@ export function ActualidadCard({ item }: { item: Actualidad }) {
         {/* Event location */}
         {item.tipoContenido === 'evento' && item.lugarEvento && (
           <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-3">
-            <MapPin className="h-3.5 w-3.5 text-[#700D39]" />
+            <MapPin className="h-3.5 w-3.5 text-[#A10D5E]" />
             <span className="truncate">{item.lugarEvento}</span>
           </div>
         )}
@@ -114,7 +114,7 @@ export function ActualidadCard({ item }: { item: Actualidad }) {
         <div className="pt-3 border-t border-gray-100">
           <Link
             href={`/actualidad/${item.slug}/`}
-            className="inline-flex items-center gap-2 text-[#700D39] font-semibold text-sm group-hover:gap-3 transition-all duration-300 hover:text-[#F29429]"
+            className="inline-flex items-center gap-2 text-[#A10D5E] font-semibold text-sm group-hover:gap-3 transition-all duration-300 hover:text-[#F29429]"
           >
             Leer más
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />

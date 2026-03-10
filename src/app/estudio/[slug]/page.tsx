@@ -34,6 +34,7 @@ import {
   getEstudioBySlug,
   enrichEstudioWithDocumentos,
   enrichEstudioWithGaleria,
+  enrichEstudioWithPdf,
   getMediaById,
 } from '@/lib/wordpress';
 import { SafeHtml } from '@/components/ui';
@@ -158,8 +159,8 @@ function ContentSection({
   return (
     <details className="group bg-white rounded-xl border border-gray-200 overflow-hidden" open={defaultOpen}>
       <summary className="flex items-center gap-3 p-5 cursor-pointer hover:bg-gray-50 transition-colors list-none">
-        <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-[#700D39]/10 to-[#FF6900]/10 rounded-lg">
-          <Icon className="h-5 w-5 text-[#700D39]" />
+        <div className="flex items-center justify-center w-10 h-10 bg-gradient-to-br from-[#A10D5E]/10 to-[#F29429]/10 rounded-lg">
+          <Icon className="h-5 w-5 text-[#A10D5E]" />
         </div>
         <h3 className="text-lg font-bold text-gray-900 flex-grow font-nunito">{title}</h3>
         <span className="text-gray-400 group-open:rotate-180 transition-transform">
@@ -193,12 +194,15 @@ export default async function EstudioPage({
     notFound();
   }
 
-  // Enriquecer con documentos y galería
+  // Enriquecer con documentos, galería y PDF
   if (estudio.documentosDescarga?.length > 0) {
     estudio = await enrichEstudioWithDocumentos(estudio);
   }
   if (estudio.galeria?.length > 0) {
     estudio = await enrichEstudioWithGaleria(estudio);
+  }
+  if (estudio.pdfEstudio && estudio.pdfEstudio > 0) {
+    estudio = await enrichEstudioWithPdf(estudio);
   }
 
   // Obtener URL del logo del promotor
@@ -232,98 +236,105 @@ export default async function EstudioPage({
         mainEntityOfPage: `https://mapinsol.es/estudio/${estudio.slug}/`,
       }} />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* Back Link */}
-        <Link
-          href="/estudios/"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-[#700D39] font-medium text-sm mb-6 transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Volver a estudios
-        </Link>
+        <div className="py-5 mb-6">
+          <Link
+            href="/estudios/"
+            className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-[#F29429] transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span>Volver a estudios</span>
+          </Link>
+        </div>
+
+        {/* Galería */}
+        {estudio.galeriaDetails && estudio.galeriaDetails.length > 0 && (
+          <MediaGallery
+            imagenes={estudio.galeriaDetails}
+            youtubeId={youtubeId}
+            title={estudio.title}
+          />
+        )}
 
         {/* Header */}
-        <header className="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden mb-8">
-          {/* Imagen destacada */}
-          {estudio.featuredMediaUrl && (
-            <div className="relative h-80 md:h-[450px] lg:h-[500px] overflow-hidden">
-              <img
-                src={estudio.featuredMediaUrl}
-                alt={estudio.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-
-              {/* Badges sobre imagen */}
-              <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                {estudio.ambitoGeografico && (
-                  <span className="inline-flex items-center gap-1.5 bg-white/95 backdrop-blur-sm text-gray-700 text-sm font-semibold px-3 py-1.5 rounded-full">
-                    <Globe className="h-4 w-4 text-[#700D39]" />
-                    {AMBITO_LABELS[estudio.ambitoGeografico] || estudio.ambitoGeografico}
-                  </span>
-                )}
-                {estudio.estudioDestacado && (
-                  <span className="inline-flex items-center gap-1.5 bg-emerald-500 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
-                    Destacado
-                  </span>
-                )}
-              </div>
-            </div>
-          )}
-
-          <div className="p-6 md:p-8">
-            {/* Tipo de promotor badge */}
+        <header className="mb-10">
+          {/* Badges */}
+          <div className="flex flex-wrap items-center gap-2 mb-4">
             {estudio.tipoPromotor && (
-              <span className="inline-flex items-center gap-1.5 bg-[#700D39]/10 text-[#700D39] text-sm font-semibold px-3 py-1.5 rounded-full mb-4">
+              <span className="inline-flex items-center gap-1.5 bg-[#A10D5E]/10 text-[#A10D5E] text-sm font-semibold px-3 py-1.5 rounded-full">
                 {TIPO_PROMOTOR_LABELS[estudio.tipoPromotor] || estudio.tipoPromotor}
               </span>
             )}
+            {estudio.ambitoGeografico && (
+              <span className="inline-flex items-center gap-1.5 bg-gray-100 text-gray-700 text-sm font-semibold px-3 py-1.5 rounded-full">
+                <Globe className="h-3.5 w-3.5 text-[#A10D5E]" />
+                {AMBITO_LABELS[estudio.ambitoGeografico] || estudio.ambitoGeografico}
+              </span>
+            )}
+            {estudio.estudioDestacado && (
+              <span className="inline-flex items-center gap-1.5 bg-emerald-500 text-white text-sm font-semibold px-3 py-1.5 rounded-full">
+                Destacado
+              </span>
+            )}
+          </div>
 
-            {/* Título */}
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4 font-poppins leading-tight">
-              {estudio.title}
-            </h1>
+          {/* Título */}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#A10D5E] leading-tight mb-5">
+            {estudio.title}
+          </h1>
 
-            {/* Meta info */}
-            <div className="flex flex-wrap items-center gap-4 md:gap-6 text-sm text-gray-600">
-              {estudio.promotor && (
-                <div className="flex items-center gap-2">
-                  <Building2 className="h-4 w-4 text-[#700D39]" />
-                  <span>{estudio.promotor}</span>
-                </div>
-              )}
-              {rangoAnios && (
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-[#700D39]" />
-                  <span>{rangoAnios}</span>
-                </div>
-              )}
-              {estudio.ccaa && (
-                <div className="flex items-center gap-2">
-                  <Globe className="h-4 w-4 text-[#700D39]" />
-                  <span>{estudio.ccaa}</span>
-                </div>
-              )}
-            </div>
-
-            {/* Categorías */}
-            {estudio.categoriesDetails && estudio.categoriesDetails.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-4">
-                {estudio.categoriesDetails.map((cat) => (
-                  <span
-                    key={cat.id}
-                    className="inline-flex items-center bg-teal-50 text-teal-700 text-sm font-medium px-3 py-1 rounded-full border border-teal-200"
+          {/* Meta info */}
+          <div className="flex flex-wrap gap-6 mb-6">
+            {estudio.promotor && (
+              <div className="flex items-center gap-2 text-gray-600">
+                <Building2 className="w-5 h-5 text-[#F29429]" />
+                <span className="font-semibold text-gray-500">Promotor:</span>
+                {estudio.urlPromotor ? (
+                  <a
+                    href={estudio.urlPromotor}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sky-600 font-medium hover:text-[#F29429] hover:underline transition-colors"
                   >
-                    {cat.name}
-                  </span>
-                ))}
+                    {estudio.promotor}
+                  </a>
+                ) : (
+                  <span>{estudio.promotor}</span>
+                )}
+              </div>
+            )}
+            {estudio.ccaa && (
+              <div className="flex items-center gap-2 text-gray-600">
+                <Globe className="w-5 h-5 text-[#F29429]" />
+                <span>{estudio.ccaa}</span>
+              </div>
+            )}
+            {rangoAnios && (
+              <div className="flex items-center gap-2 text-gray-600">
+                <Calendar className="w-5 h-5 text-[#F29429]" />
+                <span>{rangoAnios}</span>
               </div>
             )}
           </div>
+
+          {/* PDF Link */}
+          {estudio.pdfEstudioUrl && (
+            <a
+              href={estudio.pdfEstudioUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-6 py-3.5 bg-white rounded-xl border-2 border-red-200 text-red-600 font-semibold text-base hover:border-red-500 hover:bg-red-50 hover:-translate-y-0.5 transition-all shadow-sm"
+            >
+              <PdfIcon />
+              <span>Descargar Estudio en PDF</span>
+              <Download className="w-5 h-5 opacity-70" />
+            </a>
+          )}
         </header>
 
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8">
           {/* Contenido Principal */}
           <div className="space-y-4">
             <ContentSection
@@ -407,7 +418,7 @@ export default async function EstudioPage({
                             href={est.url_estudio}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-[#700D39] hover:text-[#F29429] font-medium transition-colors"
+                            className="text-[#A10D5E] hover:text-[#F29429] font-medium transition-colors"
                           >
                             {est.titulo_estudio}
                           </a>
@@ -424,17 +435,6 @@ export default async function EstudioPage({
 
           {/* Sidebar */}
           <aside className="space-y-6">
-            {/* Logo del promotor */}
-            {logoPromotorUrl && (
-              <div className="bg-white rounded-xl border border-gray-200 p-6 flex items-center justify-center">
-                <img
-                  src={logoPromotorUrl}
-                  alt={estudio.promotor}
-                  className="max-h-24 w-auto object-contain"
-                />
-              </div>
-            )}
-
             {/* Documentos descargables */}
             {estudio.documentosDescarga && estudio.documentosDescarga.length > 0 && (
               <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
@@ -476,7 +476,7 @@ export default async function EstudioPage({
               <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
                 <div className="p-4 border-b border-gray-100">
                   <div className="flex items-center gap-2">
-                    <LinkIcon className="h-5 w-5 text-[#700D39]" />
+                    <LinkIcon className="h-5 w-5 text-[#A10D5E]" />
                     <h3 className="font-bold text-gray-900">Enlaces</h3>
                   </div>
                 </div>
@@ -490,7 +490,7 @@ export default async function EstudioPage({
                       className="flex items-center gap-3 p-4 hover:bg-gray-50 transition-colors"
                     >
                       <ExternalLink className="h-4 w-4 text-gray-400 flex-shrink-0" />
-                      <span className="text-sm text-[#700D39] hover:text-[#F29429] font-medium">
+                      <span className="text-sm text-[#A10D5E] hover:text-[#F29429] font-medium">
                         {enlace.texto_enlace}
                       </span>
                     </a>
@@ -501,37 +501,56 @@ export default async function EstudioPage({
 
             {/* Info del promotor */}
             {(estudio.promotor || estudio.urlPromotor) && (
-              <div className="bg-gradient-to-br from-[#700D39] to-[#8B1547] rounded-xl p-6 text-white">
-                <h3 className="font-bold mb-3">Promotor</h3>
-                {estudio.promotor && (
-                  <p className="text-white/90 mb-3">{estudio.promotor}</p>
-                )}
-                {estudio.urlPromotor && (
-                  <a
-                    href={estudio.urlPromotor}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
-                  >
-                    <Globe className="h-4 w-4" />
-                    Visitar web
-                  </a>
-                )}
+              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                <div className="p-4 border-b border-gray-100">
+                  <div className="flex items-center gap-2">
+                    <Building2 className="h-5 w-5 text-[#A10D5E]" />
+                    <h3 className="font-bold text-gray-900">Promotor</h3>
+                  </div>
+                </div>
+                <div className="p-5 flex flex-col items-center">
+                  {logoPromotorUrl && (
+                    <div className="mb-4">
+                      <img
+                        src={logoPromotorUrl}
+                        alt={estudio.promotor}
+                        className="max-h-24 w-auto object-contain rounded-lg"
+                      />
+                    </div>
+                  )}
+                  {estudio.promotor && (
+                    <p className="text-xl font-extrabold italic text-[#A10D5E] text-center font-poppins leading-snug">{estudio.promotor}</p>
+                  )}
+                  {estudio.urlPromotor && (
+                    <a
+                      href={estudio.urlPromotor}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 text-sm font-semibold text-[#A10D5E] hover:text-[#F29429] transition-colors mt-3"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      Visitar web del promotor
+                    </a>
+                  )}
+                </div>
               </div>
             )}
 
-            {/* Galería de imágenes */}
-            {estudio.galeriaDetails && estudio.galeriaDetails.length > 0 && (
-              <MediaGallery
-                imagenes={estudio.galeriaDetails}
-                youtubeId={youtubeId}
-                title={estudio.title}
-                compact
-              />
-            )}
           </aside>
         </div>
       </div>
     </main>
+  );
+}
+
+function PdfIcon() {
+  return (
+    <svg viewBox="0 0 32 32" fill="none" className="w-8 h-8">
+      <path d="M6 2h14l8 8v18a2 2 0 01-2 2H6a2 2 0 01-2-2V4a2 2 0 012-2z" fill="#dc2626" />
+      <path d="M20 2v8h8" fill="#fca5a5" />
+      <text x="6" y="23" fontSize="9" fontWeight="bold" fill="white" fontFamily="Arial">
+        PDF
+      </text>
+    </svg>
   );
 }

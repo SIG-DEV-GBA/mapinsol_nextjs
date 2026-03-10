@@ -49,7 +49,7 @@ export function CookieBanner() {
     <div className="fixed inset-0 z-[9999] flex items-end sm:items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fadeIn">
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden animate-slideUp">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#700D39] to-[#8B1547] p-5 text-white">
+        <div className="bg-gradient-to-r from-[#A10D5E] to-[#8B1547] p-5 text-white">
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center w-12 h-12 bg-white/20 rounded-xl">
               <Cookie className="h-6 w-6" />
@@ -72,11 +72,11 @@ export function CookieBanner() {
               </p>
               <p className="text-gray-500 text-xs mb-5">
                 Para más información, consulta nuestra{' '}
-                <Link href="/privacidad/" className="text-[#700D39] hover:underline font-medium">
+                <Link href="/privacidad/" className="text-[#A10D5E] hover:underline font-medium">
                   Política de Privacidad
                 </Link>{' '}
                 y{' '}
-                <Link href="/cookies/" className="text-[#700D39] hover:underline font-medium">
+                <Link href="/cookies/" className="text-[#A10D5E] hover:underline font-medium">
                   Política de Cookies
                 </Link>.
               </p>
@@ -89,7 +89,7 @@ export function CookieBanner() {
                   <h3 className="font-semibold text-gray-900">Cookies esenciales</h3>
                   <p className="text-sm text-gray-500">Necesarias para el funcionamiento del sitio</p>
                 </div>
-                <div className="w-12 h-6 bg-[#700D39] rounded-full flex items-center justify-end px-1">
+                <div className="w-12 h-6 bg-[#A10D5E] rounded-full flex items-center justify-end px-1">
                   <div className="w-4 h-4 bg-white rounded-full" />
                 </div>
               </div>
@@ -103,7 +103,7 @@ export function CookieBanner() {
                 <button
                   onClick={() => setAnalyticsEnabled(!analyticsEnabled)}
                   className={`w-12 h-6 rounded-full flex items-center px-1 transition-colors ${
-                    analyticsEnabled ? 'bg-[#700D39] justify-end' : 'bg-gray-300 justify-start'
+                    analyticsEnabled ? 'bg-[#A10D5E] justify-end' : 'bg-gray-300 justify-start'
                   }`}
                 >
                   <div className="w-4 h-4 bg-white rounded-full shadow" />
@@ -131,7 +131,7 @@ export function CookieBanner() {
                 </button>
                 <button
                   onClick={acceptAll}
-                  className="flex-1 px-5 py-2.5 bg-gradient-to-r from-[#700D39] to-[#8B1547] text-white font-semibold rounded-xl hover:from-[#8B1547] hover:to-[#700D39] transition-all shadow-lg"
+                  className="flex-1 px-5 py-2.5 bg-gradient-to-r from-[#A10D5E] to-[#8B1547] text-white font-semibold rounded-xl hover:from-[#8B1547] hover:to-[#A10D5E] transition-all shadow-lg"
                 >
                   Aceptar todas
                 </button>
@@ -146,7 +146,7 @@ export function CookieBanner() {
                 </button>
                 <button
                   onClick={savePreferences}
-                  className="flex-1 px-5 py-2.5 bg-gradient-to-r from-[#700D39] to-[#8B1547] text-white font-semibold rounded-xl hover:from-[#8B1547] hover:to-[#700D39] transition-all shadow-lg"
+                  className="flex-1 px-5 py-2.5 bg-gradient-to-r from-[#A10D5E] to-[#8B1547] text-white font-semibold rounded-xl hover:from-[#8B1547] hover:to-[#A10D5E] transition-all shadow-lg"
                 >
                   Guardar preferencias
                 </button>

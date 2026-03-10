@@ -66,7 +66,7 @@ export default function BoletinesPage() {
         {/* Back Link */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-[#700D39] font-medium text-sm mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-[#A10D5E] font-medium text-sm mb-8 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
           Volver al inicio
@@ -74,7 +74,7 @@ export default function BoletinesPage() {
 
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#700D39] to-[#8B1547] rounded-2xl mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-[#A10D5E] to-[#8B1547] rounded-2xl mb-4">
             <Newspaper className="h-8 w-8 text-white" />
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3 font-poppins">
@@ -89,15 +89,15 @@ export default function BoletinesPage() {
         {/* Benefits */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
           <div className="bg-white rounded-xl border border-gray-200 p-5 text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#700D39]/10 rounded-full mb-3">
-              <Newspaper className="h-6 w-6 text-[#700D39]" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#A10D5E]/10 rounded-full mb-3">
+              <Newspaper className="h-6 w-6 text-[#A10D5E]" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-1">Novedades</h3>
             <p className="text-sm text-gray-600">Nuevas buenas prácticas y estudios publicados</p>
           </div>
           <div className="bg-white rounded-xl border border-gray-200 p-5 text-center">
-            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#FF6900]/10 rounded-full mb-3">
-              <Bell className="h-6 w-6 text-[#FF6900]" />
+            <div className="inline-flex items-center justify-center w-12 h-12 bg-[#F29429]/10 rounded-full mb-3">
+              <Bell className="h-6 w-6 text-[#F29429]" />
             </div>
             <h3 className="font-semibold text-gray-900 mb-1">Eventos</h3>
             <p className="text-sm text-gray-600">Información sobre jornadas y actividades</p>
@@ -147,7 +147,7 @@ export default function BoletinesPage() {
                   name="nombre"
                   value={formData.nombre}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                   placeholder="Tu nombre"
                 />
               </div>
@@ -163,7 +163,7 @@ export default function BoletinesPage() {
                   name="apellidos"
                   value={formData.apellidos}
                   onChange={handleChange}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors"
+                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                   placeholder="Tus apellidos"
                 />
               </div>
@@ -179,7 +179,7 @@ export default function BoletinesPage() {
                 name="sexo"
                 value={formData.sexo}
                 onChange={handleChange}
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors bg-white"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors bg-white"
               >
                 <option value="">Seleccionar...</option>
                 {SEXO_OPTIONS.map(opt => (
@@ -200,7 +200,7 @@ export default function BoletinesPage() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#700D39]/20 focus:border-[#700D39] transition-colors"
+                className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                 placeholder="tu@email.com"
               />
             </div>
@@ -209,7 +209,7 @@ export default function BoletinesPage() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#700D39] to-[#8B1547] text-white font-semibold py-3 px-6 rounded-xl hover:from-[#8B1547] hover:to-[#700D39] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#A10D5E] to-[#8B1547] text-white font-semibold py-3 px-6 rounded-xl hover:from-[#8B1547] hover:to-[#A10D5E] transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
             >
               {isPending ? (
                 <>
@@ -226,7 +226,7 @@ export default function BoletinesPage() {
 
             <p className="text-xs text-gray-500 text-center">
               Consulta nuestra{' '}
-              <a href="#" className="text-[#700D39] hover:underline">política de privacidad</a>.
+              <a href="#" className="text-[#A10D5E] hover:underline">política de privacidad</a>.
             </p>
           </form>
         </div>

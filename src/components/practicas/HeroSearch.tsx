@@ -7,11 +7,17 @@ interface HeroSearchProps {
 
 export function HeroSearch({ total, entidades }: HeroSearchProps) {
   return (
-    <section className="relative bg-gradient-to-br from-[#FF6900] via-[#FF6900] to-amber-500 pt-8 pb-12 overflow-hidden">
-      {/* Decoraciones de fondo */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-amber-300 rounded-full blur-3xl" />
+    <section className="relative pt-8 pb-12 overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/portada_buenas_practicas.webp"
+          alt=""
+          className="h-full w-full object-cover"
+          fetchPriority="high"
+        />
+        {/* Overlay naranja */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#F29429]/15 via-[#F29429]/10 to-amber-500/10" />
       </div>
 
       <div className="relative container mx-auto px-4">

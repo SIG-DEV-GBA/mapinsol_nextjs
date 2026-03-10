@@ -16,7 +16,7 @@ export async function LatestPractices() {
         {/* Header */}
         <div className="mb-12 flex items-end justify-between">
           <div>
-            <h2 className="text-3xl font-bold text-[#700D39] lg:text-4xl mb-3">
+            <h2 className="text-3xl font-bold text-[#A10D5E] lg:text-4xl mb-3">
               Últimas Buenas Prácticas
             </h2>
             <p className="text-lg text-gray-600">
@@ -26,7 +26,7 @@ export async function LatestPractices() {
 
           <Link
             href="/practicas/"
-            className="hidden items-center gap-2 text-[#FF6900] font-semibold hover:gap-3 transition-all lg:inline-flex"
+            className="hidden items-center gap-2 text-[#F29429] font-semibold hover:gap-3 transition-all lg:inline-flex"
           >
             Ver todas
             <ArrowRight className="h-5 w-5" />
@@ -44,7 +44,7 @@ export async function LatestPractices() {
         <div className="mt-10 text-center lg:hidden">
           <Link
             href="/practicas/"
-            className="inline-flex items-center gap-2 rounded-lg bg-[#FF6900] px-6 py-3 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#F29429] px-6 py-3 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
           >
             Ver todas las prácticas
             <ArrowRight className="h-5 w-5" />

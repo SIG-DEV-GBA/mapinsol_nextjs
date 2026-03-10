@@ -56,7 +56,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<ContactFo
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #700D39; border-bottom: 2px solid #FF6900; padding-bottom: 10px;">
+        <h2 style="color: #A10D5E; border-bottom: 2px solid #F29429; padding-bottom: 10px;">
           Nueva consulta MapinSol
         </h2>
 
@@ -88,13 +88,13 @@ export async function sendContactEmail(data: ContactFormData): Promise<ContactFo
           <tr>
             <td style="padding: 10px; border-bottom: 1px solid #eee; font-weight: bold;">Email:</td>
             <td style="padding: 10px; border-bottom: 1px solid #eee;">
-              <a href="mailto:${data.email}" style="color: #700D39;">${data.email}</a>
+              <a href="mailto:${data.email}" style="color: #A10D5E;">${data.email}</a>
             </td>
           </tr>
         </table>
 
         <div style="margin-top: 20px; padding: 15px; background-color: #f9f9f9; border-radius: 8px;">
-          <h3 style="color: #700D39; margin-top: 0;">Mensaje:</h3>
+          <h3 style="color: #A10D5E; margin-top: 0;">Mensaje:</h3>
           <p style="white-space: pre-wrap; line-height: 1.6;">${data.mensaje}</p>
         </div>
 

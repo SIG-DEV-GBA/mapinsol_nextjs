@@ -523,6 +523,8 @@ export interface Estudio {
   galeria: number[];
   galeriaDetails?: MediaAttachment[];
   enlaceVideo: string;
+  pdfEstudio: number;
+  pdfEstudioUrl?: string;
 
   // Configuración
   estudioDestacado: boolean;

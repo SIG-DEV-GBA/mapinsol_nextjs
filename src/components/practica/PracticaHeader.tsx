@@ -19,14 +19,14 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
         </div>
       )}
 
-      <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#700D39] leading-tight mb-5">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#A10D5E] leading-tight mb-5">
         {practica.title}
       </h1>
 
       <div className="flex flex-wrap gap-6">
         {practica.entidadResponsable && (
           <div className="flex items-center gap-2 text-gray-600">
-            <Building2 className="w-5 h-5 text-[#FF6900]" />
+            <Building2 className="w-5 h-5 text-[#F29429]" />
             <span className="font-semibold text-gray-500">Entidad Responsable:</span>
             {practica.urlEntidad ? (
               <a
@@ -45,7 +45,7 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
 
         {(practica.municipio || practica.provincia || practica.ccaa) && (
           <div className="flex items-center gap-2 text-gray-600">
-            <MapPin className="w-5 h-5 text-[#FF6900]" />
+            <MapPin className="w-5 h-5 text-[#F29429]" />
             <span className="flex items-center gap-1 flex-wrap">
               {practica.municipio && (
                 <>
@@ -83,7 +83,7 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
 
         {practica.anioInicio && (
           <div className="flex items-center gap-2 text-gray-600">
-            <Calendar className="w-5 h-5 text-[#FF6900]" />
+            <Calendar className="w-5 h-5 text-[#F29429]" />
             <span>Desde {practica.anioInicio}</span>
           </div>
         )}

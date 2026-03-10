@@ -82,7 +82,7 @@ export function Navbar() {
     cn(
       'relative px-3 py-2.5 text-sm font-medium transition-all duration-300 rounded-lg hover:scale-105 xl:px-4 xl:text-base',
       active ?? isActive(href)
-        ? 'text-[#700D39]'
+        ? 'text-[#A10D5E]'
         : 'text-gray-700 hover:text-[#F29429] hover:bg-gray-50'
     );
 
@@ -120,7 +120,7 @@ export function Navbar() {
               >
                 {item.label}
                 {isActive(item.href) && (
-                  <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#700D39]" />
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#A10D5E]" />
                 )}
               </Link>
             ))}
@@ -145,7 +145,7 @@ export function Navbar() {
                   dropdownOpen && 'rotate-180'
                 )} />
                 {isActualidadActive && (
-                  <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#700D39]" />
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#A10D5E]" />
                 )}
               </button>
 
@@ -161,13 +161,13 @@ export function Navbar() {
                         className={cn(
                           'block px-4 py-2.5 text-sm font-medium transition-colors',
                           isActive(item.href)
-                            ? 'text-[#700D39] bg-[#700D39]/5'
+                            ? 'text-[#A10D5E] bg-[#A10D5E]/5'
                             : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
                         )}
                         onClick={() => setDropdownOpen(false)}
                       >
                         <span className="flex items-center gap-3">
-                          <Icon className="h-4 w-4 text-[#700D39] flex-shrink-0" />
+                          <Icon className="h-4 w-4 text-[#A10D5E] flex-shrink-0" />
                           <span>{item.label}</span>
                         </span>
                       </Link>
@@ -184,7 +184,7 @@ export function Navbar() {
             >
               {contactItem.label}
               {isActive(contactItem.href) && (
-                <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#700D39]" />
+                <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#A10D5E]" />
               )}
             </Link>
           </div>
@@ -213,7 +213,7 @@ export function Navbar() {
                   className={cn(
                     'block rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200',
                     isActive(item.href)
-                      ? 'bg-[#700D39] text-white'
+                      ? 'bg-[#A10D5E] text-white'
                       : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
                   )}
                 >
@@ -227,7 +227,7 @@ export function Navbar() {
                 className={cn(
                   'flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200',
                   isActualidadActive
-                    ? 'bg-[#700D39] text-white'
+                    ? 'bg-[#A10D5E] text-white'
                     : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
                 )}
               >
@@ -239,7 +239,7 @@ export function Navbar() {
               </button>
 
               {mobileDropdownOpen && (
-                <div className="ml-4 space-y-1 border-l-2 border-[#700D39]/20 pl-3">
+                <div className="ml-4 space-y-1 border-l-2 border-[#A10D5E]/20 pl-3">
                   {actualidadItems.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -250,7 +250,7 @@ export function Navbar() {
                         className={cn(
                           'block rounded-lg px-4 py-2.5 text-sm font-medium transition-colors',
                           isActive(item.href)
-                            ? 'text-[#700D39] bg-[#700D39]/10'
+                            ? 'text-[#A10D5E] bg-[#A10D5E]/10'
                             : 'text-gray-600 hover:bg-gray-50 hover:text-[#F29429]'
                         )}
                       >
@@ -271,7 +271,7 @@ export function Navbar() {
                 className={cn(
                   'block rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200',
                   isActive(contactItem.href)
-                    ? 'bg-[#700D39] text-white'
+                    ? 'bg-[#A10D5E] text-white'
                     : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
                 )}
               >

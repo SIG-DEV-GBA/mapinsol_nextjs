@@ -12,8 +12,8 @@ export function RelatedPracticas({ practicas }: RelatedPracticasProps) {
 
   return (
     <section className="mt-12 pt-8 border-t border-gray-200">
-      <h2 className="text-2xl font-bold text-[#700D39] mb-6 flex items-center gap-3">
-        <span className="w-1 h-6 bg-gradient-to-b from-[#700D39] to-[#FF6900] rounded" />
+      <h2 className="text-2xl font-bold text-[#A10D5E] mb-6 flex items-center gap-3">
+        <span className="w-1 h-6 bg-gradient-to-b from-[#A10D5E] to-[#F29429] rounded" />
         Prácticas Relacionadas
       </h2>
 
@@ -59,7 +59,7 @@ function RelatedCard({ practica }: { practica: BuenaPractica }) {
 
       {/* Contenido */}
       <div className="p-4 flex flex-col gap-2 flex-1">
-        <h3 className="text-[15px] font-semibold text-[#700D39] leading-snug line-clamp-2 group-hover:text-[#F29429] transition-colors">
+        <h3 className="text-[15px] font-semibold text-[#A10D5E] leading-snug line-clamp-2 group-hover:text-[#F29429] transition-colors">
           {practica.title}
         </h3>
 
@@ -72,14 +72,14 @@ function RelatedCard({ practica }: { practica: BuenaPractica }) {
 
         {(practica.municipio || practica.provincia || practica.ccaa) && (
           <p className="flex items-center gap-1.5 text-xs text-gray-500">
-            <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-[#FF6900]" />
+            <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-[#F29429]" />
             <span className="truncate">
               {[practica.municipio, practica.provincia, practica.ccaa].filter(Boolean).join(', ')}
             </span>
           </p>
         )}
 
-        <span className="mt-auto pt-3 flex items-center gap-1.5 text-sm font-semibold text-[#FF6900]">
+        <span className="mt-auto pt-3 flex items-center gap-1.5 text-sm font-semibold text-[#F29429]">
           Ver práctica
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </span>
