@@ -444,3 +444,209 @@ export interface PaginatedResponse<T> {
   /** Total de páginas disponibles */
   totalPages: number;
 }
+
+// =============================================================================
+// TIPOS PARA ESTUDIOS
+// =============================================================================
+
+/**
+ * Documento descargable del estudio
+ */
+export interface DocumentoEstudio {
+  archivo: number;
+  nombre_documento: string;
+  tipo_documento: string;
+  idioma: string;
+}
+
+/**
+ * Enlace externo del estudio
+ */
+export interface EnlaceEstudio {
+  texto_enlace: string;
+  url_enlace: string;
+  tipo_recurso: string;
+}
+
+/**
+ * Estudio relacionado de la misma línea de investigación
+ */
+export interface EstudioRelacionado {
+  anio_estudio: string;
+  titulo_estudio: string;
+  url_estudio: string;
+}
+
+/**
+ * Estudio - Entidad principal para estudios e investigaciones
+ */
+export interface Estudio {
+  id: number;
+  slug: string;
+  title: string;
+  status: 'publish' | 'draft' | 'pending' | 'private';
+  link: string;
+  datePublished: Date;
+  dateModified: Date;
+
+  // Imagen destacada
+  featuredMediaId: number;
+  featuredMediaUrl?: string;
+
+  // Información General
+  promotor: string;
+  urlPromotor: string;
+  logoPromotor: number;
+  logoPromotorUrl?: string;
+  tipoPromotor: string;
+  ambitoGeografico: string;
+  pais: string;
+  ccaa: string;
+  anioPublicacion: string;
+  anioInicio: string;
+  anioFin: string;
+
+  // Contenido Principal
+  descripcion: string;
+  objetivos: string;
+  destinatarios: string;
+  metodologia: string;
+  resultados: string;
+  conclusiones: string;
+
+  // Documentos y Enlaces
+  documentosDescarga: DocumentoEstudio[];
+  enlacesExternos: EnlaceEstudio[];
+  estudiosLinea: EstudioRelacionado[];
+
+  // Multimedia
+  galeria: number[];
+  galeriaDetails?: MediaAttachment[];
+  enlaceVideo: string;
+
+  // Configuración
+  estudioDestacado: boolean;
+  mostrarSlider: boolean;
+  orden: number;
+
+  // Taxonomías
+  categories: number[];
+  tags: number[];
+  categoriesDetails?: Categoria[];
+  tagsDetails?: Etiqueta[];
+}
+
+/**
+ * Respuesta RAW de la API REST de WordPress para Estudios
+ */
+export interface EstudioRaw {
+  id: number;
+  date: string;
+  modified: string;
+  slug: string;
+  status: string;
+  link: string;
+  title: { rendered: string };
+  featured_media: number;
+  'category-estudios'?: number[];
+  'tags-estudios'?: number[];
+  meta: Record<string, any>;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url?: string;
+      media_details?: {
+        sizes?: {
+          medium_large?: { source_url: string };
+          large?: { source_url: string };
+        };
+      };
+    }>;
+    'wp:term'?: Array<Array<{
+      id: number;
+      name: string;
+      slug: string;
+      taxonomy: string;
+      count: number;
+      description: string;
+      link: string;
+    }>>;
+  };
+}
+
+// =============================================================================
+// TIPOS PARA ACTUALIDAD Y COMUNICACIÓN
+// =============================================================================
+
+export type TipoContenido = 'boletin' | 'nota_prensa' | 'evento' | 'taller' | 'video' | 'infografia';
+
+export interface Actualidad {
+  id: number;
+  slug: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  status: 'publish' | 'draft' | 'pending' | 'private';
+  link: string;
+  datePublished: Date;
+  dateModified: Date;
+
+  // Imagen destacada
+  featuredMediaId: number;
+  featuredMediaUrl?: string;
+
+  // General
+  tipoContenido: TipoContenido;
+  descripcionCorta: string;
+  destacado: boolean;
+  galeria: number[];
+  galeriaDetails?: MediaAttachment[];
+
+  // Boletín
+  pdfBoletin: string;
+  fechaPublicacion: string;
+  enlaceInteresBoletin: string;
+
+  // Nota de prensa
+  fuenteNota: string;
+  enlaceNota: string;
+
+  // Evento / Taller
+  fechaEvento: string;
+  horaInicio: string;
+  lugarEvento: string;
+  horaFin: string;
+
+  // Video
+  urlVideo: string;
+
+  // Infografía
+  infografiaImagen: string;
+  infografiaImagenUrl?: string;
+  pdfInfografia: string;
+  pdfInfografiaUrl?: string;
+}
+
+export interface ActualidadRaw {
+  id: number;
+  date: string;
+  modified: string;
+  slug: string;
+  status: string;
+  link: string;
+  title?: { rendered: string };
+  content?: { rendered: string };
+  excerpt?: { rendered: string };
+  featured_media?: number;
+  meta: Record<string, any>;
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url?: string;
+      media_details?: {
+        sizes?: {
+          medium_large?: { source_url: string };
+          large?: { source_url: string };
+        };
+      };
+    }>;
+  };
+}

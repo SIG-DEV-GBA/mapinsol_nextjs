@@ -36,6 +36,11 @@ import type {
   EnlaceAnexo,
   WPApiParams,
   PaginatedResponse,
+  Estudio,
+  EstudioRaw,
+  DocumentoEstudio,
+  EnlaceEstudio,
+  EstudioRelacionado,
 } from '@/types';
 
 // =============================================================================
@@ -663,4 +668,533 @@ export async function enrichPracticaWithMediaUrls(practica: BuenaPractica): Prom
     ...practica,
     pdfBuenaPracticaUrl: pdfMedia?.source_url || undefined,
   };
+}
+
+// =============================================================================
+// FUNCIONES PARA ESTUDIOS
+// =============================================================================
+
+/**
+ * Parsea repeaters de estudios
+ */
+function parseEstudioRepeater<T>(value: unknown): T[] {
+  if (Array.isArray(value)) return value;
+  if (typeof value === 'object' && value !== null) {
+    return Object.values(value) as T[];
+  }
+  return [];
+}
+
+/**
+ * Transforma respuesta RAW de WordPress a objeto Estudio tipado
+ */
+function parseEstudio(raw: EstudioRaw): Estudio {
+  const meta = raw.meta || {};
+
+  const estudio: Estudio = {
+    id: raw.id,
+    slug: raw.slug,
+    title: raw.title.rendered,
+    status: raw.status as Estudio['status'],
+    link: raw.link,
+    datePublished: new Date(raw.date),
+    dateModified: new Date(raw.modified),
+
+    featuredMediaId: raw.featured_media || 0,
+
+    promotor: meta.promotor || '',
+    urlPromotor: meta.url_promotor || '',
+    logoPromotor: meta.logo_promotor ? parseInt(meta.logo_promotor, 10) : 0,
+    tipoPromotor: meta.tipo_promotor || '',
+    ambitoGeografico: meta.ambito_geografico || '',
+    pais: meta.pais || '',
+    ccaa: meta.ccaa || '',
+    anioPublicacion: meta.anio_publicacion || '',
+    anioInicio: meta.anio_inicio || '',
+    anioFin: meta.anio_fin || '',
+
+    descripcion: meta.descripcion || '',
+    objetivos: meta.objetivos || '',
+    destinatarios: meta.destinatarios || '',
+    metodologia: meta.metodologia || '',
+    resultados: meta.resultados || '',
+    conclusiones: meta.conclusiones || '',
+
+    documentosDescarga: parseEstudioRepeater<DocumentoEstudio>(meta.documentos_descarga),
+    enlacesExternos: parseEstudioRepeater<EnlaceEstudio>(meta.enlaces_externos),
+    estudiosLinea: parseEstudioRepeater<EstudioRelacionado>(meta.estudios_linea),
+
+    galeria: Array.isArray(meta.galeria) ? meta.galeria.map((id: string | number) =>
+      typeof id === 'string' ? parseInt(id, 10) : id
+    ) : [],
+    enlaceVideo: meta.enlace_video || '',
+
+    estudioDestacado: meta.estudio_destacado === 'true' || meta.estudio_destacado === true,
+    mostrarSlider: meta.mostrar_slider === 'true' || meta.mostrar_slider === true,
+    orden: meta.orden ? parseInt(meta.orden, 10) : 0,
+
+    categories: raw['category-estudios'] || [],
+    tags: raw['tags-estudios'] || [],
+  };
+
+  // Extraer datos embebidos
+  if (raw._embedded) {
+    const featuredMedia = raw._embedded['wp:featuredmedia']?.[0];
+    if (featuredMedia) {
+      estudio.featuredMediaUrl = featuredMedia.source_url ||
+        featuredMedia.media_details?.sizes?.large?.source_url ||
+        featuredMedia.media_details?.sizes?.medium_large?.source_url;
+    }
+
+    const embeddedCats = raw._embedded['wp:term']?.find((terms) =>
+      terms?.[0]?.taxonomy === 'category-estudios'
+    );
+    if (embeddedCats) {
+      estudio.categoriesDetails = embeddedCats.map(cat => ({
+        id: cat.id,
+        name: cat.name,
+        slug: cat.slug,
+        description: cat.description || '',
+        link: cat.link,
+        count: cat.count,
+      }));
+    }
+
+    const embeddedTags = raw._embedded['wp:term']?.find((terms) =>
+      terms?.[0]?.taxonomy === 'tags-estudios'
+    );
+    if (embeddedTags) {
+      estudio.tagsDetails = embeddedTags.map(tag => ({
+        id: tag.id,
+        name: tag.name,
+        slug: tag.slug,
+        description: tag.description || '',
+        link: tag.link,
+        count: tag.count,
+      }));
+    }
+  }
+
+  return estudio;
+}
+
+/**
+ * Obtiene listado de estudios con paginación y filtros
+ */
+export async function getEstudios(
+  params: WPApiParams = {}
+): Promise<PaginatedResponse<Estudio>> {
+  const searchParams = new URLSearchParams();
+
+  searchParams.set('per_page', String(params.per_page || 12));
+  searchParams.set('page', String(params.page || 1));
+  searchParams.set('status', params.status || 'publish');
+  searchParams.set('orderby', params.orderby || 'date');
+  searchParams.set('order', params.order || 'desc');
+  searchParams.set('_embed', '1');
+
+  if (params.categories?.length) {
+    searchParams.set('category-estudios', params.categories.join(','));
+  }
+  if (params.tags?.length) {
+    searchParams.set('tags-estudios', params.tags.join(','));
+  }
+  if (params.search) {
+    searchParams.set('search', params.search);
+  }
+
+  const url = `/estudios-mapinsol?${searchParams.toString()}`;
+
+  const response = await fetch(`${WP_API_URL}${url}`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!response.ok) {
+    throw new Error(`WordPress API error: ${response.status}`);
+  }
+
+  const total = parseInt(response.headers.get('x-wp-total') || '0', 10);
+  const totalPages = parseInt(response.headers.get('x-wp-totalpages') || '0', 10);
+  const rawData: EstudioRaw[] = await response.json();
+
+  const estudios = rawData.map(parseEstudio);
+
+  // Si no tienen featuredMediaUrl pero tienen galería, usar primera imagen de galería
+  const estudiosNeedingImage = estudios.filter(e => !e.featuredMediaUrl && e.galeria?.length > 0);
+  if (estudiosNeedingImage.length > 0) {
+    const imageIds = estudiosNeedingImage.map(e => e.galeria[0]);
+    const uniqueIds = [...new Set(imageIds)];
+
+    // Obtener todas las imágenes en una sola llamada
+    const mediaResponse = await fetch(
+      `${WP_API_URL}/media?include=${uniqueIds.join(',')}&per_page=${uniqueIds.length}`,
+      { next: { revalidate: 3600 } }
+    );
+
+    if (mediaResponse.ok) {
+      const mediaData = await mediaResponse.json();
+      const mediaMap = new Map<number, any>(mediaData.map((m: any) => [m.id, m]));
+
+      for (const estudio of estudiosNeedingImage) {
+        const media = mediaMap.get(estudio.galeria[0]);
+        if (media) {
+          estudio.featuredMediaUrl = media.media_details?.sizes?.large?.source_url ||
+            media.media_details?.sizes?.medium_large?.source_url ||
+            media.source_url;
+        }
+      }
+    }
+  }
+
+  return {
+    data: estudios,
+    total,
+    totalPages,
+  };
+}
+
+/**
+ * Obtiene un estudio por su slug
+ */
+export async function getEstudioBySlug(slug: string): Promise<Estudio | null> {
+  const searchParams = new URLSearchParams({
+    slug,
+    per_page: '1',
+    _embed: '1',
+  });
+
+  const response = await fetch(`${WP_API_URL}/estudios-mapinsol?${searchParams.toString()}`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!response.ok) {
+    return null;
+  }
+
+  const rawData: EstudioRaw[] = await response.json();
+
+  if (rawData.length === 0) {
+    return null;
+  }
+
+  const estudio = parseEstudio(rawData[0]);
+
+  // Si no tiene featuredMediaUrl pero tiene galería, usar primera imagen
+  if (!estudio.featuredMediaUrl && estudio.galeria?.length > 0) {
+    const media = await getMediaById(estudio.galeria[0]);
+    if (media) {
+      estudio.featuredMediaUrl = media.media_details?.sizes?.large?.source_url ||
+        media.media_details?.sizes?.medium_large?.source_url ||
+        media.source_url;
+    }
+  }
+
+  return estudio;
+}
+
+/**
+ * Obtiene categorías de estudios
+ */
+export async function getCategoriasEstudios(): Promise<Categoria[]> {
+  const searchParams = new URLSearchParams({
+    per_page: '100',
+    orderby: 'name',
+    order: 'asc',
+    _fields: 'id,name,slug,count,description,link',
+  });
+
+  const response = await fetch(`${WP_API_URL}/category-estudios?${searchParams.toString()}`, {
+    next: { revalidate: 300 },
+  });
+
+  if (!response.ok) {
+    return [];
+  }
+
+  return response.json();
+}
+
+/**
+ * Enriquece un estudio con las URLs de los documentos
+ */
+export async function enrichEstudioWithDocumentos(estudio: Estudio): Promise<Estudio> {
+  if (!estudio.documentosDescarga || estudio.documentosDescarga.length === 0) {
+    return estudio;
+  }
+
+  const docIds = estudio.documentosDescarga
+    .map(d => d.archivo)
+    .filter(id => id > 0);
+
+  if (docIds.length === 0) return estudio;
+
+  const mediaDetails = await getMediaByIds(docIds);
+
+  const documentosConUrl = estudio.documentosDescarga.map(doc => {
+    const media = mediaDetails.find((m: { id: number }) => m.id === doc.archivo);
+    return {
+      ...doc,
+      archivoUrl: media?.source_url || '',
+    };
+  });
+
+  return {
+    ...estudio,
+    documentosDescarga: documentosConUrl,
+  };
+}
+
+/**
+ * Enriquece un estudio con la galería de imágenes
+ */
+export async function enrichEstudioWithGaleria(estudio: Estudio): Promise<Estudio> {
+  if (!estudio.galeria || estudio.galeria.length === 0) {
+    return estudio;
+  }
+
+  const galeriaDetails = await getMediaByIds(estudio.galeria);
+
+  return {
+    ...estudio,
+    galeriaDetails,
+  };
+}
+
+// =============================================================================
+// ACTUALIDAD Y COMUNICACIÓN
+// =============================================================================
+
+import type { Actualidad, ActualidadRaw, TipoContenido } from '@/types';
+
+function parseGaleriaField(value: any): number[] {
+  if (!value) return [];
+  if (Array.isArray(value)) return value.map(Number).filter(Boolean);
+  if (typeof value === 'string' && value.includes(',')) {
+    return value.split(',').map(Number).filter(Boolean);
+  }
+  if (typeof value === 'string' || typeof value === 'number') {
+    const num = Number(value);
+    return num ? [num] : [];
+  }
+  return [];
+}
+
+function parseActualidad(raw: ActualidadRaw): Actualidad {
+  const meta = raw.meta || {};
+  const embedded = raw._embedded?.['wp:featuredmedia']?.[0];
+
+  return {
+    id: raw.id,
+    slug: raw.slug,
+    title: raw.title?.rendered || '',
+    content: raw.content?.rendered || '',
+    excerpt: raw.excerpt?.rendered || '',
+    status: raw.status as Actualidad['status'],
+    link: raw.link,
+    datePublished: new Date(raw.date),
+    dateModified: new Date(raw.modified),
+
+    featuredMediaId: raw.featured_media || 0,
+    featuredMediaUrl: embedded?.media_details?.sizes?.large?.source_url ||
+      embedded?.media_details?.sizes?.medium_large?.source_url ||
+      embedded?.source_url || '',
+
+    tipoContenido: (meta.tipo_contenido || '') as TipoContenido,
+    descripcionCorta: meta.descripcion || '',
+    destacado: meta.destacado === 'true' || meta.destacado === true,
+    galeria: parseGaleriaField(meta.galeria),
+
+    pdfBoletin: meta.pdf_boletin || '',
+    fechaPublicacion: meta.fecha_publicacion || '',
+    enlaceInteresBoletin: meta.enlace_interes_boletin || '',
+
+    fuenteNota: meta.fuente_nota || '',
+    enlaceNota: meta.enlace_nota || '',
+
+    fechaEvento: meta.fecha_evento || '',
+    horaInicio: meta.hora_inicio || '',
+    lugarEvento: meta.lugar_evento || '',
+    horaFin: meta.hora_fin || '',
+
+    urlVideo: meta.url_video || '',
+
+    infografiaImagen: meta.infografia_imagen || '',
+    pdfInfografia: meta.pdf_infografia || '',
+  };
+}
+
+export async function getActualidad(params?: {
+  per_page?: number;
+  page?: number;
+  tipo?: TipoContenido;
+}): Promise<PaginatedResponse<Actualidad>> {
+  const searchParams = new URLSearchParams({
+    per_page: String(params?.per_page || 12),
+    page: String(params?.page || 1),
+    status: 'publish',
+    _embed: '1',
+    orderby: 'date',
+    order: 'desc',
+  });
+
+  const response = await fetch(`${WP_API_URL}/actualidad-mapinsol?${searchParams.toString()}`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!response.ok) {
+    return { data: [], total: 0, totalPages: 0 };
+  }
+
+  const total = parseInt(response.headers.get('X-WP-Total') || '0', 10);
+  const totalPages = parseInt(response.headers.get('X-WP-TotalPages') || '0', 10);
+  const rawData: ActualidadRaw[] = await response.json();
+
+  let items = rawData.map(parseActualidad);
+
+  if (params?.tipo) {
+    items = items.filter(item => item.tipoContenido === params.tipo);
+  }
+
+  // Resolver primera imagen de galería como featuredMediaUrl fallback
+  const needingImage = items.filter(i => !i.featuredMediaUrl && i.galeria?.length > 0);
+  if (needingImage.length > 0) {
+    const imageIds = needingImage.map(i => i.galeria[0]);
+    const uniqueIds = [...new Set(imageIds)];
+    try {
+      const mediaResponse = await fetch(
+        `${WP_API_URL}/media?include=${uniqueIds.join(',')}&per_page=${uniqueIds.length}`,
+        { next: { revalidate: 3600 } }
+      );
+      if (mediaResponse.ok) {
+        const mediaData = await mediaResponse.json();
+        const mediaMap = new Map<number, any>(mediaData.map((m: any) => [m.id, m]));
+        for (const item of needingImage) {
+          const media = mediaMap.get(item.galeria[0]);
+          if (media) {
+            item.featuredMediaUrl = media.media_details?.sizes?.large?.source_url ||
+              media.media_details?.sizes?.medium_large?.source_url ||
+              media.source_url || '';
+          }
+        }
+      }
+    } catch { /* skip */ }
+  }
+
+  // Resolver infografia_imagen como featuredMediaUrl fallback para tipo infografia
+  const needingInfografia = items.filter(i => !i.featuredMediaUrl && i.infografiaImagen);
+  if (needingInfografia.length > 0) {
+    const imgIds = needingInfografia.map(i => Number(i.infografiaImagen)).filter(Boolean);
+    const uniqueIds = [...new Set(imgIds)];
+    try {
+      const mediaResponse = await fetch(
+        `${WP_API_URL}/media?include=${uniqueIds.join(',')}&per_page=${uniqueIds.length}`,
+        { next: { revalidate: 3600 } }
+      );
+      if (mediaResponse.ok) {
+        const mediaData = await mediaResponse.json();
+        const mediaMap = new Map<number, any>(mediaData.map((m: any) => [m.id, m]));
+        for (const item of needingInfografia) {
+          const media = mediaMap.get(Number(item.infografiaImagen));
+          if (media) {
+            item.featuredMediaUrl = media.media_details?.sizes?.large?.source_url ||
+              media.media_details?.sizes?.medium_large?.source_url ||
+              media.source_url || '';
+          }
+        }
+      }
+    } catch { /* skip */ }
+  }
+
+  // Resolver thumbnail de YouTube como featuredMediaUrl fallback para tipo video
+  for (const item of items) {
+    if (!item.featuredMediaUrl && item.urlVideo) {
+      const ytMatch = item.urlVideo.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+      if (ytMatch) {
+        item.featuredMediaUrl = `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
+      }
+    }
+  }
+
+  return { data: items, total, totalPages };
+}
+
+export async function getActualidadBySlug(slug: string): Promise<Actualidad | null> {
+  const searchParams = new URLSearchParams({
+    slug,
+    per_page: '1',
+    _embed: '1',
+  });
+
+  const response = await fetch(`${WP_API_URL}/actualidad-mapinsol?${searchParams.toString()}`, {
+    next: { revalidate: 60 },
+  });
+
+  if (!response.ok) return null;
+
+  const rawData: ActualidadRaw[] = await response.json();
+  if (rawData.length === 0) return null;
+
+  const item = parseActualidad(rawData[0]);
+
+  // Resolver galería de imágenes
+  if (item.galeria && item.galeria.length > 0) {
+    const galeriaDetails = await getMediaByIds(item.galeria);
+    item.galeriaDetails = galeriaDetails;
+
+    // Usar primera imagen como featuredMediaUrl si no tiene
+    if (!item.featuredMediaUrl && galeriaDetails.length > 0) {
+      const first = galeriaDetails[0];
+      item.featuredMediaUrl = first.media_details?.sizes?.large?.source_url ||
+        first.media_details?.sizes?.medium_large?.source_url ||
+        first.source_url || '';
+    }
+  }
+
+  // Resolver pdf_boletin (ID → URL)
+  if (item.pdfBoletin) {
+    const pdfId = Number(item.pdfBoletin);
+    if (pdfId) {
+      const media = await getMediaById(pdfId);
+      if (media) {
+        item.pdfBoletin = media.source_url || '';
+      }
+    }
+  }
+
+  // Resolver infografia_imagen (ID → URL)
+  if (item.infografiaImagen) {
+    const imgId = Number(item.infografiaImagen);
+    if (imgId) {
+      const media = await getMediaById(imgId);
+      if (media) {
+        item.infografiaImagenUrl = media.media_details?.sizes?.large?.source_url ||
+          media.source_url || '';
+      }
+    }
+  }
+
+  // Resolver pdf_infografia (ID → URL)
+  if (item.pdfInfografia) {
+    const pdfId = Number(item.pdfInfografia);
+    if (pdfId) {
+      const media = await getMediaById(pdfId);
+      if (media) {
+        item.pdfInfografiaUrl = media.source_url || '';
+      }
+    }
+  }
+
+  return item;
+}
+
+export async function getActualidadSlugs(): Promise<string[]> {
+  const response = await fetch(
+    `${WP_API_URL}/actualidad-mapinsol?per_page=100&status=publish&_fields=slug`,
+    { next: { revalidate: 3600 } }
+  );
+
+  if (!response.ok) return [];
+
+  const data: { slug: string }[] = await response.json();
+  return data.map(item => item.slug);
 }

@@ -55,7 +55,7 @@ export function PracticaCard({ practica }: PracticaCardProps) {
         'group relative bg-white rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 h-full flex flex-col shadow-sm hover:shadow-xl border-2',
         esDestacada
           ? 'border-amber-400 ring-2 ring-amber-200'
-          : 'border-gray-100 hover:border-[#FF6900]/20'
+          : 'border-gray-100 hover:border-[#F29429]/20'
       )}
     >
       {/* Badge Destacada */}
@@ -101,7 +101,7 @@ export function PracticaCard({ practica }: PracticaCardProps) {
       <div className="p-5 flex flex-col flex-grow">
         {/* Título */}
         <Link href={`/practica/${practica.slug}/`} className="block mb-3">
-          <h3 className="text-lg font-bold text-[#700D39] line-clamp-2 group-hover:text-[#FF6900] transition-colors duration-300 leading-tight">
+          <h3 className="text-lg font-bold text-[#700D39] line-clamp-2 group-hover:text-[#F29429] transition-colors duration-300 leading-tight">
             {practica.title}
           </h3>
         </Link>

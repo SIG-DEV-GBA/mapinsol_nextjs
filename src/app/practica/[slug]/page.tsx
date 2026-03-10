@@ -27,12 +27,12 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getBuenasPracticas, getBuenaPracticaBySlug, enrichPracticaWithAnexos, enrichPracticaWithMediaUrls } from '@/lib/wordpress';
 import {
-  MediaGallery,
   PracticaContent,
   PracticaSidebar,
   RelatedPracticas,
   PracticaHeader,
 } from '@/components/practica';
+import { MediaGallery } from '@/components/ui';
 import { BackLink, PdfLink } from '@/components/practica/PracticaHeader';
 import type { BuenaPractica } from '@/types';
 import { JsonLd } from '@/components/seo/JsonLd';
@@ -205,8 +205,17 @@ export default async function PracticaPage({
   const poblacion = getCheckboxValues(practica.poblacionDestinataria);
   const agentes = getCheckboxValues(practica.agentesImplicados);
   const youtubeId = getYoutubeId(practica.enlaceVideo);
-  const imagenes =
+  const anexoImagenes =
     practica.anexosDetails?.filter((a) => a.mime_type?.includes('image')) || [];
+
+  // Include featured image at the beginning if not already in anexos
+  const imagenes = (() => {
+    if (!practica.featuredMediaUrl) return anexoImagenes;
+    const isInAnexos = anexoImagenes.some(a => a.source_url === practica.featuredMediaUrl);
+    if (isInAnexos) return anexoImagenes;
+    return [{ source_url: practica.featuredMediaUrl, alt_text: practica.title }, ...anexoImagenes];
+  })();
+
   const hasPdf = !!practica.pdfBuenaPracticaUrl;
   const hasMedia = imagenes.length > 0 || !!youtubeId;
 

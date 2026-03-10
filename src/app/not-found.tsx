@@ -20,7 +20,7 @@ export default function NotFound() {
           </Link>
           <Link
             href="/practicas/"
-            className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#FF6900] px-6 py-3 text-base font-semibold text-[#FF6900] transition-all duration-300 hover:bg-[#FF6900] hover:text-white"
+            className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#FF6900] px-6 py-3 text-base font-semibold text-[#FF6900] transition-all duration-300 hover:bg-[#F29429] hover:text-white"
           >
             Ver buenas prácticas
           </Link>

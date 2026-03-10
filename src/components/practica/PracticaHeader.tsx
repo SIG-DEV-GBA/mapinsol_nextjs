@@ -33,7 +33,7 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
                 href={practica.urlEntidad}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sky-600 font-medium hover:text-[#FF6900] hover:underline transition-colors"
+                className="text-sky-600 font-medium hover:text-[#F29429] hover:underline transition-colors"
               >
                 {practica.entidadResponsable}
               </a>
@@ -51,7 +51,7 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
                 <>
                   <Link
                     href={`/practicas/?localidad=${encodeURIComponent(practica.municipio)}`}
-                    className="hover:text-[#FF6900] hover:underline transition-colors"
+                    className="hover:text-[#F29429] hover:underline transition-colors"
                   >
                     {practica.municipio}
                   </Link>
@@ -62,7 +62,7 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
                 <>
                   <Link
                     href={`/practicas/?localidad=${encodeURIComponent(practica.provincia)}`}
-                    className="hover:text-[#FF6900] hover:underline transition-colors"
+                    className="hover:text-[#F29429] hover:underline transition-colors"
                   >
                     {practica.provincia}
                   </Link>
@@ -72,7 +72,7 @@ export function PracticaHeader({ practica, showBadges = false }: PracticaHeaderP
               {practica.ccaa && (
                 <Link
                   href={`/practicas/?ccaa=${encodeURIComponent(practica.ccaa)}`}
-                  className="hover:text-[#FF6900] hover:underline transition-colors"
+                  className="hover:text-[#F29429] hover:underline transition-colors"
                 >
                   {practica.ccaa}
                 </Link>
@@ -97,7 +97,7 @@ export function BackLink() {
     <div className="py-5 mb-6">
       <Link
         href="/practicas/"
-        className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-[#FF6900] transition-colors"
+        className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-[#F29429] transition-colors"
       >
         <ArrowLeft className="w-4 h-4" />
         <span>Volver al listado</span>

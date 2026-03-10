@@ -21,7 +21,7 @@ export function LocationLinks({ municipio, provincia, ccaa, size = 'md' }: Locat
           <>
             <Link
               href={`/practicas/?localidad=${encodeURIComponent(municipio)}`}
-              className="hover:text-[#FF6900] hover:underline transition-colors"
+              className="hover:text-[#F29429] hover:underline transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
               {municipio}
@@ -33,7 +33,7 @@ export function LocationLinks({ municipio, provincia, ccaa, size = 'md' }: Locat
           <>
             <Link
               href={`/practicas/?localidad=${encodeURIComponent(provincia)}`}
-              className="hover:text-[#FF6900] hover:underline transition-colors"
+              className="hover:text-[#F29429] hover:underline transition-colors"
               onClick={(e) => e.stopPropagation()}
             >
               {provincia}
@@ -44,7 +44,7 @@ export function LocationLinks({ municipio, provincia, ccaa, size = 'md' }: Locat
         {ccaa && (
           <Link
             href={`/practicas/?ccaa=${encodeURIComponent(ccaa)}`}
-            className="hover:text-[#FF6900] hover:underline transition-colors"
+            className="hover:text-[#F29429] hover:underline transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
             {ccaa}

@@ -30,7 +30,7 @@ function RelatedCard({ practica }: { practica: BuenaPractica }) {
   return (
     <Link
       href={`/practica/${practica.slug}/`}
-      className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-[#FF6900] hover:shadow-lg hover:-translate-y-0.5 transition-all"
+      className="group flex flex-col bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-[#F29429] hover:shadow-lg hover:-translate-y-0.5 transition-all"
     >
       {/* Imagen */}
       <div className="relative h-36 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
@@ -59,7 +59,7 @@ function RelatedCard({ practica }: { practica: BuenaPractica }) {
 
       {/* Contenido */}
       <div className="p-4 flex flex-col gap-2 flex-1">
-        <h3 className="text-[15px] font-semibold text-[#700D39] leading-snug line-clamp-2 group-hover:text-[#FF6900] transition-colors">
+        <h3 className="text-[15px] font-semibold text-[#700D39] leading-snug line-clamp-2 group-hover:text-[#F29429] transition-colors">
           {practica.title}
         </h3>
 

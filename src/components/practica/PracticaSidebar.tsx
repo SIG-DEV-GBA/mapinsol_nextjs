@@ -151,7 +151,7 @@ export function PracticaSidebar({ practica, poblacion, agentes }: PracticaSideba
                     href={enlace.url_enlace}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3.5 py-2.5 bg-gray-50 rounded-lg text-sm text-gray-600 hover:bg-gray-100 hover:text-[#FF6900] transition-colors"
+                    className="flex items-center gap-2 px-3.5 py-2.5 bg-gray-50 rounded-lg text-sm text-gray-600 hover:bg-gray-100 hover:text-[#F29429] transition-colors"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>{enlace.texto_enlace || 'Ver enlace'}</span>

@@ -95,7 +95,7 @@ function NavButton({ onClick, disabled, icon, label, labelFirst }: NavButtonProp
     'flex items-center gap-2 px-3 py-2 rounded-xl border transition-all',
     disabled
       ? 'border-gray-200 text-gray-300 cursor-not-allowed'
-      : 'border-gray-200 text-gray-700 hover:border-[#FF6900] hover:text-[#FF6900]'
+      : 'border-gray-200 text-gray-700 hover:border-[#F29429] hover:text-[#F29429]'
   );
 
   return (

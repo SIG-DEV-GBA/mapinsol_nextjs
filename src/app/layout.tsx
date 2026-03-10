@@ -24,6 +24,7 @@ import "./globals.css";
 import Script from "next/script";
 import { Navbar, Footer, ScrollToTop } from "@/components";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { CookieBanner } from "@/components/CookieBanner";
 
 /** Poppins - Fuente para títulos principales (h1, h2) */
 const poppins = Poppins({
@@ -130,6 +131,7 @@ gtag('config', 'G-Z222Z7CJWF');`}
         {children}
         <Footer />
         <ScrollToTop />
+        <CookieBanner />
       </body>
     </html>
   );

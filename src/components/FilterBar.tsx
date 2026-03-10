@@ -62,7 +62,7 @@ export function FilterBar({ categorias, etiquetas }: FilterBarProps) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && applyFilters()}
-              className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF6900] focus:ring-2 focus:ring-[#FF6900]/20 outline-none transition-all"
+              className="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-200 focus:border-[#FF6900] focus:ring-2 focus:ring-[#F29429]/20 outline-none transition-all"
             />
           </div>
 
@@ -72,7 +72,7 @@ export function FilterBar({ categorias, etiquetas }: FilterBarProps) {
               'flex items-center gap-2 px-4 py-3 rounded-xl border transition-all',
               showFilters || hasActiveFilters
                 ? 'bg-[#FF6900] text-white border-[#FF6900]'
-                : 'bg-white text-gray-700 border-gray-200 hover:border-[#FF6900]'
+                : 'bg-white text-gray-700 border-gray-200 hover:border-[#F29429]'
             )}
           >
             <Filter className="h-5 w-5" />
@@ -97,7 +97,7 @@ export function FilterBar({ categorias, etiquetas }: FilterBarProps) {
                 <select
                   value={selectedCategoria}
                   onChange={(e) => setSelectedCategoria(e.target.value)}
-                  className="w-full appearance-none px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#FF6900] focus:ring-2 focus:ring-[#FF6900]/20 outline-none transition-all pr-10"
+                  className="w-full appearance-none px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#FF6900] focus:ring-2 focus:ring-[#F29429]/20 outline-none transition-all pr-10"
                 >
                   <option value="">Todas las categorías</option>
                   {categorias.map((cat) => (
@@ -119,7 +119,7 @@ export function FilterBar({ categorias, etiquetas }: FilterBarProps) {
                 <select
                   value={selectedTag}
                   onChange={(e) => setSelectedTag(e.target.value)}
-                  className="w-full appearance-none px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#FF6900] focus:ring-2 focus:ring-[#FF6900]/20 outline-none transition-all pr-10"
+                  className="w-full appearance-none px-4 py-2.5 rounded-lg border border-gray-200 focus:border-[#FF6900] focus:ring-2 focus:ring-[#F29429]/20 outline-none transition-all pr-10"
                 >
                   <option value="">Todas las etiquetas</option>
                   {etiquetas.map((tag) => (

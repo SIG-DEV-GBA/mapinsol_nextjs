@@ -1,0 +1,109 @@
+{
+  "post_types": [],
+  "taxonomies": [],
+  "listings": [],
+  "components": [],
+  "meta_boxes": {
+    "meta-boletines": {
+      "args": {
+        "object_type": "post",
+        "allowed_tax": [],
+        "allowed_post_type": ["boletines-mapinsol"],
+        "allowed_posts": [],
+        "excluded_posts": [],
+        "active_conditions": [],
+        "name": "Campos Boletines Mapinsol"
+      },
+      "meta_fields": [
+        {
+          "title": "Información del Boletín",
+          "name": "tab_info_boletin",
+          "object_type": "tab",
+          "width": "100%",
+          "type": "text",
+          "id": 5000,
+          "isNested": false,
+          "options_source": "manual",
+          "repeater-fields": [],
+          "options": []
+        },
+        {
+          "title": "Descripción corta",
+          "name": "descripcion_corta",
+          "object_type": "field",
+          "width": "100%",
+          "type": "textarea",
+          "id": 5001,
+          "isNested": true,
+          "options_source": "manual",
+          "repeater-fields": [],
+          "options": [],
+          "show_in_rest": true,
+          "description": "Resumen breve del boletín (máx. 200 caracteres)"
+        },
+        {
+          "title": "PDF del Boletín",
+          "name": "pdf_boletin",
+          "object_type": "field",
+          "width": "100%",
+          "type": "media",
+          "id": 5002,
+          "isNested": true,
+          "options_source": "manual",
+          "repeater-fields": [],
+          "options": [],
+          "show_in_rest": true,
+          "description": "Archivo PDF del boletín para descargar"
+        },
+        {
+          "title": "Número de edición",
+          "name": "numero_edicion",
+          "object_type": "field",
+          "width": "50%",
+          "type": "number",
+          "id": 5003,
+          "isNested": true,
+          "options_source": "manual",
+          "repeater-fields": [],
+          "options": [],
+          "show_in_rest": true,
+          "description": "Número de edición del boletín (ej: 1, 2, 3...)"
+        },
+        {
+          "title": "Fecha de publicación",
+          "name": "fecha_publicacion",
+          "object_type": "field",
+          "width": "50%",
+          "type": "date",
+          "id": 5004,
+          "isNested": true,
+          "options_source": "manual",
+          "repeater-fields": [],
+          "options": [],
+          "show_in_rest": true,
+          "description": "Fecha de publicación del boletín"
+        },
+        {
+          "title": "¿Boletín destacado?",
+          "name": "boletin_destacado",
+          "object_type": "field",
+          "width": "50%",
+          "type": "switcher",
+          "id": 5005,
+          "isNested": true,
+          "options_source": "manual",
+          "repeater-fields": [],
+          "options": [],
+          "show_in_rest": true,
+          "description": "Mostrar en sección de destacados"
+        }
+      ],
+      "id": "meta-boletines"
+    }
+  },
+  "relations": [],
+  "options_pages": [],
+  "glossaries": [],
+  "queries": [],
+  "content": []
+}

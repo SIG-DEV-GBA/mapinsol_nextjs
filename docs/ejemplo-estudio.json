@@ -1,0 +1,65 @@
+{
+  "title": "Estudio de Ejemplo: Impacto del Acompanamiento en Personas Mayores",
+  "status": "draft",
+  "featured_media": 28227,
+  "meta": {
+    "promotor": "Fundacion Padrinos de la Vejez",
+    "url_promotor": "https://fundacionpadrinosdelavejez.es",
+    "tipo_promotor": "fundacion",
+    "ambito_geografico": "estatal",
+    "pais": "Espana",
+    "ccaa": "Madrid",
+    "anio_publicacion": "2024",
+    "anio_inicio": "",
+    "anio_fin": "",
+    "descripcion": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>",
+    "objetivos": "<ul><li>Analizar el impacto del acompanamiento social en la calidad de vida de personas mayores</li><li>Identificar factores clave para programas de voluntariado efectivos</li><li>Desarrollar indicadores de medicion del bienestar emocional</li><li>Proponer recomendaciones para politicas publicas</li></ul>",
+    "destinatarios": "<p>Este estudio esta dirigido a:</p><ul><li>Profesionales del sector sociosanitario</li><li>Responsables de politicas publicas</li><li>Organizaciones del Tercer Sector</li><li>Investigadores en gerontologia social</li></ul>",
+    "metodologia": "<p>Se ha utilizado una metodologia mixta combinando:</p><ul><li>Analisis cuantitativo de 500 encuestas</li><li>Entrevistas en profundidad a 50 personas mayores</li><li>Grupos focales con profesionales</li><li>Revision sistematica de literatura cientifica</li></ul>",
+    "resultados": "<p>Los principales hallazgos del estudio revelan que:</p><ul><li>El 85% de participantes reporto mejora en bienestar emocional</li><li>Reduccion del 40% en sentimientos de soledad</li><li>Incremento significativo en actividades sociales</li><li>Mayor adherencia a tratamientos medicos</li></ul>",
+    "conclusiones": "<p>El acompanamiento social estructurado demuestra ser una intervencion efectiva para mejorar la calidad de vida de las personas mayores. Se recomienda su integracion en los servicios sociales municipales y la formacion especifica de voluntarios.</p>",
+    "documentos_descarga": [
+      {
+        "archivo": 27039,
+        "nombre_documento": "Informe Completo - Diptico Mapinsol",
+        "tipo_documento": "informe_completo",
+        "idioma": "es"
+      },
+      {
+        "archivo": 27039,
+        "nombre_documento": "Resumen Ejecutivo",
+        "tipo_documento": "informe_ejecutivo",
+        "idioma": "es"
+      }
+    ],
+    "enlaces_externos": [
+      {
+        "texto_enlace": "Web Fundacion Padrinos de la Vejez",
+        "url_enlace": "https://fundacionpadrinosdelavejez.es",
+        "tipo_recurso": "web"
+      },
+      {
+        "texto_enlace": "Catalogo de Buenas Practicas Mapinsol",
+        "url_enlace": "https://mapinsol.es/practicas",
+        "tipo_recurso": "web"
+      }
+    ],
+    "estudios_linea": [
+      {
+        "anio_estudio": "2022",
+        "titulo_estudio": "Estudio piloto sobre soledad en mayores",
+        "url_estudio": "https://fundacionpadrinosdelavejez.es"
+      },
+      {
+        "anio_estudio": "2023",
+        "titulo_estudio": "Analisis de necesidades del sector",
+        "url_estudio": "https://fundacionpadrinosdelavejez.es"
+      }
+    ],
+    "galeria": [28227, 28226, 28225],
+    "enlace_video": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "estudio_destacado": "true",
+    "mostrar_slider": "true",
+    "orden": "1"
+  }
+}

@@ -92,7 +92,7 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 flex items-center justify-center rounded-full bg-white/15 text-white hover:bg-[#FF6900] hover:scale-110 transition-all duration-300"
+                  className="w-11 h-11 flex items-center justify-center rounded-full bg-white/15 text-white hover:bg-[#F29429] hover:scale-110 transition-all duration-300"
                   aria-label={social.name}
                 >
                   <social.icon className="w-5 h-5" />
@@ -117,14 +117,14 @@ export function Footer() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-white/75 hover:text-[#FF6900] transition-colors text-base"
+                        className="text-white/75 hover:text-[#F29429] transition-colors text-base"
                       >
                         {link.name}
                       </a>
                     ) : (
                       <Link
                         href={link.href}
-                        className="text-white/75 hover:text-[#FF6900] transition-colors text-base"
+                        className="text-white/75 hover:text-[#F29429] transition-colors text-base"
                       >
                         {link.name}
                       </Link>
@@ -222,32 +222,19 @@ export function Footer() {
             </p>
 
             <nav className="flex flex-wrap items-center justify-center gap-4 text-xs">
-              <a
-                href="https://fundacionpadrinosdelavejez.es/politica-de-privacidad/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/privacidad/"
                 className="text-white/50 hover:text-white transition-colors"
               >
                 Privacidad
-              </a>
+              </Link>
               <span className="text-white/30">|</span>
-              <a
-                href="https://fundacionpadrinosdelavejez.es/aviso-legal/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/50 hover:text-white transition-colors"
-              >
-                Aviso Legal
-              </a>
-              <span className="text-white/30">|</span>
-              <a
-                href="https://fundacionpadrinosdelavejez.es/cookies/"
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                href="/cookies/"
                 className="text-white/50 hover:text-white transition-colors"
               >
                 Cookies
-              </a>
+              </Link>
             </nav>
           </div>
         </div>
