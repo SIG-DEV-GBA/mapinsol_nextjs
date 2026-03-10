@@ -97,7 +97,8 @@ WordPress meta fields use JetEngine naming (Spanish with special chars). The `pa
   - Frontend completo: tipos, API, componentes, páginas listado y detalle
 - Navbar reorganizado:
   - Eliminados "Inicio" y "Sugerencias"
-  - Orden: Iniciativas eficaces → Estudio → Actualidad ▾ (dropdown) → Contacto
+  - Orden: Estudio → Iniciativas eficaces → Actualidad y comunicación ▾ (dropdown) → Contacto
+  - Estudio apunta a `/estudios/` (ya no a página de construcción)
   - Logo FPV + Mapinsol a la izquierda con separador fino
   - Dropdown "Actualidad" con 7 items: Todo, Boletines, Notas de prensa, Eventos, Talleres, Videos, Infografías
   - Mobile: accordion colapsable para Actualidad
@@ -154,5 +155,6 @@ WordPress meta fields use JetEngine naming (Spanish with special chars). The `pa
 - Formularios funcionando: contacto (SMTP) y boletines (Mailchimp)
 - Datos geográficos en `src/lib/geografiaEspana.ts`
 - Type declaration para Mailchimp en `src/types/mailchimp.d.ts`
+- `/estudios/` tiene layout adaptativo: 1 estudio → hero featured grande; 2+ → grid de cards
 - Pendiente: evento/taller no tienen galería en JetEngine → sin imagen en cards si no ponen featured_media en WP
 - Pendiente: refinar detalle de tipo video (similar a infografía)

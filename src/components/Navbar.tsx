@@ -26,10 +26,8 @@ import { Menu, X, ChevronDown, Newspaper, FileText, CalendarDays, GraduationCap,
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 
-const CONSTRUCTION_URL = 'https://fundacionpadrinosdelavejez.es/pagina-en-construccion-mapinsol/';
-
 const menuItems = [
-  { label: 'Estudio', href: CONSTRUCTION_URL, external: true },
+  { label: 'Estudio', href: '/estudios/' },
   { label: 'Iniciativas eficaces', href: '/practicas/' },
 ];
 
@@ -115,28 +113,16 @@ export function Navbar() {
           <div className="hidden items-center gap-1 lg:flex">
             {/* Buenas Prácticas & Estudio */}
             {menuItems.map((item) => (
-              item.external ? (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="relative px-3 py-2.5 text-sm font-medium transition-all duration-300 rounded-lg hover:scale-105 text-gray-700 hover:text-[#F29429] hover:bg-gray-50 xl:px-4 xl:text-base"
-                >
-                  {item.label}
-                </a>
-              ) : (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={linkClasses(item.href)}
-                >
-                  {item.label}
-                  {isActive(item.href) && (
-                    <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#700D39]" />
-                  )}
-                </Link>
-              )
+              <Link
+                key={item.label}
+                href={item.href}
+                className={linkClasses(item.href)}
+              >
+                {item.label}
+                {isActive(item.href) && (
+                  <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#700D39]" />
+                )}
+              </Link>
             ))}
 
             {/* Dropdown Actualidad */}
@@ -220,32 +206,19 @@ export function Navbar() {
             <div className="space-y-1">
               {/* Buenas Prácticas & Estudio */}
               {menuItems.map((item) => (
-                item.external ? (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsOpen(false)}
-                    className="block rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200 text-gray-700 hover:bg-gray-50 hover:text-[#F29429]"
-                  >
-                    {item.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={item.label}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={cn(
-                      'block rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200',
-                      isActive(item.href)
-                        ? 'bg-[#700D39] text-white'
-                        : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                )
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setIsOpen(false)}
+                  className={cn(
+                    'block rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200',
+                    isActive(item.href)
+                      ? 'bg-[#700D39] text-white'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
+                  )}
+                >
+                  {item.label}
+                </Link>
               ))}
 
               {/* Mobile Actualidad Accordion */}
