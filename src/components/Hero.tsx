@@ -19,7 +19,7 @@
 import Link from 'next/link';
 import { ArrowRight, Heart, icons, type LucideIcon } from 'lucide-react';
 import { getCategorias } from '@/lib/wordpress';
-import { expandAcronyms } from '@/lib/utils';
+import { expandAcronyms } from '@/lib/labelMappings';
 
 /**
  * Resuelve un nombre de icono de Lucide (kebab-case o PascalCase) a su componente.

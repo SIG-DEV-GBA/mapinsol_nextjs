@@ -21,7 +21,7 @@ import { Calendar, Building2, ArrowRight } from 'lucide-react';
 import type { BuenaPractica } from '@/types';
 import { StatusBadge, PdfBadge, HighlightBadge } from '@/components/ui';
 import { LocationLinks } from '@/components/practica';
-import { expandAcronyms } from '@/lib/utils';
+import { expandAcronyms } from '@/lib/labelMappings';
 import { cn } from '@/lib/utils';
 
 /** Props del componente PracticaCard */

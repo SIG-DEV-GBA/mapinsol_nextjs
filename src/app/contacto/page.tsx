@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Mail, Send, CheckCircle, AlertCircle, ArrowLeft, User, MapPin, Phone, Clock, Building2 } from 'lucide-react';
 import { CCAA_PROVINCIAS, CCAA_LIST, SEXO_OPTIONS } from '@/lib/geografiaEspana';
 import { sendContactEmail, ContactFormData } from './actions';
-import { CustomSelect } from '@/components/ui/CustomSelect';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function ContactoPage() {
   const [isPending, startTransition] = useTransition();
@@ -139,8 +139,8 @@ export default function ContactoPage() {
                     <Mail className="w-4 h-4" />
                   </div>
                   <div>
-                    <a href="mailto:info@mapinsol.es" className="text-sm text-white/90 hover:text-white transition-colors">
-                      info@mapinsol.es
+                    <a href="mailto:mapinsol@fundacionpadrinosdelavejez.es" className="text-sm text-white/90 hover:text-white transition-colors">
+                      mapinsol@fundacionpadrinosdelavejez.es
                     </a>
                   </div>
                 </div>
@@ -247,21 +247,19 @@ export default function ContactoPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="sexo" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
                       Sexo
                     </label>
-                    <select
-                      id="sexo"
-                      name="sexo"
-                      value={formData.sexo}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors bg-white custom-select"
-                    >
-                      <option value="">Seleccionar...</option>
-                      {SEXO_OPTIONS.map(opt => (
-                        <option key={opt.value} value={opt.value}>{opt.label}</option>
-                      ))}
-                    </select>
+                    <Select value={formData.sexo} onValueChange={(val) => setFormData(prev => ({ ...prev, sexo: val as string }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {SEXO_OPTIONS.map(opt => (
+                          <SelectItem key={opt.value} value={opt.value}>{opt.label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -275,40 +273,39 @@ export default function ContactoPage() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="ccaa" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
                       Comunidad Autónoma
                     </label>
-                    <select
-                      id="ccaa"
-                      name="ccaa"
-                      value={formData.ccaa}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors bg-white custom-select"
-                    >
-                      <option value="">Seleccionar...</option>
-                      {CCAA_LIST.map(ccaa => (
-                        <option key={ccaa} value={ccaa}>{ccaa}</option>
-                      ))}
-                    </select>
+                    <Select value={formData.ccaa} onValueChange={(val) => setFormData(prev => ({ ...prev, ccaa: val as string, provincia: '' }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {CCAA_LIST.map(ccaa => (
+                          <SelectItem key={ccaa} value={ccaa}>{ccaa}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
-                    <label htmlFor="provincia" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
                       Provincia
                     </label>
-                    <select
-                      id="provincia"
-                      name="provincia"
+                    <Select
                       value={formData.provincia}
-                      onChange={handleChange}
+                      onValueChange={(val) => setFormData(prev => ({ ...prev, provincia: val as string }))}
                       disabled={!formData.ccaa}
-                      className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors bg-white disabled:bg-gray-100 disabled:cursor-not-allowed custom-select"
                     >
-                      <option value="">Seleccionar...</option>
-                      {provincias.map(prov => (
-                        <option key={prov} value={prov}>{prov}</option>
-                      ))}
-                    </select>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Seleccionar..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {provincias.map(prov => (
+                          <SelectItem key={prov} value={prov}>{prov}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="md:col-span-2">

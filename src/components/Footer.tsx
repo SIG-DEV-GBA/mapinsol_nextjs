@@ -143,11 +143,11 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:consultas@fundacionpadrinosdelavejez.es"
+                  href="mailto:mapinsol@fundacionpadrinosdelavejez.es"
                   className="flex items-start gap-2.5 text-white/70 hover:text-white transition-colors text-sm"
                 >
                   <Mail className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#F29429]" />
-                  <span className="break-all">consultas@fundacion<wbr/>padrinosdelavejez.es</span>
+                  <span className="break-all">mapinsol@fundacion<wbr/>padrinosdelavejez.es</span>
                 </a>
               </li>
             </ul>
