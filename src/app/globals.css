@@ -873,6 +873,99 @@ body {
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* ============================================
+   ACCESSIBILITY WIDGET
+   ============================================ */
+@keyframes a11ySlideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes a11yPulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.5); }
+}
+
+@keyframes a11yBar {
+  0% { height: 4px; }
+  100% { height: 14px; }
+}
+
+.a11y-tts-mode *:not(.fixed *) {
+  transition: background-color 0.2s, outline-color 0.2s, box-shadow 0.2s;
+}
+.a11y-tts-hover {
+  outline: 2px dashed #A10D5E !important;
+  outline-offset: 2px;
+  background-color: rgba(161, 13, 94, 0.04) !important;
+  border-radius: 4px;
+  cursor: pointer !important;
+}
+.a11y-tts-reading {
+  outline: 2px solid #A10D5E !important;
+  outline-offset: 2px;
+  background-color: rgba(161, 13, 94, 0.08) !important;
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgba(161, 13, 94, 0.06);
+  animation: a11yTtsGlow 1.5s ease-in-out infinite alternate;
+}
+@keyframes a11yTtsGlow {
+  0% { box-shadow: 0 0 0 4px rgba(161, 13, 94, 0.06); }
+  100% { box-shadow: 0 0 0 6px rgba(161, 13, 94, 0.12); }
+}
+
+.a11y-contrast {
+  filter: contrast(1.4) saturate(0.8);
+}
+.a11y-contrast img,
+.a11y-contrast video {
+  filter: contrast(0.85) saturate(1.2);
+}
+
+.a11y-big-cursor,
+.a11y-big-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M4 4l8.5 22 3.5-8.5L24.5 14z' fill='%23000' stroke='%23fff' stroke-width='1.5'/%3E%3C/svg%3E") 4 4, auto !important;
+}
+
+.a11y-spacing {
+  letter-spacing: 0.08em;
+  word-spacing: 0.16em;
+  line-height: 1.8 !important;
+}
+.a11y-spacing p,
+.a11y-spacing li,
+.a11y-spacing span,
+.a11y-spacing td {
+  line-height: 2 !important;
+}
+
+.a11y-dyslexia {
+  font-family: 'Verdana', 'Trebuchet MS', 'Tahoma', sans-serif !important;
+}
+.a11y-dyslexia p,
+.a11y-dyslexia li,
+.a11y-dyslexia span,
+.a11y-dyslexia a,
+.a11y-dyslexia td,
+.a11y-dyslexia th,
+.a11y-dyslexia label,
+.a11y-dyslexia input,
+.a11y-dyslexia textarea,
+.a11y-dyslexia select,
+.a11y-dyslexia button {
+  font-family: 'Verdana', 'Trebuchet MS', 'Tahoma', sans-serif !important;
+}
+
+.a11y-highlight-links a:not([class*="rounded"]):not([aria-label]) {
+  outline: 2px solid #F29429 !important;
+  outline-offset: 2px;
+  background: rgba(242, 148, 41, 0.08);
+  border-radius: 2px;
+  text-decoration: underline !important;
+  text-decoration-color: #F29429 !important;
+  text-underline-offset: 3px;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
