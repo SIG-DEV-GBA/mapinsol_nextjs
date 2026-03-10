@@ -17,7 +17,7 @@ export async function LatestPractices() {
         <div className="mb-12 flex items-end justify-between">
           <div>
             <h2 className="text-3xl font-bold text-[#A10D5E] lg:text-4xl mb-3">
-              Últimas Buenas Prácticas
+              Mapa-Biblioteca de Prácticas que Inspiran
             </h2>
             <p className="text-lg text-gray-600">
               Las iniciativas más recientes añadidas a nuestra base de datos
