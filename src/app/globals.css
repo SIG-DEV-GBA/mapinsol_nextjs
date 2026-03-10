@@ -185,6 +185,24 @@ h5, h6, p, span, a, li, td, th, label, input, textarea, select, button {
 }
 
 /* ============================================
+   GTRANSLATE WIDGET (hidden, controlled via custom UI)
+   ============================================ */
+.gtranslate_wrapper {
+  visibility: hidden;
+  position: absolute;
+  pointer-events: none;
+  height: 0;
+  overflow: hidden;
+}
+/* Hide Google Translate top bar */
+.skiptranslate {
+  display: none !important;
+}
+body {
+  top: 0 !important;
+}
+
+/* ============================================
    UTILIDADES CUSTOM
    ============================================ */
 .line-clamp-1 {

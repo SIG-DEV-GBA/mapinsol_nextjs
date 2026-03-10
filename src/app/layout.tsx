@@ -25,6 +25,7 @@ import Script from "next/script";
 import { Navbar, Footer, ScrollToTop } from "@/components";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CookieBanner } from "@/components/CookieBanner";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -130,10 +131,15 @@ gtag('config', 'G-Z222Z7CJWF');`}
           logo: 'https://mapinsol.es/logos/logo%20FPV.png',
           sameAs: [],
         }} />
+        <Script id="gtranslate-settings" strategy="afterInteractive">
+          {`window.gtranslateSettings = {"default_language":"es","languages":["es","en","gl","ca","eu"],"detect_browser_language":false,"wrapper_selector":".gtranslate_wrapper","flag_style":"3d","flag_size":24,"horizontal_position":"inline","native_language_names":true};`}
+        </Script>
+        <Script src="https://cdn.gtranslate.net/widgets/latest/dropdown.js" strategy="afterInteractive" />
         <Navbar />
         {children}
         <Footer />
         <ScrollToTop />
+        <LanguageSwitcher />
         <CookieBanner />
       </body>
     </html>

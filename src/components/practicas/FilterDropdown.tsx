@@ -96,7 +96,7 @@ export function FilterDropdown({
               <Icon className="w-4 h-4" />
               {label}
             </h4>
-            <p className="text-xs text-gray-500 mt-0.5">{description}</p>
+            <p className={cn('text-xs mt-0.5', colorScheme.bg.includes('bg-[#A10D5E]') ? 'text-white/70' : 'text-gray-500')}>{description}</p>
           </div>
           <div className="max-h-64 overflow-y-auto py-2">
             {options.length > 0 ? (

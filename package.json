@@ -14,6 +14,7 @@
   "dependencies": {
     "@base-ui/react": "^1.2.0",
     "@mailchimp/mailchimp_marketing": "^3.0.80",
+    "circle-flags": "github:HatScripts/circle-flags",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dompurify": "^3.3.1",

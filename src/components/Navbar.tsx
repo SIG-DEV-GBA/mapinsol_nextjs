@@ -164,6 +164,7 @@ export function Navbar() {
                 <span className="absolute bottom-0 left-1/2 h-0.5 w-10 -translate-x-1/2 rounded-full bg-[#A10D5E]" />
               )}
             </Link>
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -262,6 +263,7 @@ export function Navbar() {
             >
               {contactItem.label}
             </Link>
+
           </div>
         </div>
       </nav>
