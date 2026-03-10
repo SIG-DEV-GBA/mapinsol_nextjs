@@ -36,46 +36,46 @@ export default async function ActualidadPage({
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero - same pattern as /practicas HeroSearch */}
-      <section className="relative bg-gradient-to-br from-[#A10D5E] via-[#8B1547] to-[#A10D5E] pt-4 pb-8 sm:pt-6 sm:pb-10 overflow-hidden">
+      {/* Hero + Wave */}
+      <div className="bg-gradient-to-b from-[#A10D5E] to-[#8B1547] text-white relative overflow-hidden">
         {/* Background decorations */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-[#F29429] rounded-full blur-3xl" />
+          <div className="absolute top-0 left-1/4 w-64 sm:w-96 h-64 sm:h-96 bg-white rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-48 sm:w-64 h-48 sm:h-64 bg-[#F29429] rounded-full blur-3xl" />
         </div>
 
-        <div className="relative container mx-auto px-4">
+        <div className="relative container mx-auto px-4 pt-8 pb-4 sm:pt-10 sm:pb-6 md:pt-14 md:pb-8">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-4">
               <Megaphone className="w-4 h-4" />
               <span>Noticias y Recursos</span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 font-poppins">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 font-poppins">
               Actualidad y Comunicación
             </h1>
-            <p className="text-white/90 text-lg mb-6 max-w-2xl mx-auto">
+            <p className="text-white/90 text-base sm:text-lg mb-4 sm:mb-6 max-w-2xl mx-auto px-2">
               Mantente informado sobre las últimas novedades, eventos y recursos del proyecto Mapinsol
             </p>
 
             {/* Stats */}
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4 sm:mt-6">
-              <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/15 backdrop-blur-sm">
-                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                  <Newspaper className="w-5 h-5 text-white" />
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-6 mt-3 sm:mt-6">
+              <div className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-white/15 backdrop-blur-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                  <Newspaper className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <div className="text-left">
-                  <p className="text-2xl font-bold text-white">{total}</p>
-                  <p className="text-xs text-white/80">Publicaciones</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">{total}</p>
+                  <p className="text-[10px] sm:text-xs text-white/80">Publicaciones</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/15 backdrop-blur-sm">
-                <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                  <CalendarDays className="w-5 h-5 text-white" />
+              <div className="flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl bg-white/15 backdrop-blur-sm">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                  <CalendarDays className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                 </div>
                 <div className="text-left">
-                  <p className="text-2xl font-bold text-white">6</p>
-                  <p className="text-xs text-white/80">Tipos de contenido</p>
+                  <p className="text-xl sm:text-2xl font-bold text-white">6</p>
+                  <p className="text-[10px] sm:text-xs text-white/80">Tipos de contenido</p>
                 </div>
               </div>
             </div>
@@ -83,28 +83,23 @@ export default async function ActualidadPage({
         </div>
 
         {/* Wave */}
-        <div className="absolute -bottom-1 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" className="w-full h-auto block">
-            <path
-              d="M0 60L60 55C120 50 240 40 360 35C480 30 600 30 720 32.5C840 35 960 40 1080 42.5C1200 45 1320 45 1380 45L1440 45V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0Z"
-              fill="#f9fafb"
-            />
-          </svg>
-        </div>
-      </section>
+        <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block">
+          <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#f9fafb"/>
+        </svg>
+      </div>
 
       {/* Filters - floating card */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 relative z-10">
-        <div className="flex flex-wrap gap-2 bg-white rounded-2xl shadow-lg p-4 border border-gray-100">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-2 sm:-mt-4 relative z-10">
+        <div className="flex flex-wrap gap-2 bg-white rounded-2xl shadow-lg p-3 sm:p-4 border border-gray-100">
           {TIPO_FILTERS.map(({ key, label, icon: Icon }) => {
-            const isActive = key === 'todos' ? !tipoFilter : tipoFilter === key;
+            const isActiveFilter = key === 'todos' ? !tipoFilter : tipoFilter === key;
             const href = key === 'todos' ? '/actualidad/' : `/actualidad/?tipo=${key}`;
             return (
               <Link
                 key={key}
                 href={href}
-                className={`inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
-                  isActive
+                className={`inline-flex items-center gap-1.5 px-3 sm:px-4 py-2.5 sm:py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 min-h-[44px] ${
+                  isActiveFilter
                     ? 'bg-[#A10D5E] text-white shadow-md shadow-[#A10D5E]/20 scale-105'
                     : 'text-gray-600 hover:bg-[#A10D5E]/5 hover:text-[#A10D5E]'
                 }`}

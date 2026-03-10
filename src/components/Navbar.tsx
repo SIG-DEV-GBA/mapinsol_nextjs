@@ -1,23 +1,3 @@
-/**
- * =============================================================================
- * COMPONENTE: NAVBAR
- * =============================================================================
- *
- * Barra de navegación principal de la aplicación.
- * Muestra logos, menú de navegación y versión móvil con hamburger.
- *
- * CARACTERÍSTICAS:
- * - Client Component (usa useState y usePathname)
- * - Sticky en la parte superior
- * - Backdrop blur para efecto de cristal
- * - Menú responsive: desktop horizontal, mobile colapsable
- * - Dropdown para "Actualidad y comunicación"
- * - Indicador de página activa
- * - Soporte para enlaces externos e internos
- *
- * @module components/Navbar
- */
-
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
@@ -58,7 +38,6 @@ export function Navbar() {
 
   const isActualidadActive = pathname.startsWith('/actualidad');
 
-  // Cerrar dropdown al hacer click fuera
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -111,7 +90,6 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden items-center gap-1 lg:flex">
-            {/* Buenas Prácticas & Estudio */}
             {menuItems.map((item) => (
               <Link
                 key={item.label}
@@ -149,7 +127,6 @@ export function Navbar() {
                 )}
               </button>
 
-              {/* Dropdown Menu */}
               {dropdownOpen && (
                 <div className="absolute top-full right-0 mt-2 w-56 rounded-xl bg-white shadow-xl border border-gray-200/80 py-2 animate-in fade-in slide-in-from-top-2 duration-200">
                   {actualidadItems.map((item) => {
@@ -201,85 +178,92 @@ export function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="border-t border-gray-100 pb-4 pt-2 lg:hidden">
-            <div className="space-y-1">
-              {/* Buenas Prácticas & Estudio */}
-              {menuItems.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={cn(
-                    'block rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200',
-                    isActive(item.href)
-                      ? 'bg-[#A10D5E] text-white'
-                      : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
-
-              {/* Mobile Actualidad Accordion */}
-              <button
-                onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
-                className={cn(
-                  'flex w-full items-center justify-between rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200',
-                  isActualidadActive
-                    ? 'bg-[#A10D5E] text-white'
-                    : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
-                )}
-              >
-                Actualidad y comunicación
-                <ChevronDown className={cn(
-                  'h-4 w-4 transition-transform duration-200',
-                  mobileDropdownOpen && 'rotate-180'
-                )} />
-              </button>
-
-              {mobileDropdownOpen && (
-                <div className="ml-4 space-y-1 border-l-2 border-[#A10D5E]/20 pl-3">
-                  {actualidadItems.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <Link
-                        key={item.label}
-                        href={item.href}
-                        onClick={() => { setIsOpen(false); setMobileDropdownOpen(false); }}
-                        className={cn(
-                          'block rounded-lg px-4 py-2.5 text-sm font-medium transition-colors',
-                          isActive(item.href)
-                            ? 'text-[#A10D5E] bg-[#A10D5E]/10'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-[#F29429]'
-                        )}
-                      >
-                        <span className="flex items-center gap-3">
-                          <Icon className="h-4 w-4 flex-shrink-0" />
-                          <span>{item.label}</span>
-                        </span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Contacto */}
+        <div
+          className={cn(
+            'lg:hidden overflow-hidden transition-all duration-[800ms] ease-[cubic-bezier(0.4,0,0.2,1)]',
+            isOpen ? 'max-h-[600px] opacity-100 pb-5 pt-3' : 'max-h-0 opacity-0'
+          )}
+        >
+          <div className="border-t border-gray-100 pt-3 space-y-1">
+            {menuItems.map((item) => (
               <Link
-                href={contactItem.href}
+                key={item.label}
+                href={item.href}
                 onClick={() => setIsOpen(false)}
                 className={cn(
-                  'block rounded-lg px-4 py-3 text-base font-medium transition-colors duration-200',
-                  isActive(contactItem.href)
+                  'flex items-center rounded-xl px-5 py-4 text-lg font-medium transition-colors duration-200 min-h-[56px]',
+                  isActive(item.href)
                     ? 'bg-[#A10D5E] text-white'
                     : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
                 )}
               >
-                {contactItem.label}
+                {item.label}
               </Link>
+            ))}
+
+            {/* Mobile Actualidad Accordion */}
+            <button
+              onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+              className={cn(
+                'flex w-full items-center justify-between rounded-xl px-5 py-4 text-lg font-medium transition-colors duration-200 min-h-[56px]',
+                isActualidadActive
+                  ? 'bg-[#A10D5E] text-white'
+                  : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
+              )}
+            >
+              Actualidad y comunicación
+              <ChevronDown className={cn(
+                'h-5 w-5 transition-transform duration-300',
+                mobileDropdownOpen && 'rotate-180'
+              )} />
+            </button>
+
+            <div
+              className={cn(
+                'overflow-hidden transition-all duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)]',
+                mobileDropdownOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+              )}
+            >
+              <div className="ml-4 space-y-1 border-l-2 border-[#A10D5E]/20 pl-3 py-1">
+                {actualidadItems.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => { setIsOpen(false); setMobileDropdownOpen(false); }}
+                      className={cn(
+                        'flex items-center rounded-xl px-4 py-3.5 text-base font-medium transition-colors min-h-[48px]',
+                        isActive(item.href)
+                          ? 'text-[#A10D5E] bg-[#A10D5E]/10'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-[#F29429]'
+                      )}
+                    >
+                      <span className="flex items-center gap-3">
+                        <Icon className="h-5 w-5 flex-shrink-0" />
+                        <span>{item.label}</span>
+                      </span>
+                    </Link>
+                  );
+                })}
+              </div>
             </div>
+
+            {/* Contacto */}
+            <Link
+              href={contactItem.href}
+              onClick={() => setIsOpen(false)}
+              className={cn(
+                'flex items-center rounded-xl px-5 py-4 text-lg font-medium transition-colors duration-200 min-h-[56px]',
+                isActive(contactItem.href)
+                  ? 'bg-[#A10D5E] text-white'
+                  : 'text-gray-700 hover:bg-gray-50 hover:text-[#F29429]'
+              )}
+            >
+              {contactItem.label}
+            </Link>
           </div>
-        )}
+        </div>
       </nav>
     </header>
   );
