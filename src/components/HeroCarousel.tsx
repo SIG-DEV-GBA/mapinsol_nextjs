@@ -59,7 +59,7 @@ export function HeroCarousel({ categorias }: HeroCarouselProps) {
         style={{ opacity: current === 1 ? 1 : 0 }}
       >
         <img
-          src="/derecho-igualdad-no-discriminacion-laboral-scaled.webp"
+          src="/portada_estudio.webp"
           alt=""
           className="h-full w-full object-cover"
         />
