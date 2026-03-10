@@ -15,7 +15,22 @@
       "Bash(git push)",
       "Bash(npm uninstall:*)",
       "Bash(curl:*)",
-      "Bash(node -e:*)"
+      "Bash(node -e:*)",
+      "Bash(npx:*)",
+      "Bash(claude skills:*)",
+      "WebFetch(domain:mapinsol.es)",
+      "Bash(rm:*)",
+      "WebSearch",
+      "WebFetch(domain:gist.github.com)",
+      "Bash(find:*)",
+      "Bash(source .env)",
+      "WebFetch(domain:crocoblock.com)",
+      "Bash(node:*)",
+      "Bash(taskkill:*)",
+      "Bash(netstat:*)",
+      "WebFetch(domain:maps.google.com)",
+      "Bash(read f:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

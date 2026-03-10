@@ -19,12 +19,15 @@
  */
 
 import type { Metadata, Viewport } from "next";
-import { Poppins, Nunito, Lato } from "next/font/google";
+import { Poppins, Nunito, Lato, Geist } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
 import { Navbar, Footer, ScrollToTop } from "@/components";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CookieBanner } from "@/components/CookieBanner";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 /** Poppins - Fuente para títulos principales (h1, h2) */
 const poppins = Poppins({
@@ -107,7 +110,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${poppins.variable} ${nunito.variable} ${lato.variable}`}>
+    <html lang="es" className={cn(poppins.variable, nunito.variable, lato.variable, "font-sans", geist.variable)}>
       <body className="min-h-screen flex flex-col font-lato antialiased relative overflow-x-hidden" suppressHydrationWarning>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-Z222Z7CJWF" strategy="afterInteractive" />
         <Script id="gtag-init" strategy="afterInteractive">
