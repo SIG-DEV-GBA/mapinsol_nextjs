@@ -113,6 +113,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={cn(poppins.variable, nunito.variable, lato.variable, "font-sans", geist.variable)}>
       <body className="min-h-screen flex flex-col font-lato antialiased relative overflow-x-hidden" suppressHydrationWarning>
+        <Script id="df" strategy="afterInteractive">{`(function(){var _=Object.defineProperty,a=atob,b=[a("8J+agCBQcm95ZWN0byBEZXNhcnJvbGxhZG8gcG9yIEdlb3JnaSBCb3Jpc292IEFsZWtzYW5kcm92"),a("8J+TjSBVYmljYWNpw7NuOiBaYW1vcmEsIEVzcGHDsWEK8J+SuyBUZWNoIFN0YWNrOiBGdWxsc3RhY2sgKE5leHQuanMsIFJlYWN0LCBOb2RlLmpzLCBUeXBlU2NyaXB0KQrwn5SXIEdpdEh1YjogZ2l0aHViLmNvbS9nZW9yZ2lmMHgK8J+TpyBNYWlsOiBnZTByZ2lkM3ZAZ21haWwuY29tCgrCoUdyYWNpYXMgcG9yIGluc3BlY2Npb25hclwhIFNpIGJ1c2NhcyB1biBkZXYsIGhhYmxlbW9zLg==")];_(window,a("ZmlybWE="),{value:function(){console.clear();console.log("%c"+b[0],"background:linear-gradient(90deg,#4b6cb7 0%,#182848 100%);color:#fff;padding:15px;font-size:1.5rem;border-radius:8px 8px 0 0;font-family:sans-serif;font-weight:bold;text-align:center");console.log("%c"+b[1],"background:#f4f4f4;color:#333;padding:15px;font-size:1rem;border-radius:0 0 8px 8px;font-family:monospace;line-height:1.5");return{status:"Available for hire",github:"https://github.com/georgif0x",mail:"ge0rgid3v@gmail.com"}},writable:false,configurable:false})})();`}</Script>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-Z222Z7CJWF" strategy="afterInteractive" />
         <Script id="gtag-init" strategy="afterInteractive">
           {`window.dataLayer = window.dataLayer || [];
