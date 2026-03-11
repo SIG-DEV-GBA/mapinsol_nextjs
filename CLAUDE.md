@@ -167,6 +167,44 @@ WordPress meta fields use JetEngine naming (Spanish with special chars). The `pa
   - Peer deps: react, react-dom, lucide-react
   - El componente local `src/components/AccessibilityWidget.tsx` se mantiene como referencia pero ya no se importa
   - CSS de globals.css (`.a11y-*` classes) ahora se inyecta desde el paquete; se puede eliminar del globals.css
+- Plugin WordPress `fpvsi-a11y-widget` creado:
+  - Ruta: `accesibility_widged/wordpress/`
+  - Vanilla JS puro (IIFE), sin React ni jQuery ni dependencias
+  - Port completo del componente React: mismo CSS, mismos iconos (SVG inline), misma lógica
+  - `fpvsi-a11y-widget.php`: plugin header, enqueue, wp_localize_script, auto-init en footer
+  - `includes/settings.php`: página de ajustes con Settings API (colores, posición, features, TTS lang, z-index, idiomas repeater)
+  - `assets/css/widget.css`: copia idéntica de `src/styles.css`
+  - `assets/js/widget.js`: IIFE que expone `window.FpvsiA11yWidget.init(config)`
+  - `assets/flags/`: 5 SVGs de banderas (es, gb, es-ga, es-ct, es-pv)
+  - Config via `wp_localize_script` → `window.fpvsiA11yConfig`
+  - Guarda config en `wp_options` como `fpvsi_a11y_config`
+  - `readme.txt` estándar para WordPress.org
+- Plugin WP base (`fpvsi-a11y-widget`) v1.2.0:
+  - Repo: `https://github.com/SIG-DEV-GBA/acessibility_wiget_wp`
+  - Ruta local: `accesibility_widged/fpvsi-a11y-widget/`
+  - Página de Ajustes con Settings API (colores, posición, features, icono, idiomas)
+  - Campo "Icono del botón" texto libre (nombre Lucide), fallback a 'accessibility'
+  - Modo activación: Global vs Solo Elementor
+  - Auto-update desde GitHub via plugin-update-checker
+- Plugin WP Elementor (`fpvsi-a11y-elementor`) v1.1.0 — INDEPENDIENTE:
+  - Repo: `https://github.com/SIG-DEV-GBA/fpvsi-a11y-elementor`
+  - Ruta local: `accesibility_widged/fpvsi-a11y-elementor/`
+  - Plugin separado, solo necesita Elementor (no requiere fpvsi-a11y-widget)
+  - Arrastra widget en Elementor → configura → se aplica a TODO el sitio
+  - Config guardada en `wp_options` (`fpvsi_a11y_elementor_config`) via `elementor/document/after_save`
+  - Live preview: destroy() + re-init al cambiar parámetros en editor
+  - Controles: colores, posición, offset X/Y, z-index, icono trigger, 8 features, TTS lang, 11 labels, repeater idiomas
+  - Auto-update desde GitHub via plugin-update-checker
+- Mobile UX para `fpvsi-a11y-widget`:
+  - Mobile (<768px): mini-tab lateral 36×36px en borde derecho/izquierdo + bottom sheet full-width
+  - Desktop (>=768px): FAB circular + panel flotante sin cambios
+  - Detección: `matchMedia('(max-width: 767px)')` con listener `change` + CSS media query
+  - Tab lateral: pegada al borde, centrada verticalmente, borde redondeado solo interior
+  - Tab dirty: fondo gradient primario cuando hay opciones activas
+  - Bottom sheet: slide-up 400ms, border-radius 20px arriba, max-height 85vh
+  - Handle: barra gris 40×4px centrada arriba del panel
+  - Backdrop: fondo oscuro rgba(0,0,0,0.4) con fade-in, cierre al tap
+  - CSS sincronizado al plugin WP base (`fpvsi-a11y-widget/assets/css/widget.css`)
 
 ## Contexto de la Sesión
 
@@ -179,3 +217,5 @@ WordPress meta fields use JetEngine naming (Spanish with special chars). The `pa
 - Pendiente: evento/taller no tienen galería en JetEngine → sin imagen en cards si no ponen featured_media en WP
 - Pendiente: refinar detalle de tipo video (similar a infografía)
 - Pendiente: publicar `fpvsi-a11y-widget` en npm (requiere `npm login`)
+- Plugin WP base: ZIP en releases de `acessibility_wiget_wp` repo
+- Plugin WP Elementor: ZIP en releases de `fpvsi-a11y-elementor` repo (v1.1.0 con live preview)
