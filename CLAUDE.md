@@ -146,10 +146,30 @@ WordPress meta fields use JetEngine naming (Spanish with special chars). The `pa
   - Cadena: featured_media → galeria[0] → infografia_imagen → YouTube thumbnail
   - YouTube thumbnail: `https://img.youtube.com/vi/{ID}/hqdefault.jpg`
 
+- Hero carousel con 2 slides (Buenas Prácticas + Estudio) con crossfade transitions
+- Navbar mobile: transiciones suaves (800ms), touch targets grandes (56px/48px)
+- `/actualidad/` responsive mejorado con wave SVG y filtros touch-friendly
+- GTranslate i18n: ES, EN, GL, CA, EU con LanguageSwitcher flotante custom
+  - circle-flags para banderas SVG en `/public/flags/`
+  - Oculta widget default de GTranslate con CSS
+  - Fade-out al scroll >80px
+- Developer signature: `firma()` en consola (public/df.js, base64, SHA-256)
+- Email unificado: `mapinsol@fundacionpadrinosdelavejez.es` en footer, contacto, privacidad, cookies
+- AccessibilityWidget extraído como paquete npm `fpvsi-a11y-widget`:
+  - Repo: `https://github.com/SIG-DEV-GBA/accesibility_widged.git`
+  - Ruta local: `C:\Users\Usuario\Desktop\accesibility_widged`
+  - Import en layout.tsx: `from "fpvsi-a11y-widget"` (ya no desde `@/components/AccessibilityWidget`)
+  - CSS puro (BEM + CSS vars), sin dependencia de Tailwind
+  - Props configurables: `colors`, `position`, `features`, `languages`, `ttsLang`, `labels`, `storageKey`, `zIndex`
+  - CSS inyectado en runtime via `<style id="fpvsi-a11y-styles">`
+  - 7 CSS custom properties derivadas de 2 colores (primary + accent)
+  - Build: tsup → ESM + CJS + .d.ts con `'use client'` banner
+  - Peer deps: react, react-dom, lucide-react
+  - El componente local `src/components/AccessibilityWidget.tsx` se mantiene como referencia pero ya no se importa
+  - CSS de globals.css (`.a11y-*` classes) ahora se inyecta desde el paquete; se puede eliminar del globals.css
+
 ## Contexto de la Sesión
 
-- Sección Actualidad completa: CPT + frontend + navbar dropdown
-- 6 posts de prueba creados en WP (IDs 28302-28307)
 - Build compila correctamente
 - Dev server funciona en todas las rutas
 - Formularios funcionando: contacto (SMTP) y boletines (Mailchimp)
@@ -158,3 +178,4 @@ WordPress meta fields use JetEngine naming (Spanish with special chars). The `pa
 - `/estudios/` tiene layout adaptativo: 1 estudio → hero featured grande; 2+ → grid de cards
 - Pendiente: evento/taller no tienen galería en JetEngine → sin imagen en cards si no ponen featured_media en WP
 - Pendiente: refinar detalle de tipo video (similar a infografía)
+- Pendiente: publicar `fpvsi-a11y-widget` en npm (requiere `npm login`)

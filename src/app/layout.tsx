@@ -26,7 +26,7 @@ import { Navbar, Footer, ScrollToTop } from "@/components";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CookieBanner } from "@/components/CookieBanner";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { AccessibilityWidget } from "@/components/AccessibilityWidget";
+import { AccessibilityWidget } from "fpvsi-a11y-widget";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
