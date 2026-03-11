@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown, Newspaper, FileText, CalendarDays, GraduationCap, Video, ImageIcon } from 'lucide-react';
+import { Menu, X, ChevronDown, Newspaper, FileText, CalendarDays, GraduationCap, Video, ImageIcon, Facebook, Youtube, Instagram } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 
@@ -22,6 +22,17 @@ const actualidadItems = [
 ];
 
 const contactItem = { label: 'Contacto', href: '/contacto/' };
+
+const socialLinks = [
+  { label: 'Facebook', href: 'https://www.facebook.com/FundacionPadrinosVejez', icon: Facebook },
+  { label: 'X', href: 'https://x.com/PadrinoslaVejez', icon: () => (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="!h-[16px] !w-[16px]">
+      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+    </svg>
+  )},
+  { label: 'YouTube', href: 'https://www.youtube.com/@FundacionPadrinosVejez', icon: Youtube },
+  { label: 'Instagram', href: 'https://www.instagram.com/fundacionpadrinosvejez/', icon: Instagram },
+];
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -165,6 +176,26 @@ export function Navbar() {
               )}
             </Link>
 
+            {/* Social icons */}
+            <div className="h-5 w-px bg-gray-200 mx-2" />
+            <div className="flex items-center gap-1">
+              {socialLinks.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-8 h-8 rounded-lg text-gray-400 transition-all duration-200 hover:text-[#F29429] hover:bg-gray-50 [&>svg]:h-[18px] [&>svg]:w-[18px]"
+                    aria-label={s.label}
+                  >
+                    <Icon />
+                  </a>
+                );
+              })}
+            </div>
+
           </div>
 
           {/* Mobile Menu Button */}
@@ -263,6 +294,25 @@ export function Navbar() {
             >
               {contactItem.label}
             </Link>
+
+            {/* Social icons mobile */}
+            <div className="flex items-center justify-center gap-3 pt-3 mt-2 border-t border-gray-100">
+              {socialLinks.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-10 h-10 rounded-xl text-gray-400 transition-all duration-200 hover:text-[#F29429] hover:bg-gray-50 [&>svg]:h-[18px] [&>svg]:w-[18px]"
+                    aria-label={s.label}
+                  >
+                    <Icon />
+                  </a>
+                );
+              })}
+            </div>
 
           </div>
         </div>
