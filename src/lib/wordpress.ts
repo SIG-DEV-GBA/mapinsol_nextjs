@@ -980,7 +980,7 @@ export async function enrichEstudioWithPdf(estudio: Estudio): Promise<Estudio> {
 // ACTUALIDAD Y COMUNICACIÓN
 // =============================================================================
 
-import type { Actualidad, ActualidadRaw, TipoContenido } from '@/types';
+import type { Actualidad, ActualidadRaw, TipoContenido, SeccionBoletin } from '@/types';
 
 function parseGaleriaField(value: any): number[] {
   if (!value) return [];
@@ -1023,6 +1023,7 @@ function parseActualidad(raw: ActualidadRaw): Actualidad {
     pdfBoletin: meta.pdf_boletin || '',
     fechaPublicacion: meta.fecha_publicacion || '',
     enlaceInteresBoletin: meta.enlace_interes_boletin || '',
+    seccionesBoletin: parseRepeater<SeccionBoletin>(meta.secciones_boletin),
 
     fuenteNota: meta.fuente_nota || '',
     enlaceNota: meta.enlace_nota || '',
@@ -1031,6 +1032,7 @@ function parseActualidad(raw: ActualidadRaw): Actualidad {
     horaInicio: meta.hora_inicio || '',
     lugarEvento: meta.lugar_evento || '',
     horaFin: meta.hora_fin || '',
+    enlaceInscripcion: meta.enlace_inscripcion || '',
 
     urlVideo: meta.url_video || '',
 
@@ -1173,6 +1175,23 @@ export async function getActualidadBySlug(slug: string): Promise<Actualidad | nu
       const media = await getMediaById(pdfId);
       if (media) {
         item.pdfBoletin = media.source_url || '';
+      }
+    }
+  }
+
+  // Resolver imágenes de secciones de boletín (IDs → URLs)
+  if (item.seccionesBoletin && item.seccionesBoletin.length > 0) {
+    for (const seccion of item.seccionesBoletin) {
+      if (seccion.imagen_seccion) {
+        const imgId = Number(seccion.imagen_seccion);
+        if (imgId) {
+          const media = await getMediaById(imgId);
+          if (media) {
+            seccion.imagenSeccionUrl = media.media_details?.sizes?.large?.source_url ||
+              media.media_details?.sizes?.medium_large?.source_url ||
+              media.source_url || '';
+          }
+        }
       }
     }
   }

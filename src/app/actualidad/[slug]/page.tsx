@@ -10,7 +10,7 @@ import { getActualidadBySlug, getActualidadSlugs, getActualidad } from '@/lib/wo
 import { SafeHtml } from '@/components/ui';
 import { InfografiaViewer } from '@/components/actualidad';
 import { MediaGallery } from '@/components/ui';
-import type { TipoContenido, Actualidad } from '@/types';
+import type { TipoContenido, Actualidad, SeccionBoletin } from '@/types';
 
 const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; color: string; bg: string; border: string; heroAccent: string }> = {
   boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#A10D5E]', bg: 'bg-[#A10D5E]/10', border: 'border-[#A10D5E]/20', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
@@ -266,6 +266,48 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
               </div>
             )}
 
+            {/* Secciones del boletín - repeater */}
+            {tipo === 'boletin' && item.seccionesBoletin && item.seccionesBoletin.length > 0 && (
+              <div className="space-y-6">
+                {item.seccionesBoletin.map((seccion: SeccionBoletin, idx: number) => (
+                  <div key={idx} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    {seccion.imagenSeccionUrl && (
+                      <div className="aspect-[21/9] overflow-hidden">
+                        <img
+                          src={seccion.imagenSeccionUrl}
+                          alt={seccion.titulo_seccion || ''}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    )}
+                    <div className="p-6 md:p-8">
+                      {seccion.titulo_seccion && (
+                        <h3 className="text-xl font-bold text-gray-900 font-poppins mb-3">
+                          {seccion.titulo_seccion}
+                        </h3>
+                      )}
+                      {seccion.texto_seccion && (
+                        <div className="prose prose-base max-w-none text-gray-600 mb-5">
+                          <SafeHtml html={seccion.texto_seccion} />
+                        </div>
+                      )}
+                      {seccion.enlace_boton && (
+                        <a
+                          href={seccion.enlace_boton}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#A10D5E] text-white rounded-xl hover:bg-[#8B1547] transition-colors font-semibold text-sm shadow-sm"
+                        >
+                          {seccion.texto_boton || 'Saber más'}
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+
             {/* Evento/Taller details - solo estos tipos */}
             {isEventType && item.fechaEvento && (
               <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
@@ -422,6 +464,24 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                     <p className="text-xs text-gray-500 truncate max-w-[180px]">
                       {item.fuenteNota || item.enlaceNota}
                     </p>
+                  </div>
+                </a>
+              )}
+
+              {/* Enlace inscripción - solo evento/taller */}
+              {isEventType && item.enlaceInscripcion && (
+                <a
+                  href={item.enlaceInscripcion}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 transition-colors border border-emerald-100"
+                >
+                  <div className="flex items-center justify-center w-10 h-10 bg-emerald-600 rounded-xl flex-shrink-0">
+                    <ExternalLink className="h-5 w-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">Inscripción</p>
+                    <p className="text-xs text-gray-500">Apúntate al {tipo === 'evento' ? 'evento' : 'taller'}</p>
                   </div>
                 </a>
               )}

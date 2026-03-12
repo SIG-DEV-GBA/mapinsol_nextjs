@@ -4,7 +4,7 @@
   "listings": [],
   "components": [],
   "meta_boxes": {
-    "meta-actualidad": {
+    "meta-5": {
       "args": {
         "object_type": "post",
         "allowed_tax": [],
@@ -38,24 +38,24 @@
           "options_source": "manual",
           "repeater-fields": [],
           "options": [
-            { "key": "", "value": "— Selecciona tipo —", "id": 60011 },
-            { "key": "boletin", "value": "Boletín", "id": 60012 },
+            { "key": "", "value": "\u2014 Selecciona tipo \u2014", "id": 60011 },
+            { "key": "boletin", "value": "Bolet\u00edn", "id": 60012 },
             { "key": "nota_prensa", "value": "Nota de prensa", "id": 60013 },
-            { "key": "evento", "value": "Evento presentación", "id": 60014 },
+            { "key": "evento", "value": "Evento presentaci\u00f3n", "id": 60014 },
             { "key": "taller", "value": "Taller", "id": 60015 },
             { "key": "video", "value": "Video", "id": 60016 },
-            { "key": "infografia", "value": "Infografía", "id": 60017 }
+            { "key": "infografia", "value": "Infograf\u00eda", "id": 60017 }
           ],
           "show_in_rest": true,
           "is_required": true,
-          "description": "OBLIGATORIO — Selecciona el tipo de contenido"
+          "description": "OBLIGATORIO \u2014 Selecciona el tipo de contenido"
         },
         {
-          "title": "Descripción corta",
-          "name": "descripcion_corta",
+          "title": "Descripci\u00f3n",
+          "name": "descripcion",
           "object_type": "field",
           "width": "100%",
-          "type": "textarea",
+          "type": "wysiwyg",
           "id": 6002,
           "isNested": true,
           "options_source": "manual",
@@ -63,10 +63,10 @@
           "options": [],
           "show_in_rest": true,
           "is_required": true,
-          "description": "OBLIGATORIO — Resumen breve (máx. 200 caracteres)"
+          "description": "OBLIGATORIO \u2014 Resumen breve (m\u00e1x. 200 caracteres)"
         },
         {
-          "title": "¿Destacado?",
+          "title": "\u00bfDestacado?",
           "name": "destacado",
           "object_type": "field",
           "width": "50%",
@@ -77,10 +77,10 @@
           "repeater-fields": [],
           "options": [],
           "show_in_rest": true,
-          "description": "Mostrar en sección de destacados"
+          "description": "Mostrar en secci\u00f3n de destacados"
         },
         {
-          "title": "Galería de imágenes",
+          "title": "Galer\u00eda de im\u00e1genes",
           "name": "galeria",
           "object_type": "field",
           "width": "100%",
@@ -91,11 +91,11 @@
           "repeater-fields": [],
           "options": [],
           "show_in_rest": true,
-          "description": "Galería adicional de imágenes"
+          "description": "Galer\u00eda adicional de im\u00e1genes"
         },
 
         {
-          "title": "Boletín",
+          "title": "Bolet\u00edn",
           "name": "tab_boletin",
           "object_type": "tab",
           "width": "100%",
@@ -107,7 +107,7 @@
           "options": []
         },
         {
-          "title": "PDF del Boletín",
+          "title": "PDF del Bolet\u00edn",
           "name": "pdf_boletin",
           "object_type": "field",
           "width": "100%",
@@ -118,10 +118,10 @@
           "repeater-fields": [],
           "options": [],
           "show_in_rest": true,
-          "description": "Archivo PDF del boletín para descargar"
+          "description": "Archivo PDF del bolet\u00edn para descargar"
         },
         {
-          "title": "Fecha de publicación",
+          "title": "Fecha de publicaci\u00f3n",
           "name": "fecha_publicacion",
           "object_type": "field",
           "width": "50%",
@@ -132,11 +132,24 @@
           "repeater-fields": [],
           "options": [],
           "show_in_rest": true,
-          "description": "Fecha de publicación del boletín"
+          "description": "Fecha de publicaci\u00f3n del bolet\u00edn"
         },
-
         {
-          "title": "Secciones del boletín",
+          "title": "Enlace Interes",
+          "name": "enlace_interes_boletin",
+          "object_type": "field",
+          "width": "50%",
+          "type": "text",
+          "id": 8864,
+          "isNested": true,
+          "options_source": "manual",
+          "repeater-fields": [],
+          "options": [],
+          "show_in_rest": true,
+          "description": "URL del art\u00edculo original (incluir https://)"
+        },
+        {
+          "title": "Secciones del bolet\u00edn",
           "name": "secciones_boletin",
           "object_type": "field",
           "width": "100%",
@@ -145,15 +158,45 @@
           "isNested": true,
           "options_source": "manual",
           "repeater-fields": [
-            { "name": "titulo_seccion", "title": "Título de la sección", "type": "text", "id": 61101, "width": "100%" },
-            { "name": "texto_seccion", "title": "Texto", "type": "wysiwyg", "id": 61102, "width": "100%" },
-            { "name": "imagen_seccion", "title": "Imagen", "type": "media", "id": 61103, "width": "100%" },
-            { "name": "texto_boton", "title": "Texto del botón", "type": "text", "id": 61104, "width": "50%" },
-            { "name": "enlace_boton", "title": "Enlace del botón", "type": "text", "id": 61105, "width": "50%" }
+            {
+              "name": "titulo_seccion",
+              "title": "T\u00edtulo de la secci\u00f3n",
+              "type": "text",
+              "id": 61101,
+              "width": "100%"
+            },
+            {
+              "name": "texto_seccion",
+              "title": "Texto",
+              "type": "wysiwyg",
+              "id": 61102,
+              "width": "100%"
+            },
+            {
+              "name": "imagen_seccion",
+              "title": "Imagen",
+              "type": "media",
+              "id": 61103,
+              "width": "100%"
+            },
+            {
+              "name": "texto_boton",
+              "title": "Texto del bot\u00f3n",
+              "type": "text",
+              "id": 61104,
+              "width": "50%"
+            },
+            {
+              "name": "enlace_boton",
+              "title": "Enlace del bot\u00f3n",
+              "type": "text",
+              "id": 61105,
+              "width": "50%"
+            }
           ],
           "options": [],
           "show_in_rest": true,
-          "description": "Añade secciones con título, texto, imagen y botón de enlace"
+          "description": "A\u00f1ade secciones con t\u00edtulo, texto, imagen y bot\u00f3n de enlace"
         },
 
         {
@@ -194,7 +237,7 @@
           "repeater-fields": [],
           "options": [],
           "show_in_rest": true,
-          "description": "URL del artículo original (incluir https://)"
+          "description": "URL del art\u00edculo original (incluir https://)"
         },
 
         {
@@ -224,11 +267,11 @@
           "description": "Fecha del evento o taller"
         },
         {
-          "title": "Hora",
-          "name": "hora_evento",
+          "title": "Hora inicio",
+          "name": "hora_inicio",
           "object_type": "field",
           "width": "33%",
-          "type": "text",
+          "type": "time",
           "id": 6302,
           "isNested": true,
           "options_source": "manual",
@@ -236,6 +279,20 @@
           "options": [],
           "show_in_rest": true,
           "description": "Hora del evento (ej: 10:00 - 14:00)"
+        },
+        {
+          "title": "Hora Fin",
+          "name": "hora_fin",
+          "object_type": "field",
+          "width": "25%",
+          "type": "time",
+          "id": 6304,
+          "isNested": true,
+          "options_source": "manual",
+          "repeater-fields": [],
+          "options": [],
+          "show_in_rest": true,
+          "description": "Duraci\u00f3n (ej: 2 horas, 3 d\u00edas)"
         },
         {
           "title": "Lugar",
@@ -249,25 +306,10 @@
           "repeater-fields": [],
           "options": [],
           "show_in_rest": true,
-          "description": "Ubicación del evento o taller"
+          "description": "Ubicaci\u00f3n del evento o taller"
         },
         {
-          "title": "Duración",
-          "name": "duracion_evento",
-          "object_type": "field",
-          "width": "50%",
-          "type": "text",
-          "id": 6304,
-          "isNested": true,
-          "options_source": "manual",
-          "repeater-fields": [],
-          "options": [],
-          "show_in_rest": true,
-          "description": "Duración (ej: 2 horas, 3 días)"
-        },
-
-        {
-          "title": "Enlace de inscripción",
+          "title": "Enlace de inscripci\u00f3n",
           "name": "enlace_inscripcion",
           "object_type": "field",
           "width": "100%",
@@ -309,7 +351,7 @@
         },
 
         {
-          "title": "Infografía",
+          "title": "Infograf\u00eda",
           "name": "tab_infografia",
           "object_type": "tab",
           "width": "100%",
@@ -321,7 +363,7 @@
           "options": []
         },
         {
-          "title": "Imagen de la Infografía",
+          "title": "Imagen de la Infograf\u00eda",
           "name": "infografia_imagen",
           "object_type": "field",
           "width": "50%",
@@ -332,10 +374,10 @@
           "repeater-fields": [],
           "options": [],
           "show_in_rest": true,
-          "description": "Imagen en alta resolución"
+          "description": "Imagen en alta resoluci\u00f3n"
         },
         {
-          "title": "PDF de la Infografía",
+          "title": "PDF de la Infograf\u00eda",
           "name": "pdf_infografia",
           "object_type": "field",
           "width": "50%",
@@ -346,10 +388,10 @@
           "repeater-fields": [],
           "options": [],
           "show_in_rest": true,
-          "description": "PDF descargable de la infografía"
+          "description": "PDF descargable de la infograf\u00eda"
         }
       ],
-      "id": "meta-actualidad"
+      "id": "meta-5"
     }
   },
   "relations": [],

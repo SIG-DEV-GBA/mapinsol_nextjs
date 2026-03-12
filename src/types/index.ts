@@ -581,6 +581,15 @@ export interface EstudioRaw {
 
 export type TipoContenido = 'boletin' | 'nota_prensa' | 'evento' | 'taller' | 'video' | 'infografia';
 
+export interface SeccionBoletin {
+  titulo_seccion: string;
+  texto_seccion: string;
+  imagen_seccion: string;
+  imagenSeccionUrl?: string;
+  texto_boton: string;
+  enlace_boton: string;
+}
+
 export interface Actualidad {
   id: number;
   slug: string;
@@ -607,6 +616,7 @@ export interface Actualidad {
   pdfBoletin: string;
   fechaPublicacion: string;
   enlaceInteresBoletin: string;
+  seccionesBoletin: SeccionBoletin[];
 
   // Nota de prensa
   fuenteNota: string;
@@ -617,6 +627,7 @@ export interface Actualidad {
   horaInicio: string;
   lugarEvento: string;
   horaFin: string;
+  enlaceInscripcion: string;
 
   // Video
   urlVideo: string;

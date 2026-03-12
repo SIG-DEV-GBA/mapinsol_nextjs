@@ -142,6 +142,13 @@ WordPress meta fields use JetEngine naming (Spanish with special chars). The `pa
   - Añade ", España" automáticamente si no lo incluye
   - Link "Abrir en Google Maps" debajo del mapa
 - Boletín: añadido campo `enlace_interes_boletin` (enlaceInteresBoletin) — link externo en sidebar
+- Boletín: repeater `secciones_boletin` para secciones con título + texto + imagen + botón/enlace
+  - Tipo `SeccionBoletin`: titulo_seccion, texto_seccion, imagen_seccion, imagenSeccionUrl, texto_boton, enlace_boton
+  - Repeater parseado con `parseRepeater<SeccionBoletin>()`
+  - Imágenes resueltas (media ID → URL) en `getActualidadBySlug()`
+  - Frontend: cards verticales con imagen panorámica + texto + botón "Saber más"
+  - Estilo inspirado en boletines de Sociedadora/Innovación Saludable
+- Eventos/Talleres: añadido campo `enlace_inscripcion` (enlaceInscripcion) — botón inscripción en sidebar
 - Fallback de imagen en cards de actualidad:
   - Cadena: featured_media → galeria[0] → infografia_imagen → YouTube thumbnail
   - YouTube thumbnail: `https://img.youtube.com/vi/{ID}/hqdefault.jpg`
