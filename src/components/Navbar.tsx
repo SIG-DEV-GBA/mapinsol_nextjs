@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 
 const menuItems = [
-  { label: 'Estudio', href: '#' },
+  { label: 'Estudio', href: '/estudios/' },
   { label: 'Iniciativas eficaces', href: '/practicas/' },
 ];
 
