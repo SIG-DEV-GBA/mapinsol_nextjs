@@ -18,7 +18,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dompurify": "^3.3.1",
-    "fpvsi-a11y-widget": "^1.0.0",
+    "fpvsi-a11y-widget": "^1.0.3",
     "lucide-react": "^0.555.0",
     "next": "15.5.9",
     "nodemailer": "^8.0.1",

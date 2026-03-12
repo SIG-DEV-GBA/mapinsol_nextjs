@@ -212,6 +212,11 @@ WordPress meta fields use JetEngine naming (Spanish with special chars). The `pa
   - Handle: barra gris 40×4px centrada arriba del panel
   - Backdrop: fondo oscuro rgba(0,0,0,0.4) con fade-in, cierre al tap
   - CSS sincronizado al plugin WP base (`fpvsi-a11y-widget/assets/css/widget.css`)
+- Fix CSS theming plugin WP (`accesibilidad-v3/assets/css/widget.css`):
+  - 15 valores hardcodeados (grises #4b5563, #6b7280, etc.) reemplazados por CSS custom properties
+  - Fuente de verdad: `src/styles.css` del paquete npm (theming correcto con `var(--a11y-primary)`, etc.)
+  - Se preservó soporte `top-left`/`top-right` que el plugin WP tenía adicionalmente
+  - JS (`widget.js`) y PHP (`settings.php`) NO tocados — ya inyectan las CSS vars correctamente
 
 ## Contexto de la Sesión
 
