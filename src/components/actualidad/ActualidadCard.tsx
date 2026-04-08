@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Newspaper, FileText, CalendarDays, GraduationCap, Video, ImageIcon, ArrowRight, MapPin, type LucideIcon } from 'lucide-react';
+import { Newspaper, FileText, CalendarDays, BookOpenCheck, Video, ImageIcon, ArrowRight, MapPin, type LucideIcon } from 'lucide-react';
 import type { Actualidad, TipoContenido } from '@/types';
 import { cn } from '@/lib/utils';
 
@@ -7,7 +7,7 @@ const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; colo
   boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#A10D5E]', bg: 'bg-[#A10D5E]/10', accent: 'border-[#A10D5E]/30' },
   nota_prensa: { label: 'Nota de prensa', icon: FileText, color: 'text-blue-700', bg: 'bg-blue-50', accent: 'border-blue-200' },
   evento: { label: 'Evento', icon: CalendarDays, color: 'text-emerald-700', bg: 'bg-emerald-50', accent: 'border-emerald-200' },
-  taller: { label: 'Taller', icon: GraduationCap, color: 'text-amber-700', bg: 'bg-amber-50', accent: 'border-amber-200' },
+  taller: { label: 'Estudios y políticas', icon: BookOpenCheck, color: 'text-amber-700', bg: 'bg-amber-50', accent: 'border-amber-200' },
   video: { label: 'Video', icon: Video, color: 'text-red-700', bg: 'bg-red-50', accent: 'border-red-200' },
   infografia: { label: 'Infografía', icon: ImageIcon, color: 'text-purple-700', bg: 'bg-purple-50', accent: 'border-purple-200' },
 };

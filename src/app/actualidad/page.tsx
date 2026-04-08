@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import { Newspaper, FileText, CalendarDays, GraduationCap, Video, ImageIcon, Megaphone, ArrowRight } from 'lucide-react';
+import { Newspaper, FileText, CalendarDays, BookOpenCheck, Video, ImageIcon, Megaphone, ArrowRight } from 'lucide-react';
 import { getActualidad } from '@/lib/wordpress';
 import { ActualidadCard } from '@/components/actualidad';
 import type { TipoContenido } from '@/types';
@@ -17,7 +17,7 @@ const TIPO_FILTERS: { key: TipoContenido | 'todos'; label: string; icon: any }[]
   { key: 'boletin', label: 'Boletines', icon: Newspaper },
   { key: 'nota_prensa', label: 'Notas de prensa', icon: FileText },
   { key: 'evento', label: 'Eventos', icon: CalendarDays },
-  { key: 'taller', label: 'Talleres', icon: GraduationCap },
+  { key: 'taller', label: 'Estudios y políticas', icon: BookOpenCheck },
   { key: 'video', label: 'Videos', icon: Video },
   { key: 'infografia', label: 'Infografías', icon: ImageIcon },
 ];

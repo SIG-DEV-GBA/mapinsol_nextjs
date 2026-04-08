@@ -53,7 +53,7 @@ export function FeaturedPracticesCarousel({ practicas }: FeaturedPracticesCarous
               spaceBetween={30}
               loop={practicas.length > 3}
               autoplay={{
-                delay: 5000,
+                delay: 3500,
                 disableOnInteraction: false,
               }}
               pagination={{

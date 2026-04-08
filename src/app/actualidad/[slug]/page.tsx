@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import {
-  ArrowLeft, Newspaper, FileText, CalendarDays, GraduationCap,
+  ArrowLeft, Newspaper, FileText, CalendarDays, BookOpenCheck,
   Video, ImageIcon, Download, ExternalLink, MapPin, Clock,
   Share2, ChevronRight, type LucideIcon,
 } from 'lucide-react';
@@ -16,7 +16,7 @@ const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; colo
   boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#A10D5E]', bg: 'bg-[#A10D5E]/10', border: 'border-[#A10D5E]/20', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
   nota_prensa: { label: 'Nota de prensa', icon: FileText, color: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
   evento: { label: 'Evento', icon: CalendarDays, color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
-  taller: { label: 'Taller', icon: GraduationCap, color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
+  taller: { label: 'Estudios y políticas', icon: BookOpenCheck, color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
   video: { label: 'Video', icon: Video, color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
   infografia: { label: 'Infografía', icon: ImageIcon, color: 'text-purple-700', bg: 'bg-purple-50', border: 'border-purple-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
 };
@@ -315,7 +315,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                   <div className={`w-8 h-8 rounded-lg ${item.tipoContenido === 'evento' ? 'bg-emerald-50' : 'bg-amber-50'} flex items-center justify-center`}>
                     {item.tipoContenido === 'evento'
                       ? <CalendarDays className="h-4 w-4 text-emerald-600" />
-                      : <GraduationCap className="h-4 w-4 text-amber-600" />
+                      : <BookOpenCheck className="h-4 w-4 text-amber-600" />
                     }
                   </div>
                   <h2 className="text-xl font-bold text-gray-900 font-poppins">

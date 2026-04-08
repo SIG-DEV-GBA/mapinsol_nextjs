@@ -30,7 +30,7 @@ export function HeroCarousel({ categorias }: HeroCarouselProps) {
 
   useEffect(() => {
     if (paused) return;
-    const timer = setInterval(next, 7000);
+    const timer = setInterval(next, 4000);
     return () => clearInterval(timer);
   }, [paused, next]);
 
