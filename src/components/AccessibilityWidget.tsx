@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Accessibility, X, Plus, Minus, Type, Contrast, MousePointer, Space, RotateCcw, Eye, Sparkles, Globe, Check, Volume2, Square } from 'lucide-react';
+import { PersonStanding, X, Plus, Minus, Type, Contrast, MousePointer, Space, RotateCcw, Eye, Sparkles, Globe, Check, Volume2, Square } from 'lucide-react';
 
 interface A11yState {
   fontSize: number;
@@ -265,7 +265,7 @@ export function AccessibilityWidget() {
             <div className="relative flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-white/15 backdrop-blur flex items-center justify-center">
-                  <Accessibility className="h-[18px] w-[18px] text-white" />
+                  <PersonStanding className="h-[18px] w-[18px] text-white" />
                 </div>
                 <div>
                   <span className="text-white font-bold text-sm tracking-wide font-poppins">Accesibilidad</span>
@@ -503,7 +503,7 @@ export function AccessibilityWidget() {
         aria-label="Opciones de accesibilidad"
         aria-expanded={open}
       >
-        <Accessibility className={`h-5 w-5 transition-transform duration-500 ${open ? 'rotate-[360deg]' : 'group-hover:rotate-12'}`} />
+        <PersonStanding className={`h-5 w-5 transition-transform duration-500 ${open ? 'rotate-[360deg]' : 'group-hover:rotate-12'}`} />
         {dirty && !open && (
           <span className="absolute -top-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#F29429] border-2 border-white flex items-center justify-center">
             <span className="text-[8px] font-bold text-white">{activeCount}</span>

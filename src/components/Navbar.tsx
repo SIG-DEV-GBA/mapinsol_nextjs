@@ -16,7 +16,7 @@ const actualidadItems = [
   { label: 'Boletines', href: '/actualidad/?tipo=boletin', icon: Newspaper },
   { label: 'Notas de prensa', href: '/actualidad/?tipo=nota_prensa', icon: FileText },
   { label: 'Eventos', href: '/actualidad/?tipo=evento', icon: CalendarDays },
-  { label: 'Estudios y políticas', href: '/actualidad/?tipo=taller', icon: BookOpenCheck },
+  { label: 'Estudios y políticas', href: '/actualidad/?tipo=estudiosypoliticas', icon: BookOpenCheck },
   { label: 'Videos', href: '/actualidad/?tipo=video', icon: Video },
   { label: 'Infografías', href: '/actualidad/?tipo=infografia', icon: ImageIcon },
 ];

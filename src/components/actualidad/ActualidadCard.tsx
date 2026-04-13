@@ -7,7 +7,7 @@ const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; colo
   boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#A10D5E]', bg: 'bg-[#A10D5E]/10', accent: 'border-[#A10D5E]/30' },
   nota_prensa: { label: 'Nota de prensa', icon: FileText, color: 'text-blue-700', bg: 'bg-blue-50', accent: 'border-blue-200' },
   evento: { label: 'Evento', icon: CalendarDays, color: 'text-emerald-700', bg: 'bg-emerald-50', accent: 'border-emerald-200' },
-  taller: { label: 'Estudios y políticas', icon: BookOpenCheck, color: 'text-amber-700', bg: 'bg-amber-50', accent: 'border-amber-200' },
+  estudiosypoliticas: { label: 'Estudios y políticas', icon: BookOpenCheck, color: 'text-amber-700', bg: 'bg-amber-50', accent: 'border-amber-200' },
   video: { label: 'Video', icon: Video, color: 'text-red-700', bg: 'bg-red-50', accent: 'border-red-200' },
   infografia: { label: 'Infografía', icon: ImageIcon, color: 'text-purple-700', bg: 'bg-purple-50', accent: 'border-purple-200' },
 };
@@ -33,7 +33,7 @@ export function ActualidadCard({ item }: { item: Actualidad }) {
   const imgSrc = item.featuredMediaUrl || PLACEHOLDER_IMG;
   const hasImage = !!item.featuredMediaUrl;
 
-  const dateStr = item.fechaEvento || item.fechaPublicacion || item.datePublished.toLocaleDateString('es-ES', {
+  const dateStr = item.fechaEvento || item.fechaPublicacionEstudio || item.fechaPublicacion || item.datePublished.toLocaleDateString('es-ES', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
@@ -99,7 +99,7 @@ export function ActualidadCard({ item }: { item: Actualidad }) {
         </Link>
 
         <p className="text-sm text-gray-600 line-clamp-3 mb-4 flex-grow leading-relaxed">
-          {(item.descripcionCorta || item.excerpt || '').replace(/<[^>]+>/g, '').substring(0, 150)}
+          {(item.descripcionCorta || item.descripcionDelEstudio || item.excerpt || '').replace(/<[^>]+>/g, '').substring(0, 150)}
         </p>
 
         {/* Event location */}

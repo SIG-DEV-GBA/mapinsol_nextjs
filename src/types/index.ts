@@ -579,7 +579,7 @@ export interface EstudioRaw {
 // TIPOS PARA ACTUALIDAD Y COMUNICACIÓN
 // =============================================================================
 
-export type TipoContenido = 'boletin' | 'nota_prensa' | 'evento' | 'taller' | 'video' | 'infografia';
+export type TipoContenido = 'boletin' | 'nota_prensa' | 'evento' | 'estudiosypoliticas' | 'video' | 'infografia';
 
 export interface SeccionBoletin {
   titulo_seccion: string;
@@ -588,6 +588,12 @@ export interface SeccionBoletin {
   imagenSeccionUrl?: string;
   texto_boton: string;
   enlace_boton: string;
+}
+
+export interface PdfRelacionadoEstudio {
+  titulo_pdf_relacionado_estudio: string;
+  documento_pdf_relacionado_estudio: string | number;
+  documentoPdfRelacionadoUrl?: string;
 }
 
 export interface Actualidad {
@@ -628,6 +634,14 @@ export interface Actualidad {
   lugarEvento: string;
   horaFin: string;
   enlaceInscripcion: string;
+
+  // Estudios y Políticas
+  fechaPublicacionEstudio: string;
+  pdfDelEstudio: string;
+  pdfDelEstudioUrl?: string;
+  enlaceDelEstudio: string;
+  descripcionDelEstudio: string;
+  pdfsRelacionadosEstudio: PdfRelacionadoEstudio[];
 
   // Video
   urlVideo: string;

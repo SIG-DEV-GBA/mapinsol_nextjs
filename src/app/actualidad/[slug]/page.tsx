@@ -16,7 +16,7 @@ const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; colo
   boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#A10D5E]', bg: 'bg-[#A10D5E]/10', border: 'border-[#A10D5E]/20', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
   nota_prensa: { label: 'Nota de prensa', icon: FileText, color: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
   evento: { label: 'Evento', icon: CalendarDays, color: 'text-emerald-700', bg: 'bg-emerald-50', border: 'border-emerald-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
-  taller: { label: 'Estudios y políticas', icon: BookOpenCheck, color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
+  estudiosypoliticas: { label: 'Estudios y políticas', icon: BookOpenCheck, color: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
   video: { label: 'Video', icon: Video, color: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
   infografia: { label: 'Infografía', icon: ImageIcon, color: 'text-purple-700', bg: 'bg-purple-50', border: 'border-purple-200', heroAccent: 'from-[#A10D5E] via-[#8B1547] to-[#A10D5E]' },
 };
@@ -39,6 +39,15 @@ function decodeHtmlEntities(text: string): string {
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"');
+}
+
+function getHttpUrl(value: unknown): string {
+  if (typeof value !== 'string') return '';
+  return /^https?:\/\//i.test(value) ? value : '';
+}
+
+function hasText(value: string | undefined | null): boolean {
+  return Boolean(value && value.trim().length > 0);
 }
 
 export async function generateStaticParams() {
@@ -106,8 +115,31 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
   const tipo = item.tipoContenido;
   const config = TIPO_CONFIG[tipo] || TIPO_CONFIG.boletin;
   const Icon = config.icon;
-  const isEventType = tipo === 'evento' || tipo === 'taller';
+  const isEventType = tipo === 'evento';
+  const isStudiesType = tipo === 'estudiosypoliticas';
   const embedUrl = tipo === 'video' ? getVideoEmbedUrl(item.urlVideo) : null;
+  const pdfDelEstudioHref = item.pdfDelEstudioUrl || getHttpUrl(item.pdfDelEstudio);
+  const enlaceDelEstudioHref = getHttpUrl(item.enlaceDelEstudio);
+  const fechaPublicacionEstudio = item.fechaPublicacionEstudio?.trim() || '';
+  const hasFechaPublicacionEstudio = hasText(fechaPublicacionEstudio);
+  const hasDescripcionDelEstudio = hasContent(item.descripcionDelEstudio);
+  const relatedStudyPdfs = item.pdfsRelacionadosEstudio
+    .map((pdf) => {
+      const href = pdf.documentoPdfRelacionadoUrl || getHttpUrl(pdf.documento_pdf_relacionado_estudio);
+      const titulo = pdf.titulo_pdf_relacionado_estudio?.trim() || '';
+      return {
+        ...pdf,
+        href,
+        titulo,
+      };
+    })
+    .filter((pdf) => Boolean(pdf.href) && Boolean(pdf.titulo));
+  const hasStudiesSpecificContent =
+    hasFechaPublicacionEstudio ||
+    Boolean(enlaceDelEstudioHref) ||
+    hasDescripcionDelEstudio ||
+    Boolean(pdfDelEstudioHref) ||
+    relatedStudyPdfs.length > 0;
 
   const dateStr = item.datePublished.toLocaleDateString('es-ES', {
     day: 'numeric',
@@ -157,6 +189,12 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
               <CalendarDays className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               {dateStr}
             </span>
+            {isStudiesType && hasFechaPublicacionEstudio && (
+              <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg">
+                <CalendarDays className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                Publicación: {fechaPublicacionEstudio}
+              </span>
+            )}
             {isEventType && item.lugarEvento && (
               <span className="flex items-center gap-1.5 bg-white/10 backdrop-blur-sm px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-lg">
                 <MapPin className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -266,6 +304,94 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
               </div>
             )}
 
+            {/* Estudios y Políticas - campos específicos */}
+            {isStudiesType && hasStudiesSpecificContent && (
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8">
+                <div className="flex items-center gap-2 mb-5">
+                  <div className="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center">
+                    <BookOpenCheck className="h-4 w-4 text-amber-600" />
+                  </div>
+                  <h2 className="text-xl font-bold text-gray-900 font-poppins">Estudios y políticas</h2>
+                </div>
+
+                {(hasFechaPublicacionEstudio || enlaceDelEstudioHref) && (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    {hasFechaPublicacionEstudio && (
+                      <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
+                        <div className="w-10 h-10 rounded-lg bg-[#A10D5E]/10 flex items-center justify-center flex-shrink-0">
+                          <CalendarDays className="h-5 w-5 text-[#A10D5E]" />
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500 font-medium">Fecha de publicación</p>
+                          <p className="font-semibold text-gray-900">{fechaPublicacionEstudio}</p>
+                        </div>
+                      </div>
+                    )}
+
+                    {enlaceDelEstudioHref && (
+                      <a
+                        href={enlaceDelEstudioHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-[#A10D5E]/20 hover:bg-[#A10D5E]/5 transition-colors"
+                      >
+                        <div className="w-10 h-10 rounded-lg bg-[#A10D5E]/10 flex items-center justify-center flex-shrink-0">
+                          <ExternalLink className="h-5 w-5 text-[#A10D5E]" />
+                        </div>
+                        <div>
+                          <p className="text-xs text-gray-500 font-medium">Enlace del estudio</p>
+                          <p className="font-semibold text-gray-900">Ver recurso externo</p>
+                        </div>
+                      </a>
+                    )}
+                  </div>
+                )}
+
+                {hasDescripcionDelEstudio && (
+                  <div className="mb-6">
+                    <h3 className="text-base font-bold text-gray-900 mb-3 font-poppins">Descripción del estudio</h3>
+                    <div className="prose prose-base max-w-none prose-headings:font-poppins prose-a:text-[#A10D5E] hover:prose-a:text-[#F29429]">
+                      <SafeHtml html={item.descripcionDelEstudio} />
+                    </div>
+                  </div>
+                )}
+
+                {pdfDelEstudioHref && (
+                  <div className="mb-6">
+                    <a
+                      href={pdfDelEstudioHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#A10D5E] text-white rounded-xl hover:bg-[#8B1547] transition-colors font-semibold text-sm shadow-sm"
+                    >
+                      <Download className="h-4 w-4" />
+                      Descargar PDF del estudio
+                    </a>
+                  </div>
+                )}
+
+                {relatedStudyPdfs.length > 0 && (
+                  <div className="pt-5 border-t border-gray-100">
+                    <h3 className="text-base font-bold text-gray-900 mb-3 font-poppins">PDF relacionados</h3>
+                    <div className="space-y-2">
+                      {relatedStudyPdfs.map((pdf, idx) => (
+                        <a
+                          key={`${pdf.titulo_pdf_relacionado_estudio}-${idx}`}
+                          href={pdf.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2.5 p-3 rounded-xl border border-gray-100 bg-gray-50 hover:bg-[#A10D5E]/5 hover:border-[#A10D5E]/20 transition-colors"
+                        >
+                          <Download className="h-4 w-4 text-[#A10D5E] flex-shrink-0" />
+                          <span className="text-sm font-medium text-gray-800">{pdf.titulo}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Secciones del boletín - repeater */}
             {tipo === 'boletin' && item.seccionesBoletin && item.seccionesBoletin.length > 0 && (
               <div className="space-y-6">
@@ -308,18 +434,15 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
               </div>
             )}
 
-            {/* Evento/Taller details - solo estos tipos */}
+            {/* Evento details */}
             {isEventType && item.fechaEvento && (
               <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                 <div className="flex items-center gap-2 mb-5">
-                  <div className={`w-8 h-8 rounded-lg ${item.tipoContenido === 'evento' ? 'bg-emerald-50' : 'bg-amber-50'} flex items-center justify-center`}>
-                    {item.tipoContenido === 'evento'
-                      ? <CalendarDays className="h-4 w-4 text-emerald-600" />
-                      : <BookOpenCheck className="h-4 w-4 text-amber-600" />
-                    }
+                  <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center">
+                    <CalendarDays className="h-4 w-4 text-emerald-600" />
                   </div>
                   <h2 className="text-xl font-bold text-gray-900 font-poppins">
-                    Detalles del {item.tipoContenido === 'evento' ? 'evento' : 'taller'}
+                    Detalles del evento
                   </h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -409,7 +532,8 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
           {/* Sidebar */}
           <aside className="space-y-6 lg:sticky lg:top-28 lg:self-start">
             {/* Actions Card */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 space-y-3">
+            {!isStudiesType && (
+              <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 space-y-3">
               {/* PDF Download - solo boletín */}
               {tipo === 'boletin' && item.pdfBoletin && (
                 <a
@@ -468,7 +592,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                 </a>
               )}
 
-              {/* Enlace inscripción - solo evento/taller */}
+              {/* Enlace inscripción - solo evento */}
               {isEventType && item.enlaceInscripcion && (
                 <a
                   href={item.enlaceInscripcion}
@@ -481,7 +605,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">Inscripción</p>
-                    <p className="text-xs text-gray-500">Apúntate al {tipo === 'evento' ? 'evento' : 'taller'}</p>
+                    <p className="text-xs text-gray-500">Apúntate al evento</p>
                   </div>
                 </a>
               )}
@@ -494,7 +618,8 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                 <ArrowLeft className="h-4 w-4" />
                 Volver a Actualidad
               </Link>
-            </div>
+              </div>
+            )}
 
             {/* Related */}
             {related.length > 0 && (

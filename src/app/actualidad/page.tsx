@@ -9,7 +9,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: 'Actualidad y Comunicación | Mapinsol',
-  description: 'Boletines, notas de prensa, eventos, talleres, videos e infografías del proyecto Mapinsol.',
+  description: 'Boletines, notas de prensa, eventos, estudios y políticas, videos e infografías del proyecto Mapinsol.',
 };
 
 const TIPO_FILTERS: { key: TipoContenido | 'todos'; label: string; icon: any }[] = [
@@ -17,7 +17,7 @@ const TIPO_FILTERS: { key: TipoContenido | 'todos'; label: string; icon: any }[]
   { key: 'boletin', label: 'Boletines', icon: Newspaper },
   { key: 'nota_prensa', label: 'Notas de prensa', icon: FileText },
   { key: 'evento', label: 'Eventos', icon: CalendarDays },
-  { key: 'taller', label: 'Estudios y políticas', icon: BookOpenCheck },
+  { key: 'estudiosypoliticas', label: 'Estudios y políticas', icon: BookOpenCheck },
   { key: 'video', label: 'Videos', icon: Video },
   { key: 'infografia', label: 'Infografías', icon: ImageIcon },
 ];

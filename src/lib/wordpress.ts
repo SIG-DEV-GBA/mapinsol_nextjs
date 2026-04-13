@@ -980,7 +980,27 @@ export async function enrichEstudioWithPdf(estudio: Estudio): Promise<Estudio> {
 // ACTUALIDAD Y COMUNICACIÓN
 // =============================================================================
 
-import type { Actualidad, ActualidadRaw, TipoContenido, SeccionBoletin } from '@/types';
+import type {
+  Actualidad,
+  ActualidadRaw,
+  TipoContenido,
+  SeccionBoletin,
+  PdfRelacionadoEstudio,
+} from '@/types';
+
+async function resolveMediaFieldUrl(value: string | number | null | undefined): Promise<string> {
+  if (!value) return '';
+
+  if (typeof value === 'string' && /^https?:\/\//i.test(value)) {
+    return value;
+  }
+
+  const mediaId = Number(value);
+  if (!mediaId) return '';
+
+  const media = await getMediaById(mediaId);
+  return media?.source_url || '';
+}
 
 function parseGaleriaField(value: any): number[] {
   if (!value) return [];
@@ -1016,7 +1036,7 @@ function parseActualidad(raw: ActualidadRaw): Actualidad {
       embedded?.source_url || '',
 
     tipoContenido: (meta.tipo_contenido || '') as TipoContenido,
-    descripcionCorta: meta.descripcion || '',
+    descripcionCorta: meta.descripcion || meta.descripcion_corta || '',
     destacado: meta.destacado === 'true' || meta.destacado === true,
     galeria: parseGaleriaField(meta.galeria),
 
@@ -1033,6 +1053,12 @@ function parseActualidad(raw: ActualidadRaw): Actualidad {
     lugarEvento: meta.lugar_evento || '',
     horaFin: meta.hora_fin || '',
     enlaceInscripcion: meta.enlace_inscripcion || '',
+
+    fechaPublicacionEstudio: meta.fecha_publicacion_estudio || '',
+    pdfDelEstudio: meta.pdf_del_estudio || '',
+    enlaceDelEstudio: meta.enlace_del_estudio || '',
+    descripcionDelEstudio: meta.descripcion_del_estudio || '',
+    pdfsRelacionadosEstudio: parseRepeater<PdfRelacionadoEstudio>(meta.pdfs_relacionados_estudio),
 
     urlVideo: meta.url_video || '',
 
@@ -1055,6 +1081,10 @@ export async function getActualidad(params?: {
     order: 'desc',
   });
 
+  if (params?.tipo) {
+    searchParams.set('tipo_contenido', params.tipo);
+  }
+
   const response = await fetch(`${WP_API_URL}/actualidad-mapinsol?${searchParams.toString()}`, {
     next: { revalidate: 60 },
   });
@@ -1070,7 +1100,7 @@ export async function getActualidad(params?: {
   let items = rawData.map(parseActualidad);
 
   if (params?.tipo) {
-    items = items.filter(item => item.tipoContenido === params.tipo);
+    items = items.filter((item) => item.tipoContenido === params.tipo);
   }
 
   // Resolver primera imagen de galería como featuredMediaUrl fallback
@@ -1168,14 +1198,11 @@ export async function getActualidadBySlug(slug: string): Promise<Actualidad | nu
     }
   }
 
-  // Resolver pdf_boletin (ID → URL)
+  // Resolver pdf_boletin (ID/URL -> URL)
   if (item.pdfBoletin) {
-    const pdfId = Number(item.pdfBoletin);
-    if (pdfId) {
-      const media = await getMediaById(pdfId);
-      if (media) {
-        item.pdfBoletin = media.source_url || '';
-      }
+    const pdfBoletinUrl = await resolveMediaFieldUrl(item.pdfBoletin);
+    if (pdfBoletinUrl) {
+      item.pdfBoletin = pdfBoletinUrl;
     }
   }
 
@@ -1208,13 +1235,28 @@ export async function getActualidadBySlug(slug: string): Promise<Actualidad | nu
     }
   }
 
-  // Resolver pdf_infografia (ID → URL)
+  // Resolver pdf_infografia (ID/URL -> URL)
   if (item.pdfInfografia) {
-    const pdfId = Number(item.pdfInfografia);
-    if (pdfId) {
-      const media = await getMediaById(pdfId);
-      if (media) {
-        item.pdfInfografiaUrl = media.source_url || '';
+    const pdfInfografiaUrl = await resolveMediaFieldUrl(item.pdfInfografia);
+    if (pdfInfografiaUrl) {
+      item.pdfInfografiaUrl = pdfInfografiaUrl;
+    }
+  }
+
+  // Resolver pdf_del_estudio (ID/URL -> URL)
+  if (item.pdfDelEstudio) {
+    const pdfEstudioUrl = await resolveMediaFieldUrl(item.pdfDelEstudio);
+    if (pdfEstudioUrl) {
+      item.pdfDelEstudioUrl = pdfEstudioUrl;
+    }
+  }
+
+  // Resolver PDFs relacionados de estudios (ID/URL -> URL)
+  if (item.pdfsRelacionadosEstudio && item.pdfsRelacionadosEstudio.length > 0) {
+    for (const pdfRelacionado of item.pdfsRelacionadosEstudio) {
+      const relatedPdfUrl = await resolveMediaFieldUrl(pdfRelacionado.documento_pdf_relacionado_estudio);
+      if (relatedPdfUrl) {
+        pdfRelacionado.documentoPdfRelacionadoUrl = relatedPdfUrl;
       }
     }
   }
