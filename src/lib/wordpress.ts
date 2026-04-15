@@ -986,6 +986,7 @@ import type {
   TipoContenido,
   SeccionBoletin,
   PdfRelacionadoEstudio,
+  EnlaceInteresEstudio,
 } from '@/types';
 
 async function resolveMediaFieldUrl(value: string | number | null | undefined): Promise<string> {
@@ -1059,6 +1060,7 @@ function parseActualidad(raw: ActualidadRaw): Actualidad {
     enlaceDelEstudio: meta.enlace_del_estudio || '',
     descripcionDelEstudio: meta.descripcion_del_estudio || '',
     pdfsRelacionadosEstudio: parseRepeater<PdfRelacionadoEstudio>(meta.pdfs_relacionados_estudio),
+    enlacesInteresEstudio: parseRepeater<EnlaceInteresEstudio>(meta.enlaces_interes_estudio),
 
     urlVideo: meta.url_video || '',
 

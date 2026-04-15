@@ -596,6 +596,11 @@ export interface PdfRelacionadoEstudio {
   documentoPdfRelacionadoUrl?: string;
 }
 
+export interface EnlaceInteresEstudio {
+  titulo_enlace_estudios: string;
+  enlace_enlace_estudios: string;
+}
+
 export interface Actualidad {
   id: number;
   slug: string;
@@ -642,6 +647,7 @@ export interface Actualidad {
   enlaceDelEstudio: string;
   descripcionDelEstudio: string;
   pdfsRelacionadosEstudio: PdfRelacionadoEstudio[];
+  enlacesInteresEstudio: EnlaceInteresEstudio[];
 
   // Video
   urlVideo: string;

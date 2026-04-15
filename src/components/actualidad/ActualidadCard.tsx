@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Newspaper, FileText, CalendarDays, BookOpenCheck, Video, ImageIcon, ArrowRight, MapPin, type LucideIcon } from 'lucide-react';
 import type { Actualidad, TipoContenido } from '@/types';
-import { cn } from '@/lib/utils';
+import { cn, formatStudyPublicationDate } from '@/lib/utils';
 
 const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; color: string; bg: string; accent: string }> = {
   boletin: { label: 'Boletín', icon: Newspaper, color: 'text-[#A10D5E]', bg: 'bg-[#A10D5E]/10', accent: 'border-[#A10D5E]/30' },
@@ -32,8 +32,9 @@ export function ActualidadCard({ item }: { item: Actualidad }) {
   const Icon = config.icon;
   const imgSrc = item.featuredMediaUrl || PLACEHOLDER_IMG;
   const hasImage = !!item.featuredMediaUrl;
+  const formattedStudyPublicationDate = formatStudyPublicationDate(item.fechaPublicacionEstudio);
 
-  const dateStr = item.fechaEvento || item.fechaPublicacionEstudio || item.fechaPublicacion || item.datePublished.toLocaleDateString('es-ES', {
+  const dateStr = item.fechaEvento || formattedStudyPublicationDate || item.fechaPublicacion || item.datePublished.toLocaleDateString('es-ES', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',

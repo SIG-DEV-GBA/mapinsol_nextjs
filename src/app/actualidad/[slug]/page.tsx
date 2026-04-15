@@ -10,6 +10,7 @@ import { getActualidadBySlug, getActualidadSlugs, getActualidad } from '@/lib/wo
 import { SafeHtml } from '@/components/ui';
 import { InfografiaViewer } from '@/components/actualidad';
 import { MediaGallery } from '@/components/ui';
+import { formatStudyPublicationDate } from '@/lib/utils';
 import type { TipoContenido, Actualidad, SeccionBoletin } from '@/types';
 
 const TIPO_CONFIG: Record<TipoContenido, { label: string; icon: LucideIcon; color: string; bg: string; border: string; heroAccent: string }> = {
@@ -43,7 +44,11 @@ function decodeHtmlEntities(text: string): string {
 
 function getHttpUrl(value: unknown): string {
   if (typeof value !== 'string') return '';
-  return /^https?:\/\//i.test(value) ? value : '';
+  const raw = value.trim();
+  if (!raw) return '';
+  if (/^https?:\/\//i.test(raw)) return raw;
+  if (/^www\./i.test(raw)) return `https://${raw}`;
+  return '';
 }
 
 function hasText(value: string | undefined | null): boolean {
@@ -120,8 +125,9 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
   const embedUrl = tipo === 'video' ? getVideoEmbedUrl(item.urlVideo) : null;
   const pdfDelEstudioHref = item.pdfDelEstudioUrl || getHttpUrl(item.pdfDelEstudio);
   const enlaceDelEstudioHref = getHttpUrl(item.enlaceDelEstudio);
-  const fechaPublicacionEstudio = item.fechaPublicacionEstudio?.trim() || '';
-  const hasFechaPublicacionEstudio = hasText(fechaPublicacionEstudio);
+  const fechaPublicacionEstudioRaw = item.fechaPublicacionEstudio?.trim() || '';
+  const fechaPublicacionEstudio = formatStudyPublicationDate(fechaPublicacionEstudioRaw);
+  const hasFechaPublicacionEstudio = hasText(fechaPublicacionEstudioRaw);
   const hasDescripcionDelEstudio = hasContent(item.descripcionDelEstudio);
   const relatedStudyPdfs = item.pdfsRelacionadosEstudio
     .map((pdf) => {
@@ -134,12 +140,24 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
       };
     })
     .filter((pdf) => Boolean(pdf.href) && Boolean(pdf.titulo));
+  const interestStudyLinks = item.enlacesInteresEstudio
+    .map((enlace) => {
+      const titulo = enlace.titulo_enlace_estudios?.trim() || '';
+      const href = getHttpUrl(enlace.enlace_enlace_estudios);
+      return {
+        ...enlace,
+        titulo,
+        href,
+      };
+    })
+    .filter((enlace) => Boolean(enlace.titulo) && Boolean(enlace.href));
   const hasStudiesSpecificContent =
     hasFechaPublicacionEstudio ||
     Boolean(enlaceDelEstudioHref) ||
     hasDescripcionDelEstudio ||
     Boolean(pdfDelEstudioHref) ||
-    relatedStudyPdfs.length > 0;
+    relatedStudyPdfs.length > 0 ||
+    interestStudyLinks.length > 0;
 
   const dateStr = item.datePublished.toLocaleDateString('es-ES', {
     day: 'numeric',
@@ -339,7 +357,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                           <ExternalLink className="h-5 w-5 text-[#A10D5E]" />
                         </div>
                         <div>
-                          <p className="text-xs text-gray-500 font-medium">Enlace del estudio</p>
+                          <p className="text-xs text-gray-500 font-medium">Enlace</p>
                           <p className="font-semibold text-gray-900">Ver recurso externo</p>
                         </div>
                       </a>
@@ -365,7 +383,7 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                       className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#A10D5E] text-white rounded-xl hover:bg-[#8B1547] transition-colors font-semibold text-sm shadow-sm"
                     >
                       <Download className="h-4 w-4" />
-                      Descargar PDF del estudio
+                      Descargar PDF
                     </a>
                   </div>
                 )}
@@ -384,6 +402,26 @@ export default async function ActualidadDetailPage({ params }: { params: Promise
                         >
                           <Download className="h-4 w-4 text-[#A10D5E] flex-shrink-0" />
                           <span className="text-sm font-medium text-gray-800">{pdf.titulo}</span>
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {interestStudyLinks.length > 0 && (
+                  <div className="pt-5 border-t border-gray-100 mt-5">
+                    <h3 className="text-base font-bold text-gray-900 mb-3 font-poppins">Enlaces de interés</h3>
+                    <div className="space-y-2">
+                      {interestStudyLinks.map((enlace, idx) => (
+                        <a
+                          key={`${enlace.titulo_enlace_estudios}-${idx}`}
+                          href={enlace.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2.5 p-3 rounded-xl border border-gray-100 bg-gray-50 hover:bg-[#A10D5E]/5 hover:border-[#A10D5E]/20 transition-colors"
+                        >
+                          <ExternalLink className="h-4 w-4 text-[#A10D5E] flex-shrink-0" />
+                          <span className="text-sm font-medium text-gray-800">{enlace.titulo}</span>
                         </a>
                       ))}
                     </div>
