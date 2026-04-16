@@ -115,11 +115,12 @@ export default function RootLayout({
     <html lang="es" className={cn(poppins.variable, nunito.variable, lato.variable, "font-sans", geist.variable)}>
       <body className="min-h-screen flex flex-col font-lato antialiased relative overflow-x-hidden" suppressHydrationWarning>
         <Script src="/df.js" strategy="afterInteractive" />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-Z222Z7CJWF" strategy="afterInteractive" />
-        <Script id="gtag-init" strategy="afterInteractive">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=AW-17965756637" strategy="beforeInteractive" />
+        <Script id="gtag-init" strategy="beforeInteractive">
           {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
+      gtag('config', 'AW-17965756637');
 gtag('config', 'G-Z222Z7CJWF');`}
         </Script>
         {/* Fondo con gradiente radial */}
