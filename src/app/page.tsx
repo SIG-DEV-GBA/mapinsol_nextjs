@@ -14,7 +14,7 @@
  * @module app/page
  */
 
-import { Hero, LatestPractices, FeaturedPractices } from "@/components";
+import { Hero, LatestPractices, FeaturedPractices, InformeResultados } from "@/components";
 
 /**
  * ISR: Revalidar cada 60 segundos
@@ -35,6 +35,7 @@ export default function HomePage() {
       <Hero />
       <LatestPractices />
       <FeaturedPractices />
+      <InformeResultados />
     </main>
   );
 }

@@ -10,6 +10,7 @@ export { PracticaCard } from './PracticaCard';
 // Section components
 export { LatestPractices } from './sections/LatestPractices';
 export { FeaturedPractices } from './sections/FeaturedPracticesServer';
+export { InformeResultados } from './sections/InformeResultados';
 
 // UI components
 export * from './ui';
