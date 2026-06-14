@@ -6,7 +6,35 @@ export interface SubscribeFormData {
   email: string;
   nombre?: string;
   apellidos?: string;
+  comunidadAutonoma?: string;
+  fechaNacimiento?: string;
   sexo?: string;
+}
+
+/**
+ * Convierte una fecha en formato aaaa-mm-dd (la que devuelve <input type="date">)
+ * al formato MM/DD/YYYY que espera el campo de fecha de Mailchimp (FNACIM).
+ * Devuelve null si el formato no es válido.
+ */
+function convertFechaToMailchimp(fecha?: string): string | null {
+  if (!fecha || !fecha.trim()) {
+    return '';
+  }
+
+  const match = fecha.trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (!match) {
+    return null;
+  }
+
+  const [, yyyy, mm, dd] = match;
+  const day = Number(dd);
+  const month = Number(mm);
+
+  if (month < 1 || month > 12 || day < 1 || day > 31) {
+    return null;
+  }
+
+  return `${mm}/${dd}/${yyyy}`;
 }
 
 export interface SubscribeResult {
@@ -38,6 +66,51 @@ export async function subscribeToNewsletter(data: SubscribeFormData): Promise<Su
     };
   }
 
+  // Validar campos obligatorios
+  if (!data.nombre) {
+    return {
+      success: false,
+      message: 'Por favor, introduce tu nombre.',
+    };
+  }
+
+  if (!data.apellidos) {
+    return {
+      success: false,
+      message: 'Por favor, introduce tus apellidos.',
+    };
+  }
+
+  if (!data.comunidadAutonoma) {
+    return {
+      success: false,
+      message: 'Por favor, selecciona tu comunidad autónoma.',
+    };
+  }
+
+  if (!data.sexo) {
+    return {
+      success: false,
+      message: 'Por favor, selecciona tu sexo.',
+    };
+  }
+
+  if (!data.fechaNacimiento) {
+    return {
+      success: false,
+      message: 'Por favor, introduce tu fecha de nacimiento.',
+    };
+  }
+
+  // Validar y convertir fecha de nacimiento (aaaa-mm-dd -> MM/DD/YYYY para Mailchimp)
+  const fechaNacimiento = convertFechaToMailchimp(data.fechaNacimiento);
+  if (fechaNacimiento === null) {
+    return {
+      success: false,
+      message: 'La fecha de nacimiento no es válida.',
+    };
+  }
+
   const audienceId = process.env.MAILCHIMP_AUDIENCE_ID;
 
   if (!audienceId) {
@@ -58,6 +131,8 @@ export async function subscribeToNewsletter(data: SubscribeFormData): Promise<Su
         FNAME: data.nombre || '',
         LNAME: data.apellidos || '',
         MMERGE7: data.sexo || '',
+        MMERGE10: data.comunidadAutonoma || '',
+        FNACIM: fechaNacimiento,
       },
     });
 
@@ -87,6 +162,8 @@ export async function subscribeToNewsletter(data: SubscribeFormData): Promise<Su
             FNAME: data.nombre || '',
             LNAME: data.apellidos || '',
             MMERGE7: data.sexo || '',
+            MMERGE10: data.comunidadAutonoma || '',
+            FNACIM: fechaNacimiento,
           },
         });
 

@@ -26,6 +26,33 @@ export const CCAA_PROVINCIAS: Record<string, string[]> = {
 
 export const CCAA_LIST = Object.keys(CCAA_PROVINCIAS).sort();
 
+/**
+ * Lista de Comunidades Autónomas para el formulario de boletín.
+ * IMPORTANTE: estos valores deben coincidir EXACTAMENTE con las opciones del
+ * desplegable "Comunidad Autónoma" (MMERGE10) configurado en Mailchimp.
+ */
+export const COMUNIDADES_AUTONOMAS = [
+  'Andalucía',
+  'Aragón',
+  'Asturias',
+  'Illes Balears',
+  'Canarias',
+  'Cantabria',
+  'Castilla-La Mancha',
+  'Castilla y León',
+  'Cataluña',
+  'Comunitat Valenciana',
+  'Extremadura',
+  'Galicia',
+  'Comunidad de Madrid',
+  'Región de Murcia',
+  'Comunidad Foral de Navarra',
+  'País Vasco',
+  'La Rioja',
+  'Ceuta',
+  'Melilla',
+];
+
 export const SEXO_OPTIONS = [
   { value: 'Hombre', label: 'Hombre' },
   { value: 'Mujer', label: 'Mujer' },

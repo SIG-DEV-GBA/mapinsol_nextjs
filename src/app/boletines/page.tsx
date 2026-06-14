@@ -4,7 +4,7 @@ import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { Mail, Send, CheckCircle, AlertCircle, ArrowLeft, Newspaper, Bell, UserMinus, Heart, BookOpen } from 'lucide-react';
 import { subscribeToNewsletter, unsubscribeFromNewsletter, SubscribeFormData } from './actions';
-import { SEXO_OPTIONS } from '@/lib/geografiaEspana';
+import { SEXO_OPTIONS, COMUNIDADES_AUTONOMAS } from '@/lib/geografiaEspana';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function BoletinesPage() {
@@ -15,6 +15,8 @@ export default function BoletinesPage() {
     email: '',
     nombre: '',
     apellidos: '',
+    comunidadAutonoma: '',
+    fechaNacimiento: '',
     sexo: '',
   });
 
@@ -36,7 +38,7 @@ export default function BoletinesPage() {
       setResult(response);
 
       if (response.success) {
-        setFormData({ email: '', nombre: '', apellidos: '', sexo: '' });
+        setFormData({ email: '', nombre: '', apellidos: '', comunidadAutonoma: '', fechaNacimiento: '', sexo: '' });
       }
     });
   };
@@ -147,7 +149,7 @@ export default function BoletinesPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-1">
-                      Nombre
+                      Nombre <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -155,6 +157,7 @@ export default function BoletinesPage() {
                       name="nombre"
                       value={formData.nombre}
                       onChange={handleChange}
+                      required
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                       placeholder="Tu nombre"
                     />
@@ -162,7 +165,7 @@ export default function BoletinesPage() {
 
                   <div>
                     <label htmlFor="apellidos" className="block text-sm font-medium text-gray-700 mb-1">
-                      Apellidos
+                      Apellidos <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -170,6 +173,7 @@ export default function BoletinesPage() {
                       name="apellidos"
                       value={formData.apellidos}
                       onChange={handleChange}
+                      required
                       className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
                       placeholder="Tus apellidos"
                     />
@@ -178,9 +182,41 @@ export default function BoletinesPage() {
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Sexo
+                    Comunidad Autónoma <span className="text-red-500">*</span>
                   </label>
-                  <Select value={formData.sexo} onValueChange={(val) => setFormData(prev => ({ ...prev, sexo: val as string }))}>
+                  <Select name="comunidadAutonoma" required value={formData.comunidadAutonoma} onValueChange={(val) => setFormData(prev => ({ ...prev, comunidadAutonoma: val as string }))}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona tu comunidad autónoma" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {COMUNIDADES_AUTONOMAS.map(ccaa => (
+                        <SelectItem key={ccaa} value={ccaa}>{ccaa}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label htmlFor="fechaNacimiento" className="block text-sm font-medium text-gray-700 mb-1">
+                    Fecha de Nacimiento <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="date"
+                    id="fechaNacimiento"
+                    name="fechaNacimiento"
+                    value={formData.fechaNacimiento}
+                    onChange={handleChange}
+                    required
+                    max={new Date().toISOString().split('T')[0]}
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-[#A10D5E]/20 focus:border-[#A10D5E] transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Sexo <span className="text-red-500">*</span>
+                  </label>
+                  <Select name="sexo" required value={formData.sexo} onValueChange={(val) => setFormData(prev => ({ ...prev, sexo: val as string }))}>
                     <SelectTrigger>
                       <SelectValue placeholder="Seleccionar..." />
                     </SelectTrigger>
